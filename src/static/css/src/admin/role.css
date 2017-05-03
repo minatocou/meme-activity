@@ -1,0 +1,33 @@
+.role-container {
+    float: left;
+    width: 85%;
+    padding: 5px 20px;
+    box-sizing: border-box;
+}
+
+.role-container table {
+    border: 1px solid #dcdcdc;
+    width: 100%;
+    line-height: 24px;
+}
+
+.role-container table th {
+    background: #f9f9f9;
+    color: #333;
+}
+
+.role-container table th, .role-container table td {
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.newRole{
+    margin: 10px 0;
+}
+
+#pagination-container{
+    float: right;
+    margin-top: 20px;
+}

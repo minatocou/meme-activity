@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox h5 列表</title>
+    {{> meta}}
+
+   <link rel="stylesheet" href="../../static/vendor/bootstrap/css/bootstrap.css">
+   <link rel="stylesheet" href="../../static/vendor/font-awesome/css/font-awesome.css">
+   <link rel="stylesheet" href="../../static/css/common/reset.css">
+   <link rel="stylesheet" href="../../static/vendor/pagination/pagination.css">
+   <link rel="stylesheet" href="../../static/css/common/global.css">
+   <link rel="stylesheet" href="../../static/css/common/header.css">
+   <link rel="stylesheet" href="../../static/css/common/sidebar.css">
+   <link rel="stylesheet" href="../../static/css/src/list/list.css">
+   <link rel="stylesheet" href="../../static/css/src/create/preview.css">
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div id="list">
+        <div style="border-bottom: 1px solid #cccccc;margin-bottom: 20px;">
+            <form action="{{#backh5 d}}{{/backh5}}" class="form-inline" role="form" align="center">
+                <div class="form-group">
+                    <label for="title">{{i18n.activity_name}}</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="url_key">URL</label>
+                    <input type="text" class="form-control" id="url_key" name="url_key">
+                </div>
+                <div class="form-group">
+                    <label for="state">{{i18n.page_status}}</label>
+                    <select id="state" class="form-control" name="state">
+                        <option value="">{{i18n.all}}</option>
+                        <option value="1">{{i18n.open}}</option>
+                        <option value="0">{{i18n.shut}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="lastOne">{{i18n.lastone}}</label>
+                    <input type="text" id="lastOne" class="form-control" name="lastOne">
+
+                </div>
+                <input type="hidden" value="{{pageIndex}}">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="{{i18n.search}}" id="search-btn">
+                </div>
+            </form>
+            <a href="/h5/create/{{k}}?d={{d}}" class="btn btn-primary">{{i18n.new_h5}}</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>
+                        h5{{i18n.activity_name}}
+                    </th>
+                    <th>
+                        url key
+                    </th>
+                    <th>{{i18n.page_status}}</th>
+                    <th>
+                        {{i18n.lastone}}
+                    </th>
+                    <th>
+                        {{i18n.operation}}
+                    </th>
+                </tr>
+                {{#each list}}
+                <tr>
+                    <td>{{this.dataValues.title}}</td>
+                    <td>{{this.dataValues.urlKey}}</td>
+                    {{#if this.dataValues.state}}
+                    <td class="states"><i class="fa fa-unlock"></i>{{../../i18n.open}}</td>
+                    {{else}}
+                    <td class="states"><i class="fa fa-lock"></i>{{../../i18n.shut}}</td>
+                    {{/if}}
+                    <td>{{this.dataValues.lastOne}}</td>
+                    <td>
+                        <div>
+                            <button class="btn btn-info preview-btn" data-id="{{this.dataValues.id}}" data-url="{{this.dataValues.urlKey}}">
+                                <i class=" fa fa-eye"></i>{{../i18n.preview}}</button>
+                            {{#if this.state}}
+                            <button class="btn btn-success states-btn"
+                                    data-id="{{this.dataValues.id}}"
+                                    data-state="0"
+                                    data-key="{{dataValues.urlKey}}">
+                                <i class=" fa fa-power-off"></i>{{../../i18n.shut}}</button>
+                            {{else}}
+                            <button class="btn btn-success states-btn"
+                                    data-id="{{this.dataValues.id}}"
+                                    data-state="1"
+                                    data-key="{{dataValues.urlKey}}">
+                                <i class=" fa fa-check"></i>{{../../i18n.open}}</button>
+                            {{/if}}
+                            <a class="btn btn-warning" href="/h5/create/{{this.dataValues.urlKey}}?cid={{this.dataValues.id}}&d={{../d}}">
+                                <i class=" fa fa-pencil"></i>{{../i18n.edit}}</a>
+                            <button class="btn btn-danger delete-btn" data-id="{{this.dataValues.id}}">
+                                <i class=" fa fa-trash"></i>{{../i18n.delete}}</button>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+        {{#if list.length}}
+        {{else}}
+        <div class="alert alert-info" role="alert" align="center">{{i18n.none}}</div>
+        {{/if}}
+
+        <div id="pagesObj" style="display: none">
+            {{pagesObj.pages}},{{pagesObj.pageSize}},{{pagesObj.total}}
+        </div>
+        <div id="pagination-container"></div>
+    </div>
+</div>
+
+<div class="mask">
+    <div align="center">
+        <p class="alert alert-danger">
+            {{i18n.sure_delete}}
+        </p>
+        <button type="button" class="btn btn-primary btn-lg sure-btn">
+            {{i18n.sure}}
+        </button>
+        <button type="button" class="btn btn-primary btn-lg close-btn">
+            {{i18n.cancel}}
+        </button>
+    </div>
+</div>
+
+<!--预览-->
+<div class="preview-wrapper">
+    <div class="preview-container">
+        <div class="preview-header">
+            <h4>{{i18n.preview}}</h4>
+        </div>
+        <div class="preview-con">
+            <div class="preview">
+
+            </div>
+            <div class="qr">
+                <span class="tip">{{i18n.scan}}</span>
+                <div id="qrCode"></div>
+                <div class="link">
+                    {{i18n.scan_link}}:
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <div class="close"><i class="fa fa-times"></i></div>
+    </div>
+</div>
+
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/js/src/list/list.js'></script>
+</body>
+</html>

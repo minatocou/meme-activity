@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.couponManage }}</title>
+    {{> meta}}
+
+    <link rel="stylesheet" href="/css/build/src/views/couponManage/userCouponScan.css?t=1493261397671" />
+</head>
+<body data-preview="{{config.preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+
+    <div class="right-content-frame">
+        <div class="search">
+            <label class="control-label">{{i18n.user}}ID
+            </label>
+            <input class="form-control" placeholder="{{i18n.couponUserIDPlaceholder}}" required
+                   name="user_id" id="user_id">
+            <button class="btn btn-default" id="searchBtn">搜索</button>
+        </div>
+        <div class="tab-content main-content">
+            <div id="couponTab">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th key="id">优惠券ID</th>
+                        <th key="name">活动名称</th>
+                        <th key="from_date">优惠券有效期</th>
+                        <th key="is_dynamic">优惠券类型</th>
+                        <th key="status">优惠券使用状态</th>
+                    </tr>
+                    </thead>
+                    <tbody class="data-container text-center" id="couponList-container">
+                    </tbody>
+                </table>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+
+        {{>ajaxLoading}}
+    </div>
+</div>
+
+<script type="text/html" id="couponListTpl">
+    ${each list }
+    <tr>
+        <td>${$value.id}</td>
+        <td>${$value.name}</td>
+        <td>${$value.from_date}－${$value.to_date}</td>
+        <td>${if $value.is_dynamic=='1'}动态券${else}固定券${/if}</td>
+        <td>${if $value.status=='0'}已使用${else}未使用${/if}</td>
+    </tr>
+    ${/each}
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/couponManage/userCouponScan.js?t=1493261397671"></script>
+</body>
+</html>

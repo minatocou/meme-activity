@@ -1,0 +1,60 @@
+.data-container {
+  height: 100%;
+  float: left;
+  width: 85%;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+.data-container.full {
+  width: 100%;
+}
+.data-container .fullfill {
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.data-container .box {
+  height: 100%;
+  padding-bottom: 30px;
+}
+.data-container .box .token {
+  max-width: 200px;
+  word-wrap: break-word;
+}
+.data-container .box .property {
+  max-width: 200px;
+  word-wrap: break-word;
+}
+.data-container .box .deviceTD {
+  max-width: 100px;
+  word-wrap: break-word;
+}
+.data-container .box .panel {
+  border: 1px solid #eee;
+  padding: 20px 10px 15px;
+}
+.data-container .box .panel .control-label {
+  display: block;
+}
+.data-container .box .panel select {
+  width: 62px;
+}
+.data-container .box .panel #search {
+  margin-top: 25px;
+}
+.data-container .box .panel #reset {
+  margin-top: 25px;
+}
+.data-container .box .panel label {
+  margin-bottom: 10px;
+}
+.data-container .box .panel .form-group {
+  margin-right: 20px;
+  margin-bottom: 40px;
+}
+.data-container .box .table-responsive th {
+  background: #efefef;
+  min-width: 100px;
+  text-align: center;
+}

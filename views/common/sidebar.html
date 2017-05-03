@@ -1,0 +1,353 @@
+<div class="sidebar-container">
+    <div class="first-level">
+        <ul class="first-level-list">
+            {{#each roleAction.action}}
+            {{#compare action '==' 'cn-operation-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-chrome fa-fw"></i>{{../../i18n.activity_setting}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/h5/cn/plist"><i class="fa-html5 fa fa-fw"></i>{{../../i18n.h5_page}}</a></li>
+                        <li><a href="/pc/cn/plist"><i class="fa-html5 fa fa-fw"></i>{{../../i18n.pc_page}}</a></li>
+                        <!--<li><a href="/activity/girlsday"><i class="fa-html5 fa fa-fw"></i>{{../../i18n.girls_day_page}}</a></li>-->
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+
+            {{#compare action '==' 'cn-market-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-chrome fa-fw"></i>{{../../i18n.activity_setting1}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/h5/cn/mlist"><i class="fa-html5 fa fa-fw"></i>{{../../i18n.h5_page}}</a></li>
+                        <li><a href="/pc/cn/mlist"><i class="fa-html5 fa fa-fw"></i>{{../../i18n.pc_page}}</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+
+            {{#compare action '==' 'kr-market-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-chrome fa-fw"></i>{{../../i18n.activity_setting2}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/h5/kr/mlist"><i class="fa-html5 fa fa-fw"></i>{{../../i18n.h5_page}}</a></li>
+                        <li><a href="/pc/kr/mlist"><i class="fa-html5 fa fa-fw"></i>{{../../i18n.pc_page}}</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+
+            {{#compare action '==' 'action-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-universal-access fa-fw"></i>{{../../i18n.user_setting}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/admin/panel"><i class="fa-tree fa fa-fw"></i>{{../../i18n.permission_setting}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+
+            {{#compare action '==' 'appdownload-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-download fa-fw"></i>{{../../i18n.appdownload}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/app/download"><i class="fa-download fa fa-fw"></i>{{../../i18n.appdownload}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+
+            {{#compare action '==' 'role-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-male fa-fw"></i>{{../../i18n.permission_setting}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/admin/role"><i class="fa-futbol-o fa fa-fw"></i>{{../../i18n.role_setting}}</a>
+                        </li>
+                        <li><a href="/admin/action"><i class="fa-support fa fa-fw"></i>{{../../i18n.privilige_setting}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+
+            {{#compare action '==' 'wechat-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-wechat fa-fw"></i>{{../../i18n.wechat_setting}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/wechat/offac"><i class="fa-wechat fa fa-fw"></i>{{../../i18n.custom_setting}}</a>
+                        </li>
+                        <li><a href="/wechat/reply"><i class="fa-wechat fa fa-fw"></i>{{../../i18n.auto_reply}}</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+
+            {{#compare action '==' 'promotion-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-diamond  fa-fw"></i>{{../../i18n.market_setting}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        {{#each ../../roleAction.action}} {{#compare action '==' 'market-lapse'}}
+                        <li><a href="/market/lapse"><i class="fa-cubes  fa fa-fw"></i>{{../../../../i18n.lapse}}</a>
+                        </li>
+                        {{/compare}} {{#compare action '==' 'market-coupon'}}
+                        <li><a href="/market/coupon"><i class="fa-deaf fa fa-fw"></i>{{../../../../i18n.coupon}}</a>
+                        </li>
+                        {{/compare}} {{#compare action '==' 'market-code'}}
+                        <li><a href="/market/code"><i
+                                class="fa-deaf fa fa-fw"></i>{{../../../../i18n.discount_code}}</a>
+                        </li>
+                        {{/compare}} {{#compare action '==' 'market-warehouse'}}
+                        <li><a href="/market/warehouse"><i class="fa-fighter-jet fa fa-fw"></i>{{../../../../i18n.warehouse}}</a>
+                        </li>
+                        {{/compare}} {{#compare action '==' 'market-preference'}}
+                        <li><a href="/market/preference/detail?id=1"><i class="fa-cutlery fa fa-fw"></i>{{../../../../i18n.preference}}</a>
+                        </li>
+                        {{/compare}} {{#compare action '==' 'market-data'}}
+                        <li><a href="/market/data"><i class="fa-cutlery fa fa-fw"></i>数据</a>
+                        </li>
+                        {{/compare}}
+                        {{#compare action '==' 'flash-sale'}}
+                        <li><a href="/market/flash/list"><i class="fa-cutlery fa fa-fw"></i>秒杀</a>
+                        </li>
+                        {{/compare}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+
+            {{#compare action '==' 'gift-box-sys'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-gift fa-fw"></i>{{../../i18n.boxManagementSys}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/gift/cn/base"><i class="fa fa-database fa-fw"></i>{{../../i18n.giftBaseData }}</a>
+                        </li>
+                        <li><a href="/gift/cn/warehousework"><i class="fa fa-hand-lizard-o fa-fw"></i>{{../../i18n.doneInWarehouse}}</a>
+                        </li>
+                        <li><a href="/gift/cn/query"><i class="fa fa-list-alt fa-fw"></i>{{../../i18n.queryReport}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+
+            {{#compare action '==' 'coupon-manage-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-gift fa-fw"></i>{{../../i18n.couponManage}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        {{#each ../../roleAction.action}} {{#compare action '==' 'coupon-manage'}}
+                        <li><a href="/coupon/cn/manage"><i class="fa fa-users fa-fw"></i>{{../../../../i18n.couponManage
+                            }}</a></li>
+                        {{/compare}}{{#compare action '==' 'user-coupon'}}
+                        <li><a href="/coupon/cn/user"><i class="fa fa-eye fa-fw"></i>{{../../../../i18n.userCouponScan}}</a>
+                        </li>
+                        {{/compare}}{{#compare action '==' 'sms'}}
+                        <li><a href="/coupon/cn/sms"><i class="fa fa-list-alt fa-fw"></i>{{../../../../i18n.SMSManage}}</a>
+                        </li>
+                        {{/compare}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'app-setting'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-mobile fa-fw"></i>{{../../i18n.appConf}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/app/cn/list"><i class="fa fa-home fa-fw"></i>{{../../i18n.appPages }}</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'user-info-collect-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-user fa-fw"></i>{{../../i18n.userInfoCollectSys}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/questionnaire/cn/user-property-list"><i class="fa fa-tags fa-fw"></i>{{../../i18n.tagsManage
+                            }}</a></li>
+                        <li><a href="/questionnaire/cn/question-manage"><i class="fa fa-list-alt fa-fw"></i>{{../../i18n.questionnaireManage}}</a>
+                        </li>
+                        <li><a href="/questionnaire/cn/create-question"><i class="fa fa-list-alt fa-fw"></i>{{../../i18n.createQuestionnaire}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'tag-manage-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-user fa-fw"></i>{{../../i18n.tagsManageSys}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/questionnaire/cn/tag-category-list"><i class="fa fa-tags fa-fw"></i>{{../../i18n.tagsManage
+                            }}&nbsp;New</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'brand-manage'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-shield fa-fw"></i>{{../../i18n.brandManage}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/brand/brandInfo"><i class="fa fa-tasks fa-fw"></i>{{../../i18n.brandGroupInfo
+                            }}</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'video-manage'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-shield fa-fw"></i>{{../../i18n.videoManage}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/video/list"><i class="fa fa-tasks fa-fw"></i>{{../../i18n.videoList}}</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'teletext-manage'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-newspaper-o"></i>{{../../i18n.teletextManage}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/teletext/list"><i class="fa fa-tasks fa-fw"></i>{{../../i18n.teletextList }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'data-view'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-newspaper-o"></i>数据
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/data"><i class="fa fa-tasks fa-fw"></i>数据测试</a></li>
+                    </ul>
+                </div>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/event"><i class="fa fa-tasks fa-fw"></i>埋点事件管理</a></li>
+                    </ul>
+                </div>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/eventSearch"><i class="fa fa-tasks fa-fw"></i>埋点数据查询</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'log-view'}}
+            <li>
+                <a href="/log" class="toggle-active">
+                    <i class="fa fa-newspaper-o"></i>日志管理
+                    <span class="fa fa-angle-left"></span>
+                </a>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'live-manage'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-shield fa-fw"></i>{{../../i18n.liveManage}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/live/list"><i class="fa fa-tasks fa-fw"></i>{{../../i18n.liveList}}</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'tools'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-shield fa-fw"></i>{{../../i18n.tools}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/tools/convert/productid"><i class="fa fa-tasks fa-fw"></i>{{../../i18n.tools}}</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{#compare action '==' 'subscription-manage'}}
+            <li>
+                <a href="javascript:void(0);" class="toggle-active">
+                    <i class="fa fa-shield fa-fw"></i>{{../../i18n.subscriptionManage}}
+                    <span class="fa fa-angle-left"></span>
+                </a>
+                <div class="second-level">
+                    <ul>
+                        <li><a href="/subscription/list"><i class="fa fa-tasks fa-fw"></i>{{../../i18n.subscriptionAbout}}</a></li>
+                    </ul>
+                </div>
+            </li>
+            {{/compare}}
+            {{/each}}
+        </ul>
+    </div>
+</div>

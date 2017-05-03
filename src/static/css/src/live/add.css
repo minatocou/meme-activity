@@ -1,0 +1,170 @@
+.right-content-frame {
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+.header {
+  overflow: hidden;
+}
+.liveCon .liveHeader {
+  overflow: hidden;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.liveCon .liveHeader h2 {
+  float: left;
+  font-size: 16px;
+  line-height: 34px;
+  margin: 0;
+}
+.liveCon .liveHeader h2 span {
+  color: #2e6da4;
+  font-size: 14px;
+  vertical-align: middle;
+}
+.liveCon .liveHeader .saveLive {
+  float: right;
+}
+.liveCon .saveLive {
+  padding: 4px 12px;
+}
+.liveCon .liveBody {
+  width: 100%;
+  padding: 20px;
+}
+.liveCon .liveBody .container {
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.liveCon .liveBody .container .title {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+.liveCon .liveBody .container .liveForm table {
+  width: 100%;
+}
+.liveCon .liveBody .container .liveForm table tr {
+  font-size: 14px;
+}
+.liveCon .liveBody .container .liveForm table tr input,
+.liveCon .liveBody .container .liveForm table tr select {
+  width: 400px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+.liveCon .liveBody .container .liveForm table tr textarea {
+  width: 598px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+.liveCon .liveBody .container .liveForm table tr input:focus,
+.liveCon .liveBody .container .liveForm table tr select:focus,
+.liveCon .liveBody .container .liveForm table tr textarea:focus {
+  outline: none;
+  border-color: #aaa;
+}
+.liveCon .liveBody .container .liveForm table tr td {
+  padding: 5px;
+}
+.liveCon .liveBody .container .liveForm table tr td:first-child {
+  vertical-align: top;
+}
+.liveCon .liveBody .container .liveForm table tr .uploadImgBox {
+  overflow: hidden;
+  position: relative;
+}
+.liveCon .liveBody .container .liveForm table tr .uploadImgBox img {
+  margin-top: 5px;
+  max-width: 200px;
+  max-height: 120px;
+}
+.liveCon .liveBody .container .liveForm table tr .liveImg {
+  margin-top: 5px;
+  max-width: 200px;
+  max-height: 120px;
+}
+.liveCon .liveBody .container .liveForm table .imgBox {
+  position: relative;
+  display: none;
+}
+.liveCon .liveBody .container .liveForm table .imgBox .close-btn {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  line-height: 18px;
+  font-size: 20px;
+  background: #ff5073;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  font-style: normal;
+  cursor: pointer;
+}
+.liveCon .liveBody .container .liveForm table .showImg {
+  display: inline-block;
+}
+.liveCon .liveBody .container .liveForm table .star {
+  font-size: 12px;
+  vertical-align: top;
+  color: #f00;
+  margin-left: 3px;
+}
+.liveCon .uploadCon {
+  display: block !important;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.liveCon .uploadCon .tips {
+  float: left;
+  margin-left: 10px;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.liveCon #upload-bg,
+.liveCon #upload-avatar,
+.liveCon #upload-share {
+  display: inline-block;
+  float: left;
+}
+.liveCon #upload-bg:hover .webuploader-pick,
+.liveCon #upload-avatar:hover .webuploader-pick,
+.liveCon #upload-share:hover .webuploader-pick {
+  background: #00b7cc;
+}
+.liveCon #upload-bg:active .webuploader-pick,
+.liveCon #upload-avatar:active .webuploader-pick,
+.liveCon #upload-share:active .webuploader-pick {
+  box-shadow: 0 0 5px 5px rgba(111, 111, 111, 0.4) inset;
+}
+.liveCon #upload-bg .webuploader-pick,
+.liveCon #upload-avatar .webuploader-pick,
+.liveCon #upload-share .webuploader-pick {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  background: #00b7ee;
+  padding: 0 10px;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  overflow: hidden;
+  height: 30px;
+  line-height: 30px;
+}
+.liveCon #upload-bg .webuploader-element-invisible,
+.liveCon #upload-avatar .webuploader-element-invisible,
+.liveCon #upload-share .webuploader-element-invisible {
+  position: absolute!important;
+  clip: rect(1px 1px 1px 1px);
+}

@@ -1,0 +1,299 @@
+<div class="tab-pane active" id="mainList">
+    <div class="search-form-wrap need-max-width" style="">
+        <form data-api="/task/index" action="" class="form-inline search-form" role="form" align="center" data-tmpl="main-list-tmpl">
+        <div class="table table-layout">
+            <div class="form-group">
+                <label>{{i18n.task}}ID </label>
+                <div>
+                    <input type="text" class="form-control" name="taskId">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{i18n.assembleGiftBoxName}}</label>
+                <div>
+                    <input type="text" class="form-control" name="boxName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{i18n.assembleGiftBoxCount}}</label>
+                <div>
+                    <input type="number" class="form-control" id="" name="qty">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{i18n.remark}}</label>
+                <div>
+                    <input type="text" class="form-control" id="" name="comment">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{i18n.createTime}}</label>
+                <div>
+                    <div class="input-daterange input-group" id="datepicker">
+                        <input type="text" class=" form-control" name="fromDate" placeholder="{{i18n.start_time}}" readonly />
+                        <span class="input-group-addon">➡️</span>
+                        <input type="text" class=" form-control" name="toDate" placeholder="{{i18n.end_time}}" readonly />
+                    </div>
+                </div>
+            
+            </div>
+            <div class="form-group">
+                <label>{{i18n.status}}</label>
+                <div>
+                    <select class="form-control" id="" name="status">
+                        <option value="">{{i18n.all}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{i18n.createUser}}</label>
+                <div>
+                    <input type="text" class="form-control" name="creater">
+                </div>
+            
+            </div>
+        </div>
+            <input type="hidden" name="pageNum" value="">
+            <input type="hidden" name="pageSize" value="">
+            <div class="form-group pull-right">
+                <input type="submit" class="btn btn-default" value="{{i18n.search}}" id="search-btn">
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover v-middle mb-0">
+            <thead>
+                <tr>
+                    <th>{{i18n.task}}ID </th>
+                    <th>{{i18n.assembleGiftBoxName}} </th>
+                    <th>{{i18n.assembleGiftBoxCount}}</th>
+                    <th> {{i18n.remark}} </th>
+                    <th> {{i18n.createTime}} </th> 
+                    <th> {{i18n.createUser}} </th> 
+                    <th> {{i18n.status}} </th> 
+                    <th> {{i18n.operation}} </th> 
+                </tr>
+            </thead>
+            <tbody class="data-container text-center">
+                
+            </tbody>
+        </table>
+        <script type="text/html" id="main-list-tmpl">
+            ${each list}
+                <tr>
+                    <td>${$value.id}</td>
+                    <td title="${$value.name}"><div class="td-max-width">${$value.name}</div></td>
+                    <td>${$value.qty}</td>
+                    <td title="${$value.comment}"><div class="td-max-width">${$value.comment}</div></td>
+                    <td>${$value.created_at}</td>
+                    <td>${$value.creater}</td>
+                    <td>${list.status[$value.status]}</td>
+                    <td>
+                        <button data-value="${$value.dataStringify}" data-taskId="${$value.id}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#query-component-modal">
+                            <i class=" fa fa-eye"></i>{{i18n.get_detail}}
+                        </button>
+                        ${if $value.status != '4' }
+                            <button type="button" data-taskId="${$value.id}" data-key="taskId" data-url="/task/delete" class="btn btn-danger delete-btn" >
+                                <i class=" fa fa-trash"></i>{{i18n.delete}}
+                            </button>
+                            <button type="button" data-taskId="${$value.id}" data-key="taskId" data-url="/task/complete" class="btn btn-primary">
+                                <i class=" fa fa-circle"></i>{{i18n.complete}}
+                            </button>
+                        ${else}
+                            <button type="button" class="btn btn-default delete-btn" disabled>
+                                <i class=" fa fa-trash"></i>{{i18n.delete}}
+                            </button>
+                            <button type="button" class="btn btn-default" disabled>
+                                <i class=" fa fa-circle"></i>{{i18n.complete}}
+                            </button>
+                        ${/if}
+                    </td> 
+                </tr>
+            ${/each}  
+        </script>
+    </div>
+    <div id="pagination-container"></div>
+</div>
+<script type="text/html" id="add-assemble-task">
+    <form class="form-horizontal need-validate-form" role="form" action="${action}">
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> {{i18n.assembleGiftBoxName}} </label>
+            <div class="col-sm-10">
+                <select type="text" data-live-search="true" class="form-control" name="boxSku" data-api="/master/searchgroup">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> {{i18n.assembleGiftBoxCount}}{{i18n.qty}}</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" data-bind=".totalCount" min="1" numberCheck="true" name="qty" placeholder="" value="1" required>
+                <!-- <input type="hidden" name="creater" value="{{user.username}}"> -->
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{i18n.remark}}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="comment" maxlength="50" placeholder="">
+            </div>
+        </div>
+        <div class="tab-pane active show-item-detail">
+            <div class="radio col-xs-7">
+                <label> <input type="radio" name="showType" value="barcode">{{i18n.showItemByCode}}</label>
+                &nbsp;
+                <label><input type="radio" name="showType" value="sku" checked>{{i18n.showItemBySKU}} </label>
+            </div><br><br>
+            <div class="ov-auto table mb-0">
+                <div class="table dis-table b-1 data-container">
+                    
+                </div>
+            </div>
+        </div>
+    </form>
+</script>
+<div class="modal fade" id="query-component-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg relative">
+    <div class="modal-content">
+      <div class="modal-header pb-0">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <ul class="ov-h">
+            <li class="tab-box-item active" data-target=".show-item-detail" data-tmpl="showItemDetail" data-toggle="tab" data-api="/task/detail">
+                {{i18n.assemblyDetail}}
+            </li>
+            <li class="tab-box-item" data-target=".show-box-code" data-tmpl="showBill" data-toggle="tab" data-api="/task/content">
+                {{i18n.assemblyBill}}
+            </li>
+        </ul>
+      </div>
+      <div class="modal-body tab-content">
+        <div class="tab-pane active show-item-detail">
+            <div class="radio col-xs-7">
+                <label> <input type="radio" name="showType" value="barcode">{{i18n.showItemByCode}}</label>
+                &nbsp;
+                <label><input type="radio" name="showType" value="sku" checked>{{i18n.showItemBySKU}} </label>
+            </div>   
+            <div class="ov-auto table">
+                <div class="table dis-table b-1 data-container">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane show-box-code">
+            <div class="scroll-container nowrap">
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th>{{i18n.boxCode}}</th>
+                            <th>{{i18n.assembleGiftBoxCount}}</th>
+                            <th>{{i18n.wares}}SKU</th>
+                            <th>{{i18n.waresCode}}</th>
+                            <th>{{i18n.waresName}}</th>
+                            <th>{{i18n.qty}}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="data-container text-center">
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix text-right mt-20">
+                <a href class="btn btn-primary px-30" target="_blank" data-req="/task/printTask" data-url>{{i18n.printAssembleBill}}</a>
+                <div class="text-tight p-7">
+                    {{i18n.latestPrintDate}}：<span data-bind="taskPrintTime"></span>；&nbsp;
+                    {{i18n.latestPrintUser}}：<span data-bind="taskPrintOperator"></span>
+                </div>
+            </div>
+            <div class="clearfix text-right">
+                <a href class="btn btn-primary px-30" target="_blank" data-req="/task/printBoxCode" data-url>{{i18n.printBoxCode}}</a>
+                <div class="text-tight p-7">
+                    {{i18n.latestPrintDate}}：<span data-bind="barCodePrintTime"></span>；&nbsp;
+                    {{i18n.latestPrintUser}}：<span data-bind="barCodePrintOperator"></span>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/html" id="item-detail-tmpl">
+    ${each showItemDetail}
+        <div class="table-cell v-top item-input-container">
+            <div class="text-center p-7 th">{{i18n.assemblyItem}}${$index}</div>
+            <div class="text-center th by-1 clearfix">
+                <div class="col-xs-7 p-7 br-1 p-0">{{i18n.wares}}</div>
+                <div class="col-xs-5 p-7 px-0">{{i18n.qty}}</div>
+            </div>
+            <div class="item-cell-container px-0">
+                ${each $value}
+                    <div class="text-center by-1 clearfix">
+                        <div class="col-xs-7 p-7 br-1 p-0 ">
+                            <input type="text" readonly data-sku="${$value.sku}" data-barcode="${$value.barCode}" class="item-input px-0 bb-0" value="${$value.sku}">
+                        </div>
+                        <div class="col-xs-5 p-7 px-0">
+                            <input type="text" class="item-input px-0 bb-0 text-center" data-sku="${$value.qty}" data-barcode="${$value.qty}" readonly value="${$value.qty}">
+                        </div>
+                    </div>
+                    
+                ${/each}
+            </div>    
+        </div>
+    ${/each}
+
+    ${each showItemDetail2}
+        <div class="table-cell v-top item-input-container relative  pb-53">
+            <div class="text-center p-7 th">{{i18n.assemblyItem}}${$index}</div>
+            <div class="text-center th by-1 clearfix">
+                <div class="col-xs-7 p-7 br-1 p-0">{{i18n.wares}}</div>
+                <div class="col-xs-5 p-7 px-0">{{i18n.qty}}</div>
+            </div>
+            <div class="item-cell-container px-0">
+                ${each $value}
+                    <div class="text-center by-1 clearfix">
+                        <div class="col-xs-7 p-7 br-1 p-0 ">
+                            <input type="text" readonly data-sku="${$value.prodSku}" data-barcode="${$value.prodBarCode}" class="item-input px-0 bb-0" value="${$value.prodSku}">
+                        </div>
+                        <div class="col-xs-5 p-7 px-5">
+                            <input type="number" min="0" data-calc=".totalCount" class="item-input-fix px-0 text-center"  value="${$value.qty}">
+                        </div>
+                    </div>
+                    ${if $index+1 == this.length}
+                    <div class="text-center by-1 clearfix position-bottom">
+                        <div class="col-xs-7 p-7 p-0 ">
+                            <input type="text" readonly class="item-input-fix px-0 b-0 text-center" value="{{i18n.totalCount}}：">
+                        </div>
+                        <div class="col-xs-5 p-7 px-5">
+                            <input type="number" min="0" readonly class="totalCount item-input-fix px-0 b-0 text-center" value="0">
+                        </div>
+                    </div>
+                    ${/if}
+                ${/each}
+            </div>    
+        </div>
+    ${/each}
+
+    ${each showBill as v i}
+        ${each v.detail}
+            <tr>
+                ${if $index == 0}
+                    <td class="v-middle text-center" rowspan="${v.detail.length}">
+                    ${if typeof v.sku !== 'undefined'}
+                        ${v.sku}
+                    ${else}
+                        ${v.barCode}
+                    ${/if}
+                    </td>
+                    <td class="v-middle text-center" rowspan="${v.detail.length}">${v.qty}</td>
+                    <td>${$value.sku}</td>
+                    <td>${$value.barCode }</td>
+                    <td title="${$value.name}"><div class="td-max-width">${$value.name}</div></td>
+                    <td>${v.qty}</td>
+                ${else}
+                    <td>${$value.sku}</td>
+                    <td>${$value.barCode }</td>
+                    <td title="${$value.name}"><div class="td-max-width">${$value.name}</div></td>
+                    <td>${v.qty}</td>
+                ${/if}
+            </tr>
+        ${/each}
+    ${/each}
+
+</script>

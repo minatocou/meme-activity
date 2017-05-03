@@ -1,0 +1,62 @@
+<div class="icon-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#icon" href="#icon">首页ICON组件</a>
+            </div>
+            <div id="icon" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <div class="form-group ">
+                            <div>背景图片URL(建议750*136)</div>
+                            <img class="thumbnail" v-if="setting.bg_img" :src="setting.bg_img">
+                            <input class="form-control input-sm bgImg removeSpace" v-model="setting.bg_img" value="${setting.bg_img}" name="bg_img" placeholder="${i18n.bannerBg}"
+                                   type="text">
+                        </div>
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="iconGroup singleConf">
+                        <form  v-for="(i,icon) in setting.data | orderBy 'position'" class="iconItem singleItem">
+                            <a class="itemTitle" @click="slideItem($event)">ICON<span>${icon.position}</span>配置 <i class="fa fa-caret-down"></i></a>
+                            <input class="form-control input-sm" name="position" type="hidden" value="${icon.position}">
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div><em class="red">*</em>图片URL(建议160*160)</div>
+                                    <img class="thumbnail" v-if="icon.icon_img" :src="icon.icon_img">
+                                    <input class="form-control input-sm imgSrc removeSpace" v-model="icon.icon_img" value="${icon.icon_img}"  name="icon_img" placeholder="${i18n.imgSrc}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div>文字</div>
+                                    <input class="form-control input-sm icon_title" value="${icon.icon_title}"  name="icon_title"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>跳转URL/APP原生页面</div>
+                                    <select class="form-control linkKind appLink" name="url_type" @change="changeUrlType($event)" value="${icon.url_type}">
+                                        <template v-for="(k,v) in urlType">
+                                            <option v-if="icon.url_type==v.value"
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}"
+                                                    selected>
+                                                ${v.value}
+                                            </option>
+                                            <option v-else
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}">
+                                                ${v.value}
+                                            </option>
+                                        </template>
+                                    </select>
+                                    <input class="form-control input-sm inputWord" name="url_text" @change="changeUrlInput($event)" value="${icon.url_text}" placeholder="URL" type="text">
+                                    <input class="form-control input-sm" name="item_action_url" type="hidden" value="${icon.item_action_url}">
+                                    <input class="form-control input-sm" name="item_action_url_type" type="hidden" value="${icon.item_action_url_type}">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

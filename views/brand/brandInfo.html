@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.brandManage}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/brand/brandInfo.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="appList">
+        <div class="searchContainer">
+            <button class="btn btn-primary addPage">{{i18n.addBrandPage}}</button>
+        </div>
+        {{#if brandList}}
+        <div class="listContainer table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <th>品牌名称</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </thead>
+                <tbody>
+                {{#each brandList}}
+                <tr>
+                    <td>{{title}}</td>
+                    <td>{{#status status}}{{/status}}</td>
+                    <td><a class="btn btn-warning" href="{{#mlink type id}}{{/mlink}}">{{#litext type status}}{{/litext}}</a></td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{/if}}
+    </div>
+</div>
+
+<div class="modal fade" id="addPageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">{{i18n.addBrand}}</h4>
+            </div>
+            <div class="modal-body">
+                <form id="add-page-form">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>{{i18n.pageName}}：</th>
+                            <td>
+                                <select class="form-control title">
+                                    <option data-type="226">PONY EFFECT</option>
+                                    <option data-type="224">I'M MEME</option>
+                                    <option data-type="228">NOONI</option>
+                                    <option data-type="227">BONVIVANT</option>
+                                </select>
+                                <span class="valid-msg"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary add">{{i18n.add}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{i18n.cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/build/src/views/brand/brandInfo.js?t=1493261397671"></script>
+</body>
+</html>

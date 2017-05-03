@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memebox事件关系管理面板</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href="/css/build/src/views/data/mapping.css?t=1493261397671" />
+</head>
+<body>
+{{>header}}
+<div class="main-container">
+
+    {{>sidebar}}
+
+    <div class="data-container">
+        <div class="fullfill"><i class="fa fa-arrows-alt" aria-hidden="true"></i>全屏</div>
+        <div class="box">
+            <div class="panel" id="panel">
+                <form action="" class="form-inline">
+
+                    <div class="form-group">
+                        <label for="preproty" class="control-label">
+                            属性名
+                        </label>
+                        <input type="text" id="preproty" name="preproty" v-model="param.preproty" class="form-control input-sm" placeholder="eg:start_app">
+                    </div>
+                    <div class="form-group">
+                        <label for="mapping" class="control-label">
+                            扩展字段名
+                        </label>
+                        <select class="form-control input-sm" v-model="param.mapping" id="mapping" name="mapping">
+                            <option v-for="m in mapping" :value="m">${m}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary"  @click="initPage()">搜索</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="reset" class="btn btn-primary btn-danger" @click="param={}" id="reset">清除</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" @click="addEvent" class="btn btn-success">新增</button>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>排序</th>
+                        <th>事件名称</th>
+                        <th>属性类型</th>
+                        <th>关联字段</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dataTbody">
+                        <tr v-show="eventList.length==0"><td colspan='14' style='text-align: center'>加载中...</td></tr>
+                        <tr v-show="showAddEvent">
+                            <td></td>
+                            <td></td>
+                            <td><input class="form-control input-sm" v-model="add.preproty" name="preproty" placeholder="属性名称" /></td>
+                            <td>
+                                <select class="form-control input-sm" v-model="add.mapping" name="mapping">
+                                    <option v-for="m in mapping" :value="m">${m}</option>
+                                </select>
+                            </td>
+                            <td><input class="form-control input-sm" v-model="add.description" name="description" placeholder="描述" /></td>
+                            <td>
+                                <button type="button" @click="saveEvent" class="btn btn-success">保存</button>
+                            </td>
+                        </tr>
+                        <tr v-for="(i,v) in mappingList">
+                            <td>${i}</td>
+                            <td>${v.event_name}</td>
+                            <td>${v.preproty}</td>
+                            <td>${v.mapping}</td>
+                            <td>${v.description}</td>
+                            <td>
+                                <button class="btn btn-danger delete-btn" @click="deleteMapping(v)">
+                                    <i class=" fa fa-trash"></i>删除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/build/src/views/data/mapping.js?t=1493261397671"></script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>memebox配置 pc</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href="/css/build/src/views/create/pc.css?t=1493261397671" />
+</head>
+<body id="pcContainer" data-preview="{{preview}}" data-state="{{state}}" data-localize="{{i18n.localize}}">
+
+<div class="header">
+    <ul class="f-l back">
+        <li>
+            <a href="{{#backpc d}}{{/backpc}}" ><i class="fa fa-arrow-circle-left" ></i>{{i18n.go_back}}</a>
+        </li>
+    </ul>
+    <ul class="header-item">
+        <div id="upload-img">{{i18n.upload}}</div>
+    </ul>
+    <ul class="header-group">
+        <li>
+            <a href="javascript:void(0)" id="preview-btn" >
+                <i class="fa fa-inverse fa-check-circle-o"></i>
+                <span>{{i18n.preview}}</span>
+            </a>
+        </li>
+        <li>
+            <a id="save-btn" href="javascript:void(0)">
+                <i class="fa fa-inverse fa-save"></i>
+                <span>{{i18n.save}}</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="main-container">
+    <div class="block-wrapper">
+        <ul id="template">
+            <li class="t1 template" data-field="l1">
+                <div class="list">
+                    <div class="img"></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <i class="close-btn">×</i>
+            </li>
+            <li class="tVideo template" data-field="video" >
+                <img src="/img/static/img/video.png" alt="">
+                <i class="close-btn">×</i>
+            </li>
+        </ul>
+    </div>
+    <div class="img-wrapper">
+        <img src="/img/static/img/ba.png" alt="" class="ba">
+        <ul class="img-list">
+        </ul>
+    </div>
+    <div class="canvas-wrapper">
+        <ul class="canvas" id="canvas">
+            {{#each field}}
+            {{#compare type '==' 'l1'}}
+            <li class="t1 template" data-field="l1" data-setting='{{#json this}}{{/json}}'>
+                <div class="list">
+                    <div class="img"></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <i class="close-btn">×</i>
+            </li>
+            {{/compare}}
+            {{#compare type '==' 'img'}}
+            <li class="tImg template" data-field="img" data-setting='{{#json this}}{{/json}}'>
+                <a href="{{imgUrl}}" style="pointer-events: none;">
+                    <img src="{{imgSrc}}" alt="">
+                </a>
+                <i class="close-btn">×</i>
+                {{#each links}}
+                <div style='{{#css css}}{{/css}}' class="link">
+                    <span class="link-url">{{url}}</span>
+                    <i class="close-link-btn">×</i>
+                </div>
+                {{/each}}
+            </li>
+            {{/compare}}
+            {{#compare type '==' 'video'}}
+            <li class="tVideo template" data-field="video" data-setting='{{#json this}}{{/json}}' >
+                <img src="{{videoBackground}}" alt="">
+                {{#if videoUrl}}
+                <div style='{{#css videocss}}{{/css}}' class="addVideo-cont">
+                    <span class="video-url">{{videoUrl}}</span>
+
+                    <i class="close-video-btn">×</i>
+                </div>
+
+                {{/if}}
+                <i class="close-btn">×</i>
+
+            </li>
+            {{/compare}}
+            {{/each}}
+        </ul>
+    </div>
+    <div class="attr-wrapper">
+        <form class="comm-attr" role="form">
+            <input type="hidden" name="cid" value="{{cid}}">
+            <input type="hidden" name="d" value="{{d}}">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><a data-toggle="collapse" data-parent="#page" href="#page">{{i18n.page_setting}}</a></div>
+                    <div id="page" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input class="form-control input-sm"  value="{{preview}}{{urlKey}}" type="text" readonly>
+                            </div>
+                            <div class="form-group">
+                                <input name="urlkey" class="form-control input-sm"  placeholder="url key" value="{{urlKey}}" type="text">
+                                <div class="tip"><em>*</em>{{i18n.ukey}} key</div>
+                            </div>
+                            <div class="form-group">
+                                <input name="title" class="form-control input-sm" placeholder="{{i18n.title}}" value="{{root.title}}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <input name="bgColor" class="form-control input-sm" placeholder="{{i18n.background}}" value="{{root.bgColor}}" type="text">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+        <form class="t1-attr attr-form" style="display: none" role="form">
+            <!--<div class="form-group">-->
+                <!--<input class="form-control input-sm" form-img name="groupImg" placeholder="列表首图地址(可不填)" type="text">-->
+                <!--<input class="form-control input-sm" name="groupImgUrl" placeholder="列表首图跳转链接(可不填)" type="text">-->
+
+            <!--</div>-->
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#category" data-toggle="tab">
+                        category
+                    </a>
+                </li>
+                <li><a href="#sku" data-toggle="tab">sku</a></li>
+                <li><a href="#format" data-toggle="tab">{{i18n.format_setting}}</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="category">
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="categoryid" placeholder="categoryid" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="proNum" placeholder="{{i18n.show_num}}" type="number">
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="sku">
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="skus" placeholder="{{i18n.skuid}}" type="text">
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="format">
+                    <div class="form-group">
+                        <label>{{i18n.onelineN}}</label>
+                        <select name="column" class="form-control" placeholder="{{i18n.oneline1}}">
+                            <option>3</option>
+                            <option>4</option>
+
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class='tip'><em>*</em> {{i18n.cat_tip}}</div>
+        </form>
+        <form class="img-attr attr-form" style="display: none" role="form">
+            <div class="form-group">
+                <input class="form-control input-sm" form-img name="imgSrc" placeholder="{{i18n.img_address}}" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="imgUrl" placeholder="url" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="padding" placeholder="{{i18n.padding}}" type="text">
+                <div class="tip">{{i18n.padding_tip}}</div>
+            </div>
+            <div class="link-group">
+                <div style="padding: 0" class="col-xs-12 col-md-8">
+                    <input class="form-control input-sm" id="linkUrl" placeholder="{{i18n.hot_address}}" type="text">
+                </div>
+                <div class="col-xs-6 col-md-4">
+                    <button class="btn btn-success btn-sm" id="addLink" type="button">{{i18n.add_hot}}</button>
+                </div>
+            </div>
+
+        </form>
+        <form class="video-attr attr-form" style="display: none" role="form">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><a data-toggle="collapse" data-parent="#video" href="#video">{{i18n.video_setting}}</a></div>
+                    <div id="video" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input class="form-control input-sm" name="videoUrl" id="videoUrl" placeholder="{{i18n.video_link}}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control input-sm" name="videoBackground" id="videoBackground" placeholder="{{i18n.video_bg}}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control input-sm" name="videoPadding" id="videoPadding" placeholder="{{i18n.video_padding}}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success btn-sm" id="addVideo" type="button">{{i18n.add_video}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<script id="t1Template" type="text/html">
+    <div class="list">
+        ${if groupImg}
+        <div>
+            <a ${if groupImgUrl}href="${groupImgUrl}" ${/if} class="img">
+            <img src="${groupImg}">
+            </a>
+        </div>
+        ${/if}
+        ${each list as item i}
+        ${if !proNum || i<proNum }
+        <div>
+            <a href="http://cn.memebox.com/catalog/product/view/id/${item.productId}">
+                <img src="${item.imgUrl}">
+                <div class="pro-info">
+                    <div class="title">${item.name}</div>
+                    <div class="price">${item.price}</div>
+                </div>
+            </a>
+        </div>
+        ${/if}
+        ${/each}
+    </div>
+</script>
+<script id="imgTemplate" type="text/html">
+    <a href="${imgUrl}">
+        <img src="${imgSrc}">
+    </a>
+    <i class="close-btn">×</i>
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/create/pc.js?t=1493261397671"></script>
+</body>
+</html>

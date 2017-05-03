@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新增/编辑直播</title>
+    {{> meta}}
+    <link rel='stylesheet' href="/css/build/src/views/live/addlive.css?t=1493261397671" />
+</head>
+<body id="liveContainer" data-preview="{{config.preview}}" data-page-id="{{setting.pageId}}" data-magento="{{config.magento.domain}}" data-state="{{setting.status}}" data-server-time="{{setting.server_time}}" data-localize="{{i18n.localize}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <div class="liveCon">
+            <div class="liveHeader">
+                <h2>直播配置 ><span>详情页</span></h2>
+                <a class="btn btn-primary saveLive">{{i18n.save}}</a>
+            </div>
+            <div class="liveBody">
+                <div class="container">
+                    <form class="liveForm">
+                        <!--<input type="hidden" name="operator" value="{{user.username}}">-->
+                        <input type="hidden" name="liveRoomId" value="{{liveData.liveRoomId}}">
+                        <table>
+                            <colgroup>
+                                <col width="110">
+                                <col width="">
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td>直播间背景图<span class="star">*</span></td>
+                                <td class="uploadImgBox bgBox">
+                                    <div class="uploadCon">
+                                        <div id="upload-bg">{{i18n.upload}}</div>
+                                        <span class="tips">建议尺寸:750*1334</span>
+                                    </div>
+                                    <input type="hidden" class="imgInput" name="bgUrl" value="{{#if liveData.bgUrl}}{{liveData.bgUrl}}{{/if}}">
+                                    <div class="{{#if liveData.bgUrl}}showImg{{/if}} imgBox">
+                                        <img class="imgUrl" src="{{#if liveData.bgUrl}}{{liveData.bgUrl}}{{/if}}">
+                                        <i class="close-btn">×</i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>直播间名称<span class="star">*</span></td>
+                                <td>
+                                    <input type="text" name="title" value="{{liveData.title}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>直播间密码<span class="star">*</span></td>
+                                <td>
+                                    <input type="text" name="pwd" value="{{liveData.pwd}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>直播间简介<span class="star">*</span></td>
+                                <td>
+                                    <input type="text" name="info" value="{{liveData.info}}">
+                                    <!--<textarea name="short_desc">{{liveData.short_desc}}</textarea>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>主播图片<span class="star">*</span></td>
+                                <td class="uploadImgBox avatarBox">
+                                    <div class="uploadCon">
+                                        <div id="upload-avatar">{{i18n.upload}}</div>
+                                        <span class="tips">建议尺寸:130*130</span>
+                                    </div>
+                                    <input type="hidden" name="avatar" class="imgInput" value="{{#if liveData.avatar}}{{liveData.avatar}}{{/if}}">
+                                    <div class="{{#if liveData.avatar}}showImg{{/if}} imgBox">
+                                        <img class="imgUrl" src="{{#if liveData.avatar}}{{liveData.avatar}}{{/if}}">
+                                        <i class="close-btn">×</i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>主播名称<span class="star">*</span></td>
+                                <td>
+                                    <input type="text" name="name" value="{{liveData.name}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>直播间商品</td>
+                                <td>
+                                    <input type="text" name="skus" value="{{liveData.skus}}" placeholder="只可填写sku，以英文的逗号隔开">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>预计开始时间<span class="star">*</span></td>
+                                <td>
+                                    <input type="text" name="preStart" value="{{liveData.preStart}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>分享图片<span class="star">*</span></td>
+                                <td class="uploadImgBox shareBox">
+                                    <div class="uploadCon">
+                                        <div id="upload-share">{{i18n.upload}}</div>
+                                        <span class="tips">建议尺寸:200*200</span>
+                                    </div>
+                                    <input type="hidden" class="imgInput" name="shareImg" value="{{#if liveData.shareImg}}{{liveData.shareImg}}{{/if}}">
+                                    <div class="{{#if liveData.shareImg}}showImg{{/if}} imgBox">
+                                        <img class="imgUrl" src="{{#if liveData.shareImg}}{{liveData.shareImg}}{{/if}}">
+                                        <i class="close-btn">×</i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>分享名称<span class="star">*</span></td>
+                                <td>
+                                    <input type="text" name="shareTitle" value="{{liveData.shareTitle}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>分享描述<span class="star">*</span></td>
+                                <td>
+                                    <textarea name="shareDesc">{{liveData.shareDesc}}</textarea>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </form>
+                </div>
+                <a href="/live/list" class="btn btn-default btn-sm active">&lt; 返回</a>
+                <a class="btn btn-primary saveLive">{{i18n.save}}</a>
+            </div>
+        </div>
+    </div> 
+{{>ajaxLoading}}
+</div>
+
+<script type="text/javascript" src="/js/build/src/views/live/addlive.js?t=1493261397671"></script>
+</body>
+</html>

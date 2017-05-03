@@ -1,0 +1,77 @@
+<div class="live-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#live" href="#live">直播组件</a>
+            </div>
+            <div id="live" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <div class="form-group ">
+                            <div>背景图片URL(建议750*1240)</div>
+                            <img class="thumbnail"  v-if="setting.bg_img" :src="setting.bg_img">
+                            <input class="form-control input-sm bgImg removeSpace" value="${setting.bg_img}" v-model="setting.bg_img" name="bg_img" placeholder="${i18n.bannerBg}"
+                                   type="text">
+                        </div>
+                        <!--<div class="form-group ">
+                            <div><em class="red">*</em>模块title</div>
+                            <input class="form-control input-sm" value="${setting.title}" v-model="setting.title" name="title" type="text">
+                        </div>-->
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="liveGroup singleConf">
+                        <form  v-for="(i,live) in setting.data" class="liveItem singleItem">
+                            <input type="hidden" class="uid" name="id" value="${live.id}">
+                            <!--<a class="itemTitle" @click="slideItem($event)">直播配置(${live.start_time}-${live.end_time},${status(live)}) <i class="fa fa-caret-down"></i></a>-->
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div><em class="red">*</em>房间ID</div>
+                                    <input class="form-control input-sm position" @keydown="emptyLive($event)" value="${live.liveRoomId}" v-model="live.liveRoomId" name="liveRoomId" type="text">
+                                    <a class="btn btn-success btn-sm readLive" @click="readLive($event)" type="button">${i18n.validate}</a>
+                                    <input type="hidden" name="is_pass" value="${live.is_pass}">
+                                </div>
+                                <!--<div class="form-group">
+                                    <div><em class="red">*</em>视频名称</div>
+                                    <input class="form-control input-sm grayInput" value="${live.live_title}" onkeydown="return false" name="live_title" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>视频链接</div>
+                                    <input class="form-control input-sm grayInput" value="${live.live_url}" onkeydown="return false"  name="live_url" type="text">
+                                </div>-->
+                                <div class="form-group">
+                                    <div><em class="red">*</em>直播主图</div>
+                                    <input class="form-control input-sm removeSpace" value="${live.live_img}" name="live_img" v-model="live.live_img" type="text" >
+                                    <img class="thumbnail liveImg"  v-show="live.live_img" :src="live.live_img">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>开始时间</div>
+                                    <input @mousedown="initDate($event,live.end_time,'start')" v-model="live.start_time" class="form-control input-sm startTime" value="${live.start_time}"  name="start_time" placeholder="${i18n.start_time}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>结束时间</div>
+                                    <input @mousedown="initDate($event,live.start_time,'end')" v-model="live.end_time" class="form-control input-sm endTime" value="${live.end_time}" name="end_time" placeholder="${i18n.end_time}" type="text">
+                                </div>
+                                <!--<div class="form-group">
+                                    <div class="ops">
+                                        <a class="btn btn-warning btn-sm shutLive" @click="shutLive($event)" :class="{'active':live.status==1}" type="button">${i18n.shut}
+                                        </a>
+                                        <a class="btn btn-success btn-sm openLive" @click="openLive($event)" :class="{'active':live.status==0}" type="button">${i18n.open}
+                                        </a>
+                                    </div>
+                                    <input class="status" type="hidden" name="status" value="${live.status}">
+                                </div>-->
+                            </div>
+                            <!--<div class="form-group delIcon">
+                                <div class="ops">
+                                    <a class="btn btn-sm delBanner" @click="deleteLive($event)" type="button">×</a>
+                                </div>
+                            </div>-->
+                        </form>
+                    </div>
+                    <!--<a @click="addLive($event)" class="addLive btn btn-primary">${i18n.add_config} + </a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

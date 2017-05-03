@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.teletextManage}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/teletext/teletextList.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="teletext-container">
+        <div class="teletext-head clearfix">
+            {{i18n.teletextManage}} ><span class="high-light"> {{i18n.teletextList}}</span>
+            <div class="f-r">
+                <a class="btn btn-danger" href="/teletext/panel">
+                    <i class="fa fa-plus"></i>{{i18n.newTeletext}}
+                </a>
+            </div>
+        </div>
+        <div class="wrap">
+            <form class="form-inline form-telelist" role="form">
+                <div class="form-group">
+                    <label for="title">{{i18n.teletextName}}</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="url_key">URL KEY</label>
+                    <input type="text" class="form-control" id="url_key" name="jump_id">
+                </div>
+                <div class="form-group">
+                    <label for="state">{{i18n.page_status}}</label>
+                    <select id="state" class="form-control" name="status">
+                        <option value="">{{i18n.all}}</option>
+                        <option value="1">待发布</option>
+                        <option value="0">已发布</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="lastOne">{{i18n.lastone}}</label>
+                    <input type="text" id="lastOne" class="form-control" name="admin">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-primary" value="{{i18n.search}}" id="search-btn">
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover tele-page" id="tele-alertCnt">
+                    <colgroup>
+                        <col width="80px">
+                        <col width="100px">
+                        <col width="100px">
+                        <col width="80px">
+                        <col width="150px">
+                        <col width="200px">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>
+                            图文ID
+                        </th>
+                        <th>
+                            {{i18n.teletextName}}
+                        </th>
+                        <th>
+                            URL KEY
+                        </th>
+                        <th>
+                            {{i18n.status}}
+                        </th>
+                        <th>
+                            {{i18n.lastone}}
+                        </th>
+                        <th>
+                            {{i18n.operation}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="teletext-list"></tbody>
+                </table>
+                <div class="alert alert-info tele-page" id="tele-alertInfo" role="alert" align="center">没有您想要的内容</div>
+            </div>
+            <div class="teletext-pagination" id="pagination"></div>
+        </div>
+    </div>
+</div>
+
+<script id="telelist-tpl" type="text/html">
+    ${each data as v}
+    <tr data-ori="${v.id}">
+        <td>${v.id}</td>
+        <td>${v.title}</td>
+        <td>${v.jump_id}</td>
+        <td class="sta">
+            ${if v.status=='1'}
+            <i class="fa fa-unlock"></i>已发布
+            ${else}
+            <i class="fa fa-lock"></i>待发布
+            ${/if}
+        </td>
+        <td>${v.admin}</td>
+        <td>
+            <button class="btn btn-info preview-btn" data-url="${v.short_url}">
+                <i class="fa fa-eye"></i>预览
+            </button>
+            <button class="btn btn-success states-btn">
+                ${if v.status=='1'}
+                <i class="fa fa-power-off" data-value="off"></i>下线
+                ${else}
+                <i class="fa fa-check" data-value="on"></i>发布
+                ${/if}
+            </button>
+            <a class="btn btn-warning" href="/teletext/panel?id=${v.id}">
+                <i class="fa fa-pencil"></i>编辑
+            </a>
+            <button type="button" class="btn btn-danger delete-btn">
+                <i class="fa fa-trash"></i>删除
+            </button>
+        </td>
+    </tr>
+    ${/each}
+</script>
+
+<!--预览-->
+<div class="preview-wrapper">
+    <div class="preview-container">
+        <div class="preview-header">
+            <h4>{{i18n.preview}}</h4>
+        </div>
+        <div class="preview-con">
+            <div class="preview">
+
+            </div>
+            <div class="qr">
+                <span class="tip">{{i18n.scan}}</span>
+                <div id="qrCode"></div>
+                <div class="p-link">
+                    {{i18n.scan_link}}:
+                    <p></p>
+                </div>
+                <div class="teletextId p-link">图文ID: <span></span></div>
+            </div>
+        </div>
+        <div class="close"><i class="fa fa-times"></i></div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/build/src/views/teletext/teletextList.js?t=1493261397671"></script>
+</body>
+</html>

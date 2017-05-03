@@ -1,0 +1,65 @@
+.appList {
+  width: 85%;
+  float: right;
+}
+.videoHeader {
+  overflow: hidden;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.videoHeader h2 {
+  float: left;
+  font-size: 16px;
+  line-height: 34px;
+}
+.videoHeader .addVideo {
+  float: right;
+}
+.videoBody {
+  padding: 20px;
+}
+.videoBody .searchContainer {
+  padding: 20px 20px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.videoBody .searchContainer .search {
+  overflow: hidden;
+}
+.videoBody .searchContainer .search table {
+  width: 80%;
+  float: left;
+}
+.videoBody .searchContainer .search table th {
+  font-weight: normal;
+}
+.videoBody .searchContainer .search table td {
+  padding: 10px 0;
+}
+.videoBody .searchContainer .search table input {
+  height: 26px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+.videoBody .searchContainer .search table select {
+  width: 80px;
+  height: 26px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.videoBody .searchContainer .search .searchBtn {
+  float: left;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.videoBody .listContainer {
+  border-radius: 4px;
+}
+.videoBody .listContainer table th {
+  background: #eee;
+  font-weight: normal;
+  border-bottom-width: 1px;
+}

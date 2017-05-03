@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.appConf }}</title>
+    {{> meta}}
+    <link rel='stylesheet' href="/css/build/src/views/live/list.css?t=1493261397671" />
+</head>
+<body data-preview="{{config.preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <div class="liveList">
+            <div class="liveHeader">
+                <h2>直播配置</h2>
+                <a href="/live/add" class="btn btn-primary addLive">{{i18n.addLive}}</a>
+            </div>
+            <div class="liveBody">
+                <div class="listContainer table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="20%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="20%">
+                        </colgroup>
+                        <thead>
+                            <th>ID</th>
+                            <th>直播间名称</th>
+                            <th>密码</th>
+                            <th>主播名称</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>总在线数</th>
+                            <th>点赞数</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                        {{#if listData.data.length}}
+                        {{#each listData.data}}
+                        <tr data-liveroomid="{{liveRoomId}}">
+                            <td>{{liveRoomId}}</td>
+                            <td>{{title}}</td>
+                            <td>{{pwd}}</td>
+                            <td>{{name}}</td>
+                            <td>{{#if startTime}}{{startTime}}{{else}}--{{/if}}</td>
+                            <td>{{#if endTime}}{{endTime}}{{else}}--{{/if}}</td>
+                            <td>{{#if totalUsersCount}}{{totalUsersCount}}{{else}}0{{/if}}</td>
+                            <td>{{like}}</td>
+                            <td>{{#livestatus status}}{{/livestatus}}</td>
+                            <td>
+                                <a class="btn btn-info operatorBtn manage" href='/live/manage/{{liveRoomId}}'>管理</a>
+                                <a class="btn btn-warning operatorBtn edit" href="/live/edit/{{liveRoomId}}">编辑</a>
+                                <a class="btn btn-danger operatorBtn closeLive" href="javascript:void(0);">关闭直播</a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        {{else}}
+                        <tr>
+                            <td colspan="10" style="text-align:center;">暂无数据</td>
+                        </tr>
+                        {{/if}}
+                        </tbody>
+                    </table>
+                </div>
+                <div id="pagesObj" style="display: none">
+                    {{listData.pageSize}},{{listData.total}}
+                </div>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+    </div> 
+    {{>ajaxLoading}}
+</div>
+<script type="text/javascript" src="/js/build/src/views/live/list.js?t=1493261397671"></script>
+</body>
+</html>

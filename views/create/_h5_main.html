@@ -1,0 +1,180 @@
+<ul class="canvas" id="canvas">
+    {{#each field}}
+    {{#compare type '==' 'l1'}}
+    <li class="t1 l1 template" data-field="l1" data-setting='{{#json this}}{{/json}}'>
+        <div class="list">
+            <div class="img"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+
+    {{#compare type '==' 'img'}}
+    <li class="tImg template" data-field="img" data-setting='{{#json this}}{{/json}}'>
+        <a href="{{imgUrl}}" style="pointer-events: none;">
+            <img src="{{imgSrc}}" alt="">
+        </a>
+        <i class="close-btn">×</i>
+        {{#each linksPopup}}
+        <div style='{{#css css}}{{/css}}' class="link link-popup">
+            <p>
+                图片：<span class="pop-img-url">{{img}}</span>
+            </p>
+            <p>
+                <span class="link-type">{{type}}</span>：<span class="link-url">{{url}}</span>
+            </p>
+            <i class="close-link-btn">×</i>
+        </div>
+        {{/each}}
+        {{#each links}}
+        <div style='{{#css css}}{{/css}}' class="link">
+            <span class="link-url">{{url}}</span>
+            <i class="close-link-btn">×</i>
+        </div>
+        {{/each}}
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'topnav'}}
+    <li class="tTopnav template" data-field="topnav" data-setting='{{#json this}}{{/json}}'>
+        <div class="psetting">
+                    <span>
+                        {{../../i18n.top_nav}}
+                    </span>
+
+        </div>
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type "==" "seckill"}}
+    <li class="tSeckill template" data-field="seckill" data-setting='{{#json this}}{{/json}}'>
+        <div class="psetting">
+                    <span>
+                        {{../../i18n.seckill}}
+                    </span>
+
+        </div>
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'purchase'}}
+    <li class="tPurchase template" data-field="purchase" data-setting='{{#json this}}{{/json}}'>
+        <div class="psetting">
+                    <span>
+                        {{../../i18n.placeorder}}
+                    </span>
+
+        </div>
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'countdown'}}
+    <li class="tCountdown template" data-field="countdown" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.countdown}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+
+    {{#compare type '==' 'video'}}
+    <li class="tVideo template" data-field="video" data-setting='{{#json this}}{{/json}}'>
+        <img src="{{videoBackground}}" alt="">
+        {{#if videoUrl}}
+        <div style='{{#css videocss}}{{/css}}' class="addVideo-cont">
+            <span class="video-url">{{videoUrl}}</span>
+
+            <i class="close-video-btn">×</i>
+        </div>
+
+        {{/if}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+
+    {{#compare type '==' 'anchor'}}
+    <li class="tAnchor template" data-field="anchor" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.anchor}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+
+    {{#compare type '==' 'flashsale'}}
+    <li class="tFlashsale template" data-field="flashsale" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.flashsale}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'benefits'}}
+    <li class="tBenefits template" data-field="benefits" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.benefits}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'win'}}
+    <li class="tWin template" data-field="win" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.roster}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'comment'}}
+    <li class="tComment template" data-field="comment" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.comment}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'presale'}}
+    <li class="tPresale template" data-field="presale" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.presale}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'groupon'}}
+    <li class="tGroupon template" data-field="groupon" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.groupon}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'live'}}
+    <li class="tLive template" data-field="live" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.live}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'support'}}
+    <li class="tSupport template" data-field="support" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.support}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'newcomer'}}
+    <li class="tNewcomer simple template" data-field="newcomer" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.newcomer}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'newcomercomment'}}
+    <li class="tNewcomer simple template" data-field="newcomercomment" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.newcomercomment}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'newcomercoupon'}}
+    <li class="tNewcomercoupon simple template" data-field="newcomercoupon" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.newcomercoupon}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{/each}}
+</ul>

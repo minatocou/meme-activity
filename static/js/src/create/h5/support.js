@@ -1,0 +1,1 @@
+$("#supportFrom").datetimepicker({onShow:function(){this.setOptions({maxDate:$("#supportTo").val()?$("#supportTo").val():!1})}}),$("#supportTo").datetimepicker({onShow:function(){this.setOptions({minDate:$("#supportFrom").val()?$("#supportFrom").val():!1})}});

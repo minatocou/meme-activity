@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>APP品牌馆</title>
+    {{> meta}}
+    <link rel='stylesheet' href="/css/build/src/views/app/brand.css?t=1493261397671" />
+</head>
+<body id="hfiveContainer" data-page-id="{{setting.pageId}}" data-magento="{{config.magento.domain}}" data-state="{{setting.status}}" data-server-time="{{setting.server_time}}" data-localize="{{i18n.localize}}">
+<div class="header" data-name="{{user.username}}" data-brandId="{{setting.brandId}}">
+    <ul class="f-l back">
+        <li>
+            <a href="/app/cn/list"><i class="fa fa-arrow-circle-left"></i>{{i18n.go_back}}</a>
+        </li>
+    </ul>
+    <ul class="header-item">
+        <div id="upload-img">{{i18n.upload}} <i class="fa  fa-spin"></i></div>
+    </ul>
+    {{#compare setting.status "==" "0"}}
+    <ul class="header-group">
+        <li>
+            <a id="publish" @click="publish($event)" href="javascript:void(0)">
+                <i class="fa fa-inverse fa-product-hunt"></i>
+                <span>{{i18n.publish}}</span>
+            </a>
+        </li>
+        <!--<li>
+            <a href="javascript:void(0)" @click="preview($event)" id="preview-btn">
+                <i class="fa fa-inverse fa-check-circle-o"></i>
+                <span>{{i18n.preview}}</span>
+            </a>
+        </li>-->
+        <li>
+            <a id="save-btn" @click="saveData($event)" href="javascript:void(0)">
+                <i class="fa fa-inverse fa-save"></i>
+                <span>{{i18n.save}}</span>
+            </a>
+        </li>
+    </ul>
+    {{/compare}}
+    {{#compare setting.status "==" "1"}}
+    <div class="header-group pageTip">已发布页面仅供查看，不用做编辑、预览和发布，请在待发布页面进行相关操作</div>
+    {{/compare}}
+</div>
+
+<div class="main-container">
+    <div class="block-wrapper">
+        <ul id="template">
+            <!--<brandhome></brandhome>-->
+            <icon></icon>
+            <special></special>
+            <brandcate></brandcate>
+            <activity></activity>
+            <separate></separate>
+            <imagetext></imagetext>
+        </ul>
+
+    </div>
+    <div class="img-wrapper">
+        <ul class="img-list"></ul>
+    </div>
+    <div class="canvas-wrapper">
+        <ul class="canvas" id="canvas">
+            {{#each setting.field}}
+                <{{type}} :setting='{{#json this}}{{/json}}'></{{type}}>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="attr-wrapper">
+        <brandhome-form :brand-data="brandData" :channels-data="channelsData" v-ref:brandhomeform></brandhome-form>
+        <brandcate-form v-ref:brandcateform></brandcate-form>
+        <icon-form v-ref:iconform></icon-form>
+        <special-form v-ref:specialform></special-form>
+        <activity-form v-ref:activityform></activity-form>
+        <separate-form v-ref:separateform></separate-form>
+        <imagetext-form v-ref:imagetextform></imagetext-form>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/build/src/views/app/brand.js?t=1493261397671"></script>
+</body>
+</html>

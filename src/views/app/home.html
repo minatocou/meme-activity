@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>APP首页配置</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href='../../static/css/common/reset.css'/>
+    <link rel='stylesheet' href='../../static/css/common/global.css'/>
+    <link rel='stylesheet' href='../../static/vendor/font-awesome/css/font-awesome.css'/>
+    <link rel='stylesheet' href='../../static/vendor/bootstrap/css/bootstrap.css'/>
+    <link rel='stylesheet' href='../../static/vendor/datePicker/jquery.datetimepicker.css'/>
+    <link rel='stylesheet' href='../../static/vendor/jquery-ui/jquery-ui.min.css'/>
+    <link rel='stylesheet' href='../../static/css/src/app/home.less'/>
+</head>
+<body  id="hfiveContainer" data-page-id="{{setting.pageId}}" data-page-type="{{setting.type}}" data-h5="{{config.h5.domain}}" data-magento="{{config.magento.domain}}" data-state="{{setting.status}}" data-server-time="{{setting.server_time}}" data-localize="{{i18n.localize}}">
+<div class="header">
+    <ul class="f-l back">
+        <li>
+            <a href="/app/cn/list"><i class="fa fa-arrow-circle-left"></i>{{i18n.go_back}}</a>
+        </li>
+    </ul>
+    <ul class="header-item">
+        <div id="upload-img">{{i18n.upload}} <i class="fa  fa-spin"></i></div>
+    </ul>
+    {{#compare setting.status "==" "0"}}
+    <ul class="header-group">
+        <li>
+            <a id="publish" @click="publish($event)" href="javascript:void(0)">
+                <i class="fa fa-inverse fa-product-hunt"></i>
+                <span>{{i18n.publish}}</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" @click="preview($event)" id="preview-btn">
+                <i class="fa fa-inverse fa-check-circle-o"></i>
+                <span>{{i18n.preview}}</span>
+            </a>
+        </li>
+        <li>
+            <a id="save-btn" @click="saveData($event)" href="javascript:void(0)">
+                <i class="fa fa-inverse fa-save"></i>
+                <span>{{i18n.save}}</span>
+            </a>
+        </li>
+    </ul>
+    {{/compare}}
+    {{#compare setting.status "==" "1"}}
+    <div class="header-group pageTip">已发布页面仅供查看，不用做编辑、预览和发布，请在待发布页面进行相关操作</div>
+    {{/compare}}
+</div>
+
+<div class="main-container">
+    <div class="block-wrapper">
+        <ul id="template">
+            <!--<banner></banner>-->
+            <icon></icon>
+            <bulletin></bulletin>
+            <special></special>
+            <discount></discount>
+            <groupon></groupon>
+            <activity></activity>
+            <favor></favor>
+            <favorcom></favorcom>
+            <video></video>
+            <separate></separate>
+            <imagetext></imagetext>
+            <!--秒杀-->
+            <flashsale></flashsale>
+            <live></live>
+            <newcomer></newcomer>
+        </ul>
+
+    </div>
+    <div class="img-wrapper">
+        <ul class="img-list"></ul>
+    </div>
+    <div class="canvas-wrapper">
+        <ul class="canvas" id="canvas">
+            {{#each setting.field}}
+                <{{type}} :setting='{{#json this}}{{/json}}'></{{type}}>
+            {{/each}}
+        </ul>
+    </div>
+    <div class="attr-wrapper">
+        <banner-form v-ref:bannerform></banner-form>
+        <icon-form v-ref:iconform></icon-form>
+        <bulletin-form v-ref:bulletinform></bulletin-form>
+        <special-form v-ref:specialform></special-form>
+        <discount-form v-ref:discountform></discount-form>
+        <activity-form v-ref:activityform></activity-form>
+        <groupon-form v-ref:grouponform></groupon-form>
+        <favor-form v-ref:favorform></favor-form>
+        <separate-form v-ref:separateform></separate-form>
+        <video-form v-ref:videoform></video-form>
+        <favorcom-form v-ref:favorcomform></favorcom-form>
+        <brandcate-form v-ref:brandcateform></brandcate-form>
+        <imagetext-form v-ref:imagetextform></imagetext-form>
+        <flashsale-form v-ref:flashsaleform></flashsale-form>
+        <live-form v-ref:liveform></live-form>
+        <newcomer-form v-ref:newcomerform></newcomer-form>
+    </div>
+    <div class="preview-wrapper">
+        <div class="preview-container">
+            <div class="preview-header">
+                <h4>{{i18n.preview}}:(仅供H5首页预览,APP首页预览展示以APP为准)</h4>
+            </div>
+            <div class="preview-con">
+                <div class="preview">
+                </div>
+                <div class="qr">
+                    <span class="tip">{{i18n.scan}}:</span>
+                    <div id="qrCode"></div>
+                    <div class="p-link">
+                        {{i18n.scan_link}}:
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="close" @click="closePreview($event)"><i class="fa fa-times"></i></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src='../../static/vendor/vue/vue.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/webuploader/webuploader.js'></script>
+<script type="text/javascript" src='../../static/vendor/sortable/Sortable.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-ui/jquery-ui.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/underscore/underscore.js'></script>
+<script type="text/javascript" src='../../static/vendor/sortable/jquery.binding.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/moment/moment.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/datePicker/jquery.datetimepicker.full.min.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/js/src/app/channel/util.js'></script>
+<script type="text/javascript" src='../../static/js/src/app/channel/va.js'></script>
+<script type="text/javascript" src='../../static/js/src/app/channel/validator.js'></script>
+<script type="text/javascript" src='../../static/js/src/app/channel/sortable.js'></script>
+<script type="text/javascript" src='../../static/js/src/app/channel/upload.js'></script>
+<script type="text/javascript" src='../../static/js/src/app/channel/save.js'></script>
+<script type="text/javascript" src='../../static/js/src/app/channel/appInfo.js'></script>
+<script type="text/javascript" src='../../static/js/src/app/home.js'></script>
+
+</body>
+</html>

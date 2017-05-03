@@ -1,0 +1,436 @@
+/*
+* @Author: Derek Zhou
+* @Date:   2016-11-22 15:58:22
+* @Last Modified by:   Derek Zhou
+* @Last Modified time: 2016-11-23 15:49:57
+*/
+.main-container {
+  margin-left: 15%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.main-container #warnning {
+  background-color: #fefdea;
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 12px;
+  width: 100%;
+}
+.main-container #warnning p {
+  margin: 0;
+}
+.main-container #opt-list {
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 20px;
+  border-bottom: 2px solid #e0e0e0;
+}
+.main-container #opt-list #menu {
+  font-size: 22px;
+}
+.main-container #opt-list #save-menu,
+.main-container #opt-list #preview-menu,
+.main-container #opt-list .shut-down {
+  width: 60px;
+  height: 30px;
+  border: 0;
+  color: #ffffff;
+  border-radius: 5px;
+  display: inline-block;
+  line-height: 30px;
+  text-align: center;
+  vertical-align: top;
+  margin-left: 10px;
+}
+.main-container #opt-list .shut-down {
+  background-color: #f6dff9;
+  color: #c00024;
+}
+.main-container #opt-list .shut-down.reopen {
+  background-color: #5cb85c;
+  color: #fff;
+}
+.main-container #opt-list #preview-menu {
+  background-color: #5bc0de;
+  float: right;
+}
+.main-container #opt-list #save-menu {
+  width: 100px;
+  background-color: #d9534f;
+  float: right;
+}
+.main-container #add-new {
+  width: 120px;
+  height: 30px;
+  border: 0;
+  position: fixed;
+  bottom: 40px;
+  background-color: #5cb85c;
+  color: #ffffff;
+  border-radius: 5px;
+  line-height: 30px;
+  text-align: center;
+  float: left;
+}
+.main-container #options {
+  margin-top: 20px;
+  float: left;
+  width: 100%;
+  background-color: #eee;
+}
+.main-container #options span {
+  height: 50px;
+  display: inline-block;
+  line-height: 50px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-right: 0;
+  float: left;
+}
+.main-container #options span#type-menu-opt {
+  width: 10%;
+}
+.main-container #options span#name-menu-opt {
+  width: 25%;
+}
+.main-container #options span#req-menu-opt {
+  width: 15%;
+}
+.main-container #options span#act-menu-opt {
+  width: 35%;
+}
+.main-container #options span#del-menu-opt {
+  width: 15%;
+  border-right: 1px solid #e0e0e0;
+}
+.main-container #offac-setting {
+  float: left;
+  width: 100%;
+}
+.main-container #offac-setting .wrong {
+  border: 1px solid red;
+}
+.main-container #offac-setting .menu-item,
+.main-container #offac-setting .menu-item-lv2 {
+  width: 100%;
+  float: left;
+  position: relative;
+}
+.main-container #offac-setting .menu-item span,
+.main-container #offac-setting .menu-item-lv2 span {
+  display: inline-block;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-top: 0;
+  border-right: 0;
+  float: right;
+}
+.main-container #offac-setting .menu-item span.type,
+.main-container #offac-setting .menu-item-lv2 span.type {
+  width: 10%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: auto;
+}
+.main-container #offac-setting .menu-item span.req,
+.main-container #offac-setting .menu-item-lv2 span.req {
+  width: 15%;
+}
+.main-container #offac-setting .menu-item span.name,
+.main-container #offac-setting .menu-item-lv2 span.name {
+  width: 25%;
+  position: relative;
+  text-align: left;
+}
+.main-container #offac-setting .menu-item span.act,
+.main-container #offac-setting .menu-item-lv2 span.act {
+  width: 35%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.main-container #offac-setting .menu-item span.del-menu,
+.main-container #offac-setting .menu-item-lv2 span.del-menu {
+  width: 15%;
+}
+.main-container #offac-setting .menu-item input,
+.main-container #offac-setting .menu-item-lv2 input {
+  margin-left: 20px;
+  height: 35px;
+  width: 40%;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+}
+.main-container #offac-setting .menu-item select,
+.main-container #offac-setting .menu-item-lv2 select {
+  width: 80%;
+  height: 35px;
+  border: 1px solid #e0e0e0;
+}
+.main-container #offac-setting .menu-item .add-new-lv2,
+.main-container #offac-setting .menu-item-lv2 .add-new-lv2 {
+  border-radius: 10px;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+  height: 20px;
+  width: 20px;
+  border: 0;
+  font-size: 15px;
+  margin-left: 10px;
+}
+.main-container #offac-setting .menu-item .del-menu,
+.main-container #offac-setting .menu-item-lv2 .del-menu {
+  color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+}
+.main-container #offac-setting .menu-item .del-menu button,
+.main-container #offac-setting .menu-item-lv2 .del-menu button {
+  width: 50px;
+  height: 26px;
+  vertical-align: middle;
+  line-height: 26px;
+  border: 0;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.main-container #offac-setting .menu-item .del-menu button.delete,
+.main-container #offac-setting .menu-item-lv2 .del-menu button.delete {
+  background-color: #aaa;
+}
+.main-container #offac-setting .menu-item .del-menu button.pause,
+.main-container #offac-setting .menu-item-lv2 .del-menu button.pause {
+  background-color: orange;
+}
+.main-container #offac-setting .menu-item .del-menu button.pause.open,
+.main-container #offac-setting .menu-item-lv2 .del-menu button.pause.open {
+  background-color: #5cb85c;
+}
+.main-container #offac-setting .menu-item .cover,
+.main-container #offac-setting .menu-item-lv2 .cover {
+  float: left;
+  width: 100%;
+}
+.main-container #offac-setting .menu-item span {
+  height: 70px;
+  line-height: 70px;
+}
+.main-container #offac-setting .menu-item-lv2 .guide {
+  position: absolute;
+  left: 16%;
+  width: 7%;
+  height: 50px;
+  top: -18px;
+  border-left: 3px solid #eee;
+  border-bottom: 3px solid #eee;
+}
+.main-container #offac-setting .menu-item-lv2 span {
+  height: 50px;
+  line-height: 50px;
+}
+.main-container #offac-setting .menu-item-lv2 input {
+  height: 35px;
+  width: 60%;
+  margin-left: 23%;
+}
+.main-container #offac-setting .menu-item-lv2 button.pause-lv2 {
+  width: 30px;
+  height: 30px;
+  border: 2px solid orange;
+  color: orange;
+  background: #ffffff;
+  border-radius: 15px;
+  margin-right: 20px;
+}
+.main-container #offac-setting .menu-item-lv2 button.pause-lv2.fa-play {
+  border: 2px solid #5cb85c;
+  color: #5cb85c;
+}
+.main-container #offac-setting .menu-item-lv2 button.delete-lv2 {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #aaa;
+  color: #aaa;
+  background: #ffffff;
+  border-radius: 15px;
+}
+.main-container #offac-setting .menu-item.grey {
+  color: #e0e0e0;
+}
+.main-container #offac-setting .menu-item-lv2.grey {
+  color: #e0e0e0;
+}
+.main-container #wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.6;
+  display: none;
+}
+.main-container #material {
+  width: 40%;
+  height: 320px;
+  position: fixed;
+  left: 30%;
+  top: 30%;
+  text-align: center;
+  z-index: 999;
+  background: #fff;
+  border-radius: 5px;
+  display: none;
+}
+.main-container #material #inmaterial {
+  text-align: left;
+  padding: 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 16px;
+}
+.main-container #material i {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-style: normal;
+  font-size: 20px;
+}
+.main-container #material #materials {
+  overflow-y: auto;
+  height: 200px;
+  margin-top: 30px;
+  padding-top: 10px;
+}
+.main-container #material #title {
+  width: 40px;
+  float: left;
+  margin-left: 20px;
+  color: #aaa;
+  margin-top: 10px;
+}
+.main-container #material #time {
+  float: right;
+  margin-right: 20px;
+  color: #aaa;
+  margin-top: 10px;
+}
+.main-container #material .ma-title {
+  text-align: left;
+  margin-left: 20px;
+  width: 70%;
+}
+.main-container #material .ma-time {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+.main-container #material .ma-all {
+  position: relative;
+  margin: 10px;
+  background: #f0f8ff;
+  border-radius: 5px;
+  padding: 10px;
+}
+.main-container #material .ma-all.chosen {
+  background: #ffc0cb;
+}
+.main-container #material .ma-all.chosen .circle {
+  background: #00ced1;
+  border: 0;
+}
+.main-container #material .circle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  border: 1px solid;
+  top: 12px;
+}
+.main-container #material #ma-access {
+  width: 50px;
+  height: 25px;
+  background: #faecef;
+  border: 1px solid #dc4a6a;
+  border-radius: 5px;
+  color: #dc4a6a;
+  float: right;
+  margin-right: 5%;
+  margin-top: 10px;
+}
+.main-container #material #ma-cancel {
+  width: 50px;
+  height: 25px;
+  background: #eee;
+  border: 1px solid #909090;
+  border-radius: 5px;
+  color: #909090;
+  margin-right: 10px;
+  float: right;
+  margin-top: 10px;
+}
+.main-container #url {
+  width: 40%;
+  height: 180px;
+  position: fixed;
+  left: 30%;
+  top: 30%;
+  text-align: center;
+  z-index: 999;
+  background: #fff;
+  border-radius: 5px;
+  display: none;
+}
+.main-container #url #inlink {
+  text-align: left;
+  padding: 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 16px;
+}
+.main-container #url i {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-style: normal;
+  font-size: 20px;
+}
+.main-container #url #putlink {
+  width: 80%;
+  text-align: left;
+  margin: 20px 10%;
+  line-height: 50px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+}
+.main-container #url button {
+  width: 60px;
+  height: 30px;
+}
+.main-container #url #cancel {
+  background: #eee;
+  border: 1px solid #909090;
+  border-radius: 5px;
+  color: #909090;
+  margin-right: 10px;
+  float: right;
+}
+.main-container #url #access {
+  background: #faecef;
+  border: 1px solid #dc4a6a;
+  border-radius: 5px;
+  color: #dc4a6a;
+  float: right;
+  margin-right: 10%;
+}
+.main-container #url #error {
+  margin-left: 10%;
+  position: absolute;
+  height: 40px;
+  bottom: 15px;
+  color: red;
+}

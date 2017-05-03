@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox 超级惠</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/market/preference/preference.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <div class="breadcrumbs">
+            {{i18n.market_tools}} ><span class="high-light"> {{i18n.preference}}</span>
+            <div class="f-r"><a class="btn btn-danger" href="/market/preference/detail">{{i18n.preference_add}}</a></div>
+        </div>
+        <hr>
+        <div class="panel" id="panel">
+            <form action="" class="form-inline">
+                <div class="form-group">
+                    <label for="activityId" class="control-label">
+                        ID
+                    </label>
+                    <input type="text" id="activityId" class="form-control input-sm">
+                </div>
+                <div class="form-group">
+                    <label for="activityName" class="control-label" >
+                        {{i18n.market_name}}
+                    </label>
+                    <input type="text" id="activityName" class="form-control input-sm">
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="selectTime" value="start" checked>{{i18n.start_time}}
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="selectTime" value="end">{{i18n.end_time}}
+                    </label>
+                    <div>
+                        <input class="form-control input-sm" id="startTime" type="text">
+                        {{i18n.to}}
+                        <input class="form-control input-sm" id="endTime" type="text">
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="activityType" class="control-label" >
+                        {{i18n.type}}
+                    </label>
+                    <select class="form-control input-sm" id="activityType">
+                        <option>ALL</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="activityState" class="control-label" >
+                        {{i18n.state}}
+                    </label>
+                    <select class="form-control input-sm" id="activityState">
+                        <option>ALL</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" id="search">{{i18n.search}}</button>
+                </div>
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        {{i18n.market_name}}
+                    </th>
+                    <th>{{i18n.use_time}}</th>
+                    <th>
+                        {{i18n.type}}
+                    </th>
+                    <th>
+                        {{i18n.state}}
+                    </th>
+                    <th>
+                        {{i18n.operation}}
+                    </th>
+                </tr>
+                <tr>
+                    <td>123</td>
+                    <td>双十一满减</td>
+                    <td>
+                        <span>2016-11-11 00:00:00</span>
+                        <span> - </span>
+                    <span>
+                        2016-11-11 00:00:00
+                    </span>
+                    </td>
+                    <td>
+                        满减
+                    </td>
+                    <td>
+                        暂停
+                    </td>
+                    <td>
+                        <button class="btn btn-success">
+                            {{i18n.open}}
+                        </button>
+                        <button class="btn btn-warning">
+                            {{i18n.pause}}
+                        </button>
+                        <button class="btn btn-default">
+                            {{i18n.edit}}
+                        </button>
+                        <button class="btn btn-danger">
+                            {{i18n.delete}}
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="pagination-container"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/build/src/views/market/preference/preference.js?t=1493261397671"></script>
+</body>
+</html>

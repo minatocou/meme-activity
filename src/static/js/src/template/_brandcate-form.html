@@ -1,0 +1,37 @@
+<div class="brandcate-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a data-toggle="collapse" data-parent="#brandcate" href="#brandcate">分类商品组件</a>
+            </div>
+            <div id="brandcate" class="panel-collapse collapse brandWrap">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+                    <div v-if="setting.data && setting.data.length>0" class="cateGroup singleConf">
+                        <form  v-for="(i,brand) in setting.data | orderBy 'position'" class="cateItem singleItem">
+                            <a class="itemTitle" @click="slideItem($event)">分类商品<span>${brand.position}</span>配置<i class="fa fa-caret-down"></i></a>
+                            <input class="form-control input-sm" name="position" type="hidden" value="${brand.position}">
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div>01区域配置仅限4个汉字</div>
+                                    <input class="form-control input-sm category_title" value="${brand.cate_name}"  name="cate_name" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div>02区域背景图片URL(建议750*160)</div>
+                                    <img class="thumbnail" v-if="brand.cate_img" :src="brand.cate_img">
+                                    <input class="form-control input-sm imgSrc removeSpace" value="${brand.cate_img}" v-model="brand.cate_img" name="cate_img" placeholder="${i18n.imgSrc}" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div>Category ID</div>
+                                    <input class="form-control input-sm icon_title" value="${brand.category_id}"  name="category_id" type="text">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

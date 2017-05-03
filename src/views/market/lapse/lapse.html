@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.lapse}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="../../../static/css/common/reset.css">
+    <link rel="stylesheet" href="../../../static/css/common/global.css">
+    <link rel="stylesheet" href="../../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../../static/css/common/sidebar.css">
+    <link rel="stylesheet" href="../../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../static/vendor/pagination/pagination.css">
+    <link rel="stylesheet" href="../../../static/css/src/market/common.css">
+    <link rel="stylesheet" href="../../../static/css/src/market/lapse/lapse.css">
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <div class="breadcrumbs">
+            {{i18n.market_tools}} ><span class="high-light"> {{i18n.lapse}}</span>
+            <div class="f-r"><a class="btn btn-danger" href="/market/lapse/detail">{{i18n.lapse_add}}</a></div>
+        </div>
+        <hr>
+        <div class="box">
+            <div class="panel" id="panel">
+                <form action="" class="form-inline">
+                    <div class="form-group">
+                        <label for="id" class="control-label">
+                            ID
+                        </label>
+                        <input type="text" id="id" class="form-control input-sm">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label">
+                            {{i18n.market_name}}
+                        </label>
+                        <input type="text" id="name" class="form-control input-sm">
+                    </div>
+                    <div class="form-group time-input">
+                        <label class="radio-inline">
+                            <input type="radio" name="selectTime" value="start" checked>{{i18n.start_time}}
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="selectTime" value="end">{{i18n.end_time}}
+                        </label>
+                        <div>
+                            <input class="form-control input-sm" id="from_date" type="text">
+                            {{i18n.to}}
+                            <input class="form-control input-sm" id="to_date" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="control-label">
+                            {{i18n.type}}
+                        </label>
+                        <select class="form-control input-sm" id="type">
+                            <option value="">ALL</option>
+                            <option value="0">{{i18n.N_yuan_shop}}</option>
+                            <option value="1">{{i18n.fill_minus_pieces}}</option>
+                            <option value="2">{{i18n.fill_minus_money}}</option>
+                            <option value="3">{{i18n.fill_discount_pieces}}</option>
+                            <option value="4">{{i18n.fill_discount_money}}</option>
+                            <option value="6">加价购-件数</option>
+                            <option value="7">加价购-金额</option>
+                            <option value="8">场增-件数</option>
+                            <option value="9">场增-金额</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status" class="control-label">
+                            {{i18n.state}}
+                        </label>
+                        <select class="form-control input-sm" id="status">
+                            <option value="">ALL</option>
+                            <option value="1">{{i18n.open}}</option>
+                            <option value="2">{{i18n.shut}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="search">{{i18n.search}}</button>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            {{i18n.market_name}}
+                        </th>
+                        <th>{{i18n.use_time}}</th>
+                        <th>
+                            {{i18n.type}}
+                        </th>
+                        <th>
+                            {{i18n.state}}
+                        </th>
+                        <th>
+                            {{i18n.operation}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="list">
+
+                    </tbody>
+                </table>
+            </div>
+            <div id="pagination-container"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{i18n.sure_delete}}
+                </h4>
+            </div>
+            <!--<div class="modal-body">-->
+            <!--在这里添加一些文本-->
+            <!--</div>-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{i18n.shut}}
+                </button>
+                <button type="button" class="btn btn-primary" id="sureBtn">
+                    {{i18n.sure}}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<div class="modal fade" id="myModalPause" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    确定要暂停吗
+                </h4>
+            </div>
+            <!--<div class="modal-body">-->
+            <!--在这里添加一些文本-->
+            <!--</div>-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{i18n.shut}}
+                </button>
+                <button type="button" class="btn btn-primary" id="pauseBtn">
+                    {{i18n.sure}}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script id="listTpl" type="text/x-handlebars-template">
+    \{{#each .}}
+    <tr data-id="\{{id}}">
+        <td>
+            <div class="div-s">
+                \{{id}}
+            </div>
+        </td>
+        <td>
+            <div class="div-l">
+                \{{name}}
+            </div>
+        </td>
+        <td>
+            <span>\{{from_date}}</span>
+            <span> - </span>
+            <span>\{{to_date}}</span>
+        </td>
+        <td>
+            \{{#compare type '==' '0'}}
+            {{i18n.N_yuan_shop}}
+            \{{/compare}}
+            \{{#compare type '==' '1'}}
+            {{i18n.fill_minus_pieces}}
+            \{{/compare}}
+            \{{#compare type '==' '2'}}
+            {{i18n.fill_minus_money}}
+            \{{/compare}}
+            \{{#compare type '==' '3'}}
+            {{i18n.fill_discount_pieces}}
+            \{{/compare}}
+            \{{#compare type '==' '4'}}
+            {{i18n.fill_discount_money}}
+            \{{/compare}}
+            \{{#compare type '==' '6'}}
+            加价购-件数
+            \{{/compare}}
+            \{{#compare type '==' '7'}}
+            加价购-金额
+            \{{/compare}}
+            \{{#compare type '==' '8'}}
+            场增-件数
+            \{{/compare}}
+            \{{#compare type '==' '9'}}
+            场增-金额
+            \{{/compare}}
+        </td>
+        <td>
+            \{{#compare status '==' '1'}}
+            {{i18n.open}}
+            \{{/compare}}
+            \{{#compare status '==' '2'}}
+            {{i18n.pause}}
+            \{{/compare}}
+        </td>
+        <td>
+            \{{#compare status '==' '1'}}
+            <button class="btn btn-warning change-status" data-id="\{{id}}" data-status="2" data-toggle="modal"
+                    data-target="#myModalPause">
+                {{i18n.pause}}
+            </button>
+            \{{/compare}}
+            \{{#compare status '==' '2'}}
+            <button class="btn btn-success change-status" data-id="\{{id}}" data-status="1">
+                {{i18n.open}}
+            </button>
+            \{{/compare}}
+            <a class="btn btn-default" href="/market/lapse/detail?id=\{{id}}">
+                {{i18n.edit}}
+            </a>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                {{i18n.delete}}
+            </button>
+        </td>
+    </tr>
+    \{{/each}}
+</script>
+<script type="text/javascript" src='../../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../../static/vendor/moment/moment.js'></script>
+<script type="text/javascript" src='../../../static/vendor/laydate/laydate.js'></script>
+<script type="text/javascript" src='../../../static/vendor/handlebars/handlebars.js'></script>
+<script type="text/javascript" src='../../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../../static/js/common/common.js'></script>
+<script type="text/javascript" src='../../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../../static/js/src/market/common.js'></script>
+<script type="text/javascript" src='../../../static/js/src/market/lapse/lapse.js'></script>
+</body>
+</html>

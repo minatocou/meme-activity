@@ -1,0 +1,23 @@
+<div class="top">
+    <button type="button" class="btn btn-default" id="saveBtn" @click="save">保存</button>
+</div>
+<div class="rule">
+    <span class="title">基本配置</span>
+    <div class="group">
+        <div>
+            <span>活动开关</span>
+            <select id="active" v-model="active">
+                <option value="0">关闭</option>
+                <option value="1">开启</option>
+            </select>
+        </div>
+        <div>
+            <span>活动名字</span>
+            <input type="text" id="name" v-model="name">
+        </div>
+        <!--<div>-->
+            <!--<span>规则提示</span>-->
+            <!--<textarea name="" id="" cols="30" rows="2"></textarea>-->
+        <!--</div>-->
+    </div>
+</div>

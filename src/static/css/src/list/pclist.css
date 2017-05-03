@@ -1,0 +1,18 @@
+#pclist{
+    float: right;
+    padding: 20px 20px 0 20px;
+    width:85%;
+}
+#pclist .table-responsive tr {
+    text-align: center;
+}
+#pclist .table-responsive th {
+    text-align: center;
+}
+#pclist .table-responsive tr td , #pclist .table-responsive tr th{
+    font-weight: normal;
+}
+#pagination-container {
+    float: right;
+    margin-top: 20px;
+}

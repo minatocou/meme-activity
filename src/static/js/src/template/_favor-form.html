@@ -1,0 +1,32 @@
+<div class="favor-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#favor" href="#favor">猜你喜欢组件</a>
+            </div>
+            <div id="favor" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <!--<div class="form-group ">
+                            <div>*背景图片URL(建议大小?*?)</div>
+                            <input class="form-control input-sm bgImg" value="${setting.bg_img}" name="bg_img" placeholder="${i18n.bg_url}"
+                                   type="text">
+                        </div>-->
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="favorGroup singleConf">
+                        <form v-for="(i,favor) in setting.data" class="favorItem singleItem">
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div>展示商品数量</div>
+                                    <input class="form-control input-sm position" value="${favor.show_num}" name="show_num" />
+                                    <div class="tips">若不填写,展示全部商品</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

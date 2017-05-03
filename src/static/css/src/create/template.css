@@ -1,0 +1,290 @@
+html {
+  font: 14px Helvetica Neue, Helvetica, Tahoma, Microsoft YaHei, STHeiti, Arial, Helvetica, sans-serif;
+}
+@media screen and (min-width: 360px) {
+  html {
+    font: 16px Helvetica Neue, Helvetica, Tahoma, Microsoft YaHei, STHeiti, Arial, Helvetica, sans-serif;
+  }
+}
+.close-btn,
+.close-link-btn,
+.close-video-btn {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  background: #ff5073;
+  color: #ffffff;
+  text-align: center;
+  line-height: 15px;
+  border-radius: 50%;
+  display: none;
+  cursor: pointer;
+}
+.canvas-wrapper .close-btn,
+.canvas-wrapper .close-link-btn,
+.img-wrapper .close-btn,
+.canvas-wrapper .close-video-btn {
+  display: block;
+}
+#canvas li.cur {
+  box-shadow: 0 0 10px #ff5073;
+  z-index: 100;
+}
+#canvas .tPurchase > div.psetting {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tPurchase > div.psetting span {
+  display: inline-block;
+}
+#canvas .tImg input {
+  display: none;
+}
+#canvas .tCountdown {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tComment {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tVideo {
+  border: 1px solid #dddddd;
+  text-align: center;
+}
+#canvas .tAnchor {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tFlashsale {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tBenefits {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tWin {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tPresale {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tGroupon {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tSupport {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tLive {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .simple {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tTopnav {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#canvas .tSeckill {
+  border: 1px solid #dddddd;
+  padding: 5px;
+  text-align: center;
+}
+#template .t1 {
+  margin: 0.9375rem;
+}
+#template .tImg {
+  margin: 0.9375rem;
+}
+#template .tTopnav {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tSeckill {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tPurchase {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+}
+#template .tPurchase > div.psetting {
+  margin: 0;
+  text-align: center;
+}
+#template .tPurchase > div.psetting span {
+  display: inline-block;
+}
+#template .tCountdown {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tComment {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tVideo {
+  margin: 0rem;
+  padding: 0rem;
+  text-align: center;
+}
+#template .tAnchor {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tFlashsale {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tBenefits {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tWin {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tPresale {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tGroupon {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tSupport {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .tLive {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+#template .simple {
+  margin: 0.9375rem;
+  background: #ffffff;
+  padding: 0.625rem;
+  text-align: center;
+}
+img {
+  max-width: 100%;
+}
+[data-field] {
+  margin: 0.3125rem 0;
+}
+.t1 {
+  position: relative;
+}
+.t1 .list {
+  width: 100%;
+  font-size: 0;
+}
+.t1 .list a {
+  color: #333;
+}
+.t1 .list > div {
+  min-height: 5rem;
+  width: 49%;
+  margin-left: 1%;
+  box-shadow: 0 0 0.125rem #ccc;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  left: -0.5%;
+  margin-bottom: 0.3125rem;
+  color: #333;
+}
+.t1 .list .pro-info {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+.t1 .list .pro-info .title {
+  height: 2.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.t1 .list .pro-info .price {
+  color: #ff5073;
+  font-size: 1.125rem;
+}
+.tImg img {
+  width: 100%;
+}
+.ov2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+#topnav {
+  padding: 5px;
+}
+#topnav label {
+  width: 100%;
+}
+#topnav span {
+  display: inline-block;
+  width: 25%;
+}
+#topnav input {
+  display: inline-block;
+  width: 70%;
+}
+#topnav .fa-close {
+  float: right;
+}
+#newcomercoupon .fa-close {
+  float: right;
+}

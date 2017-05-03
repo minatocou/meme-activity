@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>    <title>{{i18n.login}}</title>
+    {{> meta}}
+
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel='stylesheet' href="/css/build/src/views/account/login.css?t=1493261397671" />
+</head>
+<body class="login-body">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">welcome to SAS</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="login-form" method="post">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control username" placeholder="{{i18n.email}}" name="username" type="text" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="{{i18n.password}}" name="password" type="password" value="">
+                            </div>
+                            <div class="form-group">
+                                <label class="radio-inline">
+                                    <input type="radio" name="option" value="zh_cn" checked> zh_cn
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="option" value="en"> en
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-success btn-block">login</button>
+
+                        </fieldset>
+                    </form>
+                    <div class="error">{{errorMsg}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/build/src/views/account/login.js?t=1493261397671"></script>
+</body>
+</html>

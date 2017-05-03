@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.warehouse}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/market/warehouse/warehouse.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <div class="breadcrumbs">
+            {{i18n.market_tools}} ><span class="high-light"> {{i18n.warehouse}}</span>
+            <div class="f-r"><a class="btn btn-danger" href="/market/warehouse/detail">{{i18n.warehouse_add}}</a></div>
+        </div>
+        <hr>
+        <div class="box">
+            <div class="panel" id="panel">
+                <form action="" class="form-inline">
+                    <div class="form-group">
+                        <label for="id" class="control-label">
+                            ID
+                        </label>
+                        <input type="text" id="id" class="form-control input-sm">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label">
+                            {{i18n.market_name}}
+                        </label>
+                        <input type="text" id="name" class="form-control input-sm">
+                    </div>
+                    <div class="form-group time-input">
+                        <label class="radio-inline">
+                            <input type="radio" name="selectTime" value="start" checked>{{i18n.start_time}}
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="selectTime" value="end">{{i18n.end_time}}
+                        </label>
+                        <div>
+                            <input class="form-control input-sm" id="from_date" type="text">
+                            {{i18n.to}}
+                            <input class="form-control input-sm" id="to_date" type="text">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="warehouse" class="control-label">
+                            {{i18n.type}}
+                        </label>
+                        <select class="form-control input-sm" id="warehouse">
+                            <option value="">ALL</option>
+                            <option value="2">{{i18n.china_pro}}</option>
+                            <option value="1">{{i18n.korea_pro}}</option>
+                            <option value="4">{{i18n.ftz_pro}}</option>
+                            <option value="8">Epass</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status" class="control-label">
+                            {{i18n.state}}
+                        </label>
+                        <select class="form-control input-sm" id="status">
+                            <option value="">ALL</option>
+                            <option value="1">{{i18n.open}}</option>
+                            <option value="2">{{i18n.pause}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="search">{{i18n.search}}</button>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            {{i18n.market_name}}
+                        </th>
+                        <th>{{i18n.use_time}}</th>
+                        <th>
+                            {{i18n.type}}
+                        </th>
+                        <th>
+                            {{i18n.state}}
+                        </th>
+                        <th>
+                            {{i18n.operation}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="list">
+
+                    </tbody>
+                </table>
+            </div>
+            <div id="pagination-container"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{i18n.sure_delete}}
+                </h4>
+            </div>
+            <!--<div class="modal-body">-->
+            <!--在这里添加一些文本-->
+            <!--</div>-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{i18n.shut}}
+                </button>
+                <button type="button" class="btn btn-primary" id="sureBtn">
+                    {{i18n.sure}}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<div class="modal fade" id="myModalPause" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    确定要暂停吗
+                </h4>
+            </div>
+            <!--<div class="modal-body">-->
+            <!--在这里添加一些文本-->
+            <!--</div>-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    {{i18n.shut}}
+                </button>
+                <button type="button" class="btn btn-primary" id="pauseBtn">
+                    {{i18n.sure}}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script id="listTpl" type="text/x-handlebars-template">
+    \{{#each .}}
+    <tr data-id="\{{id}}">
+        <td>
+            <div class="div-s">
+                \{{id}}
+            </div>
+        </td>
+        <td>
+            <div class="div-l">
+                \{{name}}
+            </div>
+        </td>
+        <td>
+            <span>\{{from_date}}</span>
+            <span> - </span>
+            <span>\{{to_date}}</span>
+        </td>
+        <td>
+            \{{#compare warehouse '==' '1'}}
+            {{i18n.korea_pro}}
+            \{{/compare}}
+            \{{#compare warehouse '==' '2'}}
+            {{i18n.china_pro}}
+            \{{/compare}}
+            \{{#compare warehouse '==' '4'}}
+            {{i18n.ftz_pro}}
+            \{{/compare}}
+            \{{#compare warehouse '==' '8'}}
+            Epass
+            \{{/compare}}
+        </td>
+        <td>
+            \{{#compare status '==' '1'}}
+            {{i18n.open}}
+            \{{/compare}}
+            \{{#compare status '==' '2'}}
+            {{i18n.pause}}
+            \{{/compare}}
+        </td>
+        <td>
+            \{{#compare status '==' '1'}}
+            <button class="btn btn-warning change-status" data-id="\{{id}}" data-status="2" data-toggle="modal"
+                    data-target="#myModalPause">
+                {{i18n.pause}}
+            </button>
+            \{{/compare}}
+            \{{#compare status '==' '2'}}
+            <button class="btn btn-success change-status" data-id="\{{id}}" data-status="1">
+                {{i18n.open}}
+            </button>
+            \{{/compare}}
+            <a class="btn btn-default" href="/market/warehouse/detail?id=\{{id}}">
+                {{i18n.edit}}
+            </a>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                {{i18n.delete}}
+            </button>
+        </td>
+    </tr>
+    \{{/each}}
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/market/warehouse/warehouse.js?t=1493261397671"></script>
+</body>
+</html>

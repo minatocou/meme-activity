@@ -1,0 +1,52 @@
+#list{
+    float: right;
+    padding: 20px 20px 0 20px;
+    width:85%;
+}
+
+.form-inline{
+    margin-bottom: 20px;
+    display: inline-block;
+}
+th{
+    text-align: center;
+}
+#list .table-responsive tr{
+    text-align: center;
+}
+#list .table-responsive tr td , #list .table-responsive tr th{
+    font-weight: normal;
+}
+.nav-stacked > li{
+    overflow: hidden;
+}
+.dropdown-menu{
+    position: relative;
+}
+.mask{
+    position: fixed;
+    top:0;
+    left: 0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,.5);
+    display: none;
+    z-index: 3;
+}
+.mask div{
+    margin: 200px auto;
+    width:500px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0 0 20px 0;
+}
+.mask div p{
+    font-size: 20px;
+}
+.mask div button{
+    margin: 0 10px;
+}
+#pagination-container {
+    float: right;
+    margin-top: 20px;
+}

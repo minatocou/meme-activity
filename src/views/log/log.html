@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memebox权限关系管理面板</title>
+    {{> meta}}
+    <link rel='stylesheet' href="../../static/css/common/reset.css">
+    <link rel='stylesheet' href="../../static/css/common/global.css">
+    <link rel='stylesheet' href="../../static/css/common/header.css">
+    <link rel='stylesheet' href="../../static/css/common/sidebar.css">
+    <link rel='stylesheet' href="../../static/vendor/datePicker/jquery.datetimepicker.css">
+    <link rel='stylesheet' href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../static/vendor/pagination/pagination.css">
+    <link rel='stylesheet' href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel='stylesheet' href="../../static/vendor/pagination/pagination.css">
+    <link rel='stylesheet' href="../../static/css/src/log/log.css">
+
+</head>
+<body>
+{{>header}}
+<div class="main-container">
+
+    {{>sidebar}}
+
+    <div class="data-container">
+        <div class="fullfill"><i class="fa fa-arrows-alt" aria-hidden="true"></i>全屏</div>
+        <div class="box">
+            <div class="panel" id="panel">
+                <form action="" class="form-inline">
+                    <div class="form-group time-input" id="time">
+                        <label>开始日期-结束日期</label>
+                        <div>
+                            <input class="form-control input-sm" name="from_date" id="from_date" type="text" placeholder="eg:2017-03-03">
+                            至
+                            <input class="form-control input-sm" name="to_date" id="to_date" type="text" placeholder="eg:2017-03-05">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="limit" class="control-label">
+                            总数
+                        </label>
+                        <select class="form-control input-sm" id="limit" name="limit">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                            <option value="400">400</option>
+                            <option value="1000">1000</option>
+                            <option value="5000">5000</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group time-input" id="isReqCheck">
+                        <label>是否显示请求</label>
+                        <div style="text-align: center;">
+                            <input class="form-control input-sm" name="isReq" id="isReq" type="checkbox" style="box-shadow: none">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="search">搜索</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>msg</th>
+                        <th>登录名</th>
+                        <th>真实姓名</th>
+                        <!--<th>IP</th>-->
+                        <th class="hide log-hide">请求</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dataTbody">
+                    </tbody>
+                </table>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script id="data-template" type="text/html">
+    ${each list}
+    <tr>
+        <td>${$value.timestamp}</td>
+        <td>${$value.message}</td>
+        <td>${$value.username}</td>
+        <td >${$value.realname}</td>
+        <!--<td >${$value.ip}</td>-->
+        <td class="hide log-hide">${stringify $value.req}</td>
+    </tr>
+    ${/each}
+</script>
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/datePicker/jquery.datetimepicker.full.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/src/log/logMa.js'></script>
+
+</body>
+</html>

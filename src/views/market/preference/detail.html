@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.preference}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="../../../static/css/common/reset.css">
+    <link rel="stylesheet" href="../../../static/css/common/global.css">
+    <link rel="stylesheet" href="../../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../../static/css/common/sidebar.css">
+    <link rel="stylesheet" href="../../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../static/vendor/pagination/pagination.css">
+    <link rel="stylesheet" href="../../../static/css/src/market/common.css">
+    <link rel="stylesheet" href="../../../static/css/src/market/preference/detail.css">
+    <link rel="stylesheet" href="../../../static/css/src/ajaxLoading.css">
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <div class="breadcrumbs">
+            {{i18n.market_tools}} ><span> {{i18n.preference}} ></span><span
+                class="high-light">{{i18n.detail_page}}</span>
+            <div class="f-r"><a class="btn btn-danger" id="marketSaveBtn">{{i18n.save}}</a></div>
+        </div>
+        <hr>
+        <div class="box">
+            <div class="set_attr" id="detail">
+
+            </div>
+            <div class="explain">
+                <h4>配置说明</h4>
+                <div id="explainText">
+                    <p>123</p>
+                    <p>345</p>
+                </div>
+                <div id="spreadSwitch">
+                    <span class="fr">{{i18n.spread}}</span>
+                    <span class="fr">{{i18n.retract}}</span>
+                </div>
+            </div>
+            <div class="log">
+                <h4>操作日志</h4>
+                <div id="logTable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="logTbody">
+                        </tbody>
+                    </table>
+                    <div id="pagination-container"></div>
+                </div>
+                <div id="logBtn">
+                    <span class="fr">{{i18n.spread}}</span>
+                    <span class="fr">{{i18n.retract}}</span>
+                </div>
+            </div>
+            <hr>
+            <!--<a href="/market/preference" class="btn btn-default btn-sm active">< {{i18n.go_back}}</a>-->
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+<script id="detailTpl" type="text/x-handlebars-template">
+    <form>
+        <h4>
+            {{i18n.base_attribute}}
+        </h4>
+        <div class="non-empty group">
+            <label for="name">{{i18n.market_name}}</label>
+            <input type="text" class="form-control input-l" id="name" value="\{{name}}">
+        </div>
+        <div class="group non-empty">
+            <label for="description" class="">{{i18n.use_explain}}</label>
+            <input type="text" class="form-control input-l" id="description" value="\{{description}}">
+        </div>
+        <div class="non-empty group">
+            <label for="status">{{i18n.state}}</label>
+            <select class="form-control input-l" id="status">
+                \{{#select status}}
+                <option value="1">{{i18n.open}}</option>
+                <option value="2">{{i18n.pause}}</option>
+                \{{/select}}
+            </select>
+        </div>
+        <div class="group non-empty">
+            <label>{{i18n.use_time}}</label>
+            <input class="form-control input-l" id="from_date" type="text" value="\{{from_date}}">
+            -
+            <input class="form-control input-l" id="to_date" type="text" value="\{{to_date}}">
+        </div>
+        <div class="group non-empty">
+            <label for="activity_url">{{i18n.connect_activity}}</label>
+            <input type="text"
+                   id="activity_url"
+                   class="form-control input-l"
+                   value="\{{activity_url}}"
+                   placeholder="{{i18n.please_input_activity_url}}">
+        </div>
+        <div class="non-empty group">
+            <label>{{i18n.select_product}}</label>
+            <label class="radio-inline">
+                <input type="radio" name="pro_type" value="SKU" checked>SKU
+            </label>
+        </div>
+        <div class="content-r group">
+            <textarea class="form-control" rows="3" id="sku_list">\{{sku_list}}</textarea>
+        </div>
+    </form>
+</script>
+<script id="logTpl" type="text/x-handlebars-template">
+    \{{#each list}}
+    <tr>
+        <td>\{{user_name}}</td>
+        <td>\{{time}}</td>
+        <td>\{{#compare action '==' 'new'}}新建\{{/compare}}\{{#compare action '==' 'edit'}}编辑\{{/compare}}</td>
+    </tr>
+    \{{/each}}
+</script>
+<script type="text/javascript" src='../../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../../static/vendor/moment/moment.js'></script>
+<script type="text/javascript" src='../../../static/vendor/laydate/laydate.js'></script>
+<script type="text/javascript" src='../../../static/vendor/handlebars/handlebars.js'></script>
+<script type="text/javascript" src='../../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../../static/js/common/common.js'></script>
+<script type="text/javascript" src='../../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../../static/js/src/market/common.js'></script>
+<script type="text/javascript" src='../../../static/js/src/market/preference/detail.js'></script>
+</body>
+</html>

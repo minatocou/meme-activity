@@ -1,0 +1,32 @@
+
+<div class="header-container"
+     data-localize="{{i18n.localize}}"
+     data-coupon="{{config.coupon}}"
+     data-gift="{{config.gift}}"
+     data-magento="{{config.magento.domain}}"
+     data-couponmanage="{{config.couponManage}}"
+     data-questionnaire="{{config.magento.external}}"
+>
+
+    <div class="fl">
+        <div class="f-l logo"><img src="/img/static/img/common/logo.png" alt=""></div><h1 class="f-l"> {{i18n.header_title}}</h1>
+    </div>
+    <div class="private-container fr">
+        <ul>
+            <li class="user-name" data-name="{{user.username}}">
+                <span >hi, </span>
+                <span class>{{user.username}}</span>
+                <span class="record-user-name hide">{{user.realname}}</span>
+
+            </li>
+            <li>
+                <span class="user-avater"><i class="fa fa-user"></i><i class="fa fa-caret-down"></i></span>
+                <ul class="list">
+                    <li>
+                        <a class="logout" href="/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

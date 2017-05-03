@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>memebox{{i18n.wechat_setting}}</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href="../../static/css/common/reset.css">
+    <link rel='stylesheet' href="../../static/css/common/global.css">
+    <link rel='stylesheet' href="../../static/css/common/header.css">
+    <link rel='stylesheet' href="../../static/css/common/sidebar.css">
+    <link rel='stylesheet' href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel='stylesheet' href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel='stylesheet' href="../../static/vendor/pagination/pagination.css">
+    <link rel='stylesheet' href='../../static/css/src/wechat/offac.css'>
+
+    </head>
+    <body>
+    {{>header}}
+    {{>sidebar}}
+    <div class="main-container">
+        <div id="opt-list">
+            <span id="menu">{{i18n.wechat_custom_setting}}</span>
+            <span class="shut-down">{{i18n.shutdown}}</span>
+            <span id="save-menu">{{i18n.save_release}}</span>
+            <span id="preview-menu">{{i18n.preview}}</span>
+        </div>
+        <div id="warnning">
+            <p>注意事项：</p>
+            <p>1、一级菜单最多只能设置5个、开启3个，菜单名称不多于4个汉字或8个字母；每个一级主菜单下的二级子菜单最多设置、开启5个，菜单名称不多于8个汉字或16个字母；</p>
+            <p>2、更改启用的一级菜单后，须点击保存并发布后才可更新到用户端；</p>
+            <p>3、点击“停用”，意为停用自定义菜单功能，此时，保留后台当前菜单，而用户端将无法看到任何自定义菜单，请谨慎使用；</p>
+            <p>4、点击“重新开启”，用户端复现停用时保留的菜单内容。</p>
+        </div>
+        <div id="options">
+            <span id="type-menu-opt">{{i18n.menu_level}}</span>
+            <span id="name-menu-opt">{{i18n.menu_name}}</span>
+            <span id="req-menu-opt">{{i18n.menu_action}}</span>
+            <span id="act-menu-opt">{{i18n.menu_res_action}}</span>
+            <span id="del-menu-opt">{{i18n.operation}}</span>
+        </div>
+        <div id="offac-setting">
+            <div>{{menu}}</div>
+        </div>
+        <div id="add-new">＋{{i18n.new_wechat_menu}}</div>
+        <div id="wrapper"></div>
+    </div>
+
+    <script type="text/html" class="add-menu">
+        <div class="menu-item norm">
+            <span class ="type"></span>
+                <span class="del-menu">
+                    <button class="pause lv1">{{i18n.pause}}</button>
+                    <button class="delete">{{i18n.delete}}</button>
+                </span>
+                <span class="act lv1" data=""></span>
+                <span class="req">
+                    <select name="menu-type" class="menu-type lv1">
+                        <option value="0">{{i18n.choose}}</option>
+                        <option value="1">{{i18n.wechat_menu_link}}</option>
+                        <option value="2">{{i18n.wechat_menu_msg}}</option>
+                    </select>
+                </span>
+                <span class="name lv1">
+                    <input type="text"  maxlength="8">
+                    <button class="add-new-lv2">+</button>
+                </span>
+                <div class="cover"></div>
+        </div>
+    </script>
+    <script type="text/html" class="add-menu-lv2">
+        <div class="menu-item-lv2">
+            <span class="del-menu">
+                <button class="pause-lv2 fa fa-pause"></button>
+                <button class="delete-lv2 fa fa-trash"></button>
+            </span>
+            <span class="act lv2" data=""></span>
+            <span class="req">
+                <select name="menu-type" class="menu-type lv2">
+                    <option value="0">{{i18n.choose}}</option>
+                    <option value="1">{{i18n.wechat_menu_link}}</option>
+                    <option value="2">{{i18n.wechat_menu_msg}}</option>
+                </select>
+            </span>
+            <span class="name lv2">
+                <span class="guide"></span>
+                <input type="text"  maxlength="16">
+            </span>
+        </div>
+        </div>
+    </script>
+    <script type="text/html" class="add-url">
+        <div id="url">
+            <div id="inlink">请填写跳转链接</div>
+            <i id="close">×</i>
+            <input id="putlink" type="text">
+            <div id="error"></div>
+            <button id="access">确认</button>
+            <button id="cancel">取消</button>
+        </div>
+    </script>
+    {{{{material-helper}}}}
+    <script type="text/x-handlebars-template" id="material-tpl">
+        <div id="material">
+            <div id="inmaterial">选择图文消息</div>
+            <i id="close-material">×</i>
+            <div id="title">标题</div>
+            <div id="time">发布日期</div>
+            <div id="materials">
+                {{#each item}}
+                    {{#each content.news_item}}
+                    <div class="ma-all">
+                        <div class="circle"></div>
+                        <div class="ma-title" data="{{media_id}}">{{title}}</div>
+                        <div class="ma-time">{{time}}</div>
+                    </div>
+                    {{/each}}
+                {{/each}}
+            </div>
+            <button id="ma-access">确认</button>
+            <button id="ma-cancel">取消</button>
+        </div>
+    </script>
+    {{{{/material-helper}}}}
+    <script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+    <script type="text/javascript" src='../../static/vendor/sortable/Sortable.js'></script>
+    <script type="text/javascript" src='../../static/vendor/sortable/jquery.binding.js'></script>
+    <script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+    <script type="text/javascript" src='../../static/vendor/handlebars/handlebars.js'></script>
+    <script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+    <script type="text/javascript" src='../../static/js/common/header.js'></script>
+    <script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+    <script type="text/javascript" src='../../static/js/common/footer.js'></script>
+    <script type="text/javascript" src='../../static/js/src/wechat/offac.js'></script>
+
+    </body>
+</html>

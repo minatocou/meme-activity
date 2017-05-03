@@ -1,0 +1,658 @@
+@import "../variables";
+html {
+  font: 14px @font-family;
+}
+
+@media screen and (min-width: 360px) {
+  html {
+    font: 16px @font-family;
+
+  }
+}
+.close-btn,.close-link-btn{
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  background: @mainColor;
+  color: #ffffff;
+  text-align: center;
+  line-height: 15px;
+  border-radius: 50%;
+  display: none;
+  cursor: pointer;
+
+}
+.canvas-wrapper .close-btn,.canvas-wrapper .close-link-btn,.img-wrapper .close-btn {
+  display: block;
+}
+//中间
+#canvas{
+  li.cur{
+    box-shadow: 0 0  10px @mainColor;
+    z-index: 100;
+  }
+
+  .simple{
+    border: 1px solid #dddddd;
+    padding: 5px;
+    text-align: center;
+  }
+
+  li{
+    border:1px solid #eee;
+    img{
+      width:100%;
+    }
+  }
+
+}
+//左侧
+#template {
+  .t1{
+    margin: 15*@xem;
+  }
+  .simple{
+    margin: 15*@xem;
+    background: #ffffff;
+    padding: 10*@xem;
+    text-align: center;
+  }
+}
+img{
+  max-width: 100%;
+}
+[data-field]{
+  margin: 5*@xem 0;
+}
+.ov2{
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.itemTitle{
+  cursor:pointer;
+}
+.itemBody{
+  margin-top:10px;
+}
+.form-group{
+  >div{
+    margin-bottom: 5px;
+  }
+}
+#banner{
+  .bannerGroup{
+    margin-bottom:10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  .bannerItem{
+    border:1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+    overflow: inherit;
+    position:relative;
+    .itemTitle{
+      i.fa{
+        float: right;
+        margin-top: 5px;
+      }
+    }
+    .ops{
+      margin-top:10px;
+      .status{
+        float:right;
+        margin-top: 5px;
+      }
+      .shutBanner,.openBanner{
+        width:100%;
+        display:none;
+      }
+      .active{
+        display:inline-block;
+      }
+    }
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+    .form-group.delIcon{
+      position: absolute;
+      top: -20px;
+      right: -6px;
+      .delBanner{
+        width: 18px;
+        height: 18px;
+        font-size: 16px;
+        background: #337ab7;
+        color: #ffffff;
+        text-align: center;
+        line-height: 15px;
+        padding:0;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+  .addBanner{
+    float:right;
+  }
+
+}
+
+#icon{
+  .iconGroup{
+    margin-bottom:10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  .iconItem{
+    border:1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+    .itemTitle{
+      i.fa{
+        float: right;
+        margin-top: 5px;
+      }
+    }
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+  }
+
+}
+#bulletin{
+  .bulletinGroup{
+    margin-bottom:10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  .bulletinItem{
+    border:1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+    overflow: inherit;
+    position:relative;
+    .itemTitle{
+      i.fa{
+        float: right;
+        margin-top: 5px;
+      }
+    }
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+    /*.startTime,.endTime{
+      width: 98px;
+      display:inline-block;
+    }*/
+
+    .ops{
+      margin-top:10px;
+      .status{
+        float:right;
+        margin-top: 5px;
+      }
+      .shutBulletin,.openBulletin{
+        width:100%;
+        display:none;
+      }
+      .active{
+        display:inline-block;
+      }
+    }
+
+    .form-group.delIcon{
+      position: absolute;
+      top: -20px;
+      right: -6px;
+      .delBanner{
+        width: 18px;
+        height: 18px;
+        font-size: 16px;
+        background: #337ab7;
+        color: #ffffff;
+        text-align: center;
+        line-height: 15px;
+        padding:0;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+#special{
+  .specialGroup{
+    margin-bottom:10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  .specialItem{
+    border:1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+    .itemTitle{
+      i.fa{
+        float: right;
+        margin-top: 5px;
+      }
+    }
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+  }
+
+}
+#discount{
+  .discountGroup{
+    margin-bottom:10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  .commonConf{
+     /*select {
+       width: 100px;
+       height: 30px;
+       display:inline-block;
+     }
+     .inputWord{
+       width:115px;
+       display:inline;
+     }*/
+   }
+  .discountItem{
+    border:1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+    overflow: inherit;
+    position:relative;
+    .itemTitle{
+      i.fa{
+        float: right;
+        margin-top: 5px;
+      }
+    }
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+    .ops{
+      margin-top:10px;
+      .status{
+        float:right;
+        margin-top: 5px;
+      }
+      .shutDiscount,.openDiscount{
+        width:100%;
+        display:none;
+      }
+      .active{
+        display:inline-block;
+      }
+    }
+
+    .form-group.delIcon{
+      position: absolute;
+      top: -20px;
+      right: -6px;
+      .delBanner{
+        width: 18px;
+        height: 18px;
+        font-size: 16px;
+        background: #337ab7;
+        color: #ffffff;
+        text-align: center;
+        line-height: 15px;
+        padding:0;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+#activity{
+  .activityGroup{
+    margin-bottom:10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  .activityItem{
+    border:1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+    overflow: inherit;
+    position:relative;
+    .itemTitle{
+      i.fa{
+        float: right;
+        margin-top: 5px;
+      }
+    }
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+    /*.startTime,.endTime{
+      width: 98px;
+      display:inline-block;
+    }*/
+
+    .ops{
+      margin-top:10px;
+      .status{
+        float:right;
+        margin-top: 5px;
+      }
+      .shutActivity,.openActivity{
+        width:100%;
+        display:none;
+      }
+      .active{
+        display:inline-block;
+      }
+    }
+
+    .form-group.delIcon{
+      position: absolute;
+      top: -20px;
+      right: -6px;
+      .delBanner{
+        width: 18px;
+        height: 18px;
+        font-size: 16px;
+        background: #337ab7;
+        color: #ffffff;
+        text-align: center;
+        line-height: 15px;
+        padding:0;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+#groupon{
+  .commonConf{
+    select {
+      width: 100px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:115px;
+      display:inline;
+    }
+  }
+  .grouponItem{
+    .tips{
+      margin-top:10px;
+      font-size:12px;
+    }
+  }
+}
+
+#favor{
+  .favorItem{
+    .tips{
+      margin-top:10px;
+      font-size:12px;
+    }
+  }
+}
+
+#separate{
+  .separateItem{
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+  }
+}
+
+#video{
+  .videoGroup{
+    margin-bottom:10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  .videoItem{
+    border:1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+    overflow: inherit;
+    position:relative;
+    .itemTitle{
+      i.fa{
+        float: right;
+        margin-top: 5px;
+      }
+    }
+    input[name=video_id]{
+      width: 158px;
+      display: inline-block;
+    }
+    .grayInput{
+      background:#ddd;
+    }
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+    /*.startTime,.endTime{
+      width: 98px;
+      display:inline-block;
+    }*/
+
+    .ops{
+      margin-top:10px;
+      .status{
+        float:right;
+        margin-top: 5px;
+      }
+      .shutVideo,.openVideo{
+        width:100%;
+        display:none;
+      }
+      .active{
+        display:inline-block;
+      }
+    }
+
+    .form-group.delIcon{
+      position: absolute;
+      top: -20px;
+      right: -6px;
+      .delBanner{
+        width: 18px;
+        height: 18px;
+        font-size: 16px;
+        background: #337ab7;
+        color: #ffffff;
+        text-align: center;
+        line-height: 15px;
+        padding:0;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.block-wrapper .template{
+  height:150px;
+  .block-img{
+    width:100%;
+    >div{
+      height: 120px;
+      line-height: 120px;
+      text-align:center;
+      padding: 0 10px;
+      img{
+        width:100%;
+      }
+    }
+    p{
+      text-align:center;
+      margin-top: 10px;
+    }
+  }
+  .canvas-img{
+    display:none;
+  }
+}
+.thumbnail{
+  margin-bottom:10px;
+}
+.red{
+  color:red;
+  font-size: 18px;
+  vertical-align: middle;
+}
+.block-wrapper .template.favor{
+  .block-img{
+    >div{
+      img{
+        width: 75px;
+      }
+    }
+  }
+}
+.canvas-wrapper .template{
+  .block-img{
+    display:none;
+  }
+}
+/**图文组件-start**/
+.imagetextWrap {
+  .teletextGroup{
+    margin-bottom:10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+  .teletextItem{
+    border:1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+    overflow: inherit;
+    position:relative;
+    .itemTitle{
+      i.fa{
+        float: right;
+        margin-top: 5px;
+      }
+    }
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+    .ops{
+      margin-top:10px;
+      .status{
+        float:right;
+        margin-top: 5px;
+      }
+      .shutImagetext,
+      .openImagetext{
+        width:100%;
+        display:none;
+      }
+      .active{
+        display:inline-block;
+      }
+    }
+  }
+}
+/**图文组件-end**/
+
+
+
+#live{
+  .liveGroup{
+    margin-bottom:10px;
+    padding-bottom: 10px;
+  }
+  .liveItem{
+    padding:0 10px;
+    overflow: inherit;
+    position:relative;
+    .itemTitle{
+      i.fa{
+        float: right;
+        margin-top: 5px;
+      }
+    }
+    input[name=liveRoomId]{
+      width: 158px;
+      display: inline-block;
+    }
+    .grayInput{
+      background:#ddd;
+    }
+    select {
+      width: 95px;
+      height: 30px;
+      display:inline-block;
+    }
+    .inputWord{
+      width:110px;
+      display:inline;
+    }
+  }
+}

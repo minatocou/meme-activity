@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>直播管理</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href='../../static/css/common/reset.css'/>
+    <link rel='stylesheet' href='../../static/css/common/global.css'/>
+    <link rel='stylesheet' href='../../static/vendor/font-awesome/css/font-awesome.css'/>
+    <link rel='stylesheet' href='../../static/vendor/bootstrap/css/bootstrap.css'/>
+    <link rel='stylesheet' href='../../static/vendor/datePicker/jquery.datetimepicker.css'/>
+    <link rel='stylesheet' href='../../static/vendor/jquery-ui/jquery-ui.min.css'/>
+    <link rel='stylesheet' href='../../static/css/common/global.css'/>
+    <link rel='stylesheet' href='../../static/css/common/header.css'/>
+    <link rel='stylesheet' href='../../static/css/common/sidebar.css'/>
+    <link rel='stylesheet' href='../../static/css/src/create/preview.css'/>
+    <link rel='stylesheet' href='../../static/css/src/ajaxLoading.css'/>
+    <link rel='stylesheet' href='../../static/css/src/live/manage.less'/>
+    <link rel="stylesheet" href="../../static/css/src/ajaxLoading.css">
+</head>
+<body id="liveContainer" data-preview="{{config.preview}}" data-rongyun-appkey="{{config.rongyun.appKey}}" data-page-id="{{setting.pageId}}" data-magento="{{config.magento.domain}}" data-state="{{setting.status}}" data-server-time="{{setting.server_time}}" data-localize="{{i18n.localize}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <div class="liveCon">
+            <input type="hidden" name="liveRoomId" value="{{liveData.liveRoomId}}">
+            <input type="hidden" name="chatroomId" value="{{liveData.chatroomId}}">
+            <div class="liveHeader">
+                <h2>直播间管理 ><span>管理页</span></h2>
+                <span class="liveName">房间名称：<span class="live-room-name">{{liveData.title}}</span></span>
+            </div>
+            <div class="liveBody">
+                <div class="container">
+                    <div class="liveTitle">
+                        <div class="hostInfo">
+                            <div class="hostAvatar"><img src="{{liveData.avatar}}"></div>
+                            <div class="hostName">{{liveData.name}}</div>
+                        </div>
+                        <div class="watchInfo">
+                            <span class="onlineNum"><span data-bind="chatRoomNumber"> {{liveData.currentUsersCount}} </span>人在线</span>
+                            <span class="likesNum"><span data-bind="likeNumber"> {{liveData.like}} </span>人点赞</span>
+                        </div>
+                    </div>
+
+                    <div class="liveMain">
+                        <div class="liveRoom">
+                            <div class="message">
+                                <h5 class="color-warning pb-5">
+                                    欢迎来到美美直播间（直播间名称），跟主播学扮美秘籍。美美箱提倡健康的直播环境，对直播内容24小时巡查，禁止宣传违法、违规、低俗等不良信息
+                                </h5>
+                                <div class="message-list-container">
+                                    
+                                </div>
+                            </div>
+                            <script type="text/html" id="message-item-tmpl">
+                                ${if !admin}
+                                <div class="text-message-list-item">
+                                    <span class="color-user-name">${user}</span>&nbsp;&nbsp;<span>${msg}</span>
+                                </div>
+                                ${else}
+                                <div>
+                                    <div class="text-message-list-item bonus-tips">
+                                        <span class="color-user-name">${user}</span>&nbsp;&nbsp;</span>&nbsp;&nbsp;<span>${msg}</span>
+                                    </div>
+                                </div>
+                                ${/if}
+                            </script>
+                            <div class="sendMessage">
+                                <form action="" class="admin-form">
+                                    <input class="adminInput" placeholder="按回车可快捷发送消息" type="text">
+                                </form>
+                                <a class="btn btn-primary sendBtn">发 送</a>
+                            </div>
+                        </div>
+                        <div class="sensitiveWord">
+                            <div class="addWord">
+                                <p>屏蔽内容:</p>
+                                <input type="text" name="word" value=""> <a href="javascript:void(0);" class="btn btn-success sensitiveBtn addWordBtn">确定</a>
+                            </div>
+                            <div class="sensitiveList">
+                                <table class="table table-bordered table-hover">
+                                    <colgroup>
+                                        <col width="218">
+                                        <col width="">
+                                    </colgroup>
+                                    <tbody class="sensitiveBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <a href="/live/list" class="btn btn-default btn-sm active">&lt; 返回</a>
+            </div>
+        </div>
+    </div>     
+    {{>ajaxLoading}}
+</div>
+<script type="text/html" id="sensitive-list-tmpl">
+    ${each sensitiveData as value i}
+    <tr>
+        <td class="wordBox">${value}</td>
+        <td><a href="javascript:void(0);" class="btn btn-danger sensitiveBtn deleteWordBtn">删除</a></td>
+    </tr>
+    ${/each}
+</script>
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/vue/vue.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-ui/jquery-ui.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/underscore/underscore.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/moment/moment.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/datePicker/jquery.datetimepicker.full.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/webuploader/webuploader.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/src/live/rongyun/RongIMLib-2.2.5.js'></script>
+<script type="text/javascript" src='../../static/js/src/live/manage.js'></script>
+<script type="text/javascript" src='../../static/js/src/live/sensitiveWord.js'></script>
+
+</body>
+</html>

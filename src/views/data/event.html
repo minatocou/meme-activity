@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memebox事件关系管理面板</title>
+    {{> meta}}
+    <link rel='stylesheet' href="../../static/css/common/reset.css">
+    <link rel='stylesheet' href="../../static/css/common/global.css">
+    <link rel='stylesheet' href="../../static/css/common/header.css">
+    <link rel='stylesheet' href="../../static/css/common/sidebar.css">
+    <link rel='stylesheet' href="../../static/vendor/datePicker/jquery.datetimepicker.css">
+    <link rel='stylesheet' href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../static/vendor/pagination/pagination.css">
+    <link rel='stylesheet' href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel='stylesheet' href="../../static/vendor/pagination/pagination.css">
+    <link rel='stylesheet' href="../../static/css/src/data/event.css">
+
+</head>
+<body>
+{{>header}}
+<div class="main-container">
+
+    {{>sidebar}}
+
+    <div class="data-container">
+        <div class="fullfill"><i class="fa fa-arrows-alt" aria-hidden="true"></i>全屏</div>
+        <div class="box">
+            <div class="panel" id="panel">
+                <form action="" class="form-inline">
+                    <div class="form-group">
+                        <label for="group_name" class="control-label">
+                            模块名称
+                        </label>
+                        <input type="text" id="group_name" v-model="param.group_name" name="group_name" class="form-control input-sm" placeholder="eg:start_app">
+                    </div>
+                    <div class="form-group">
+                        <label for="event_name" class="control-label">
+                            事件名称
+                        </label>
+                        <input type="text" id="event_name" v-model="param.event_name" name="event_name" class="form-control input-sm" placeholder="eg:start_app">
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="control-label">
+                            事件类型
+                        </label>
+                        <select class="form-control input-sm" id="category" v-model="param.category" name="category">
+                            <option value="">ALL</option>
+                            <option value="0">页面埋点</option>
+                            <option value="1">事件埋点</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="limit" class="control-label">
+                            总数
+                        </label>
+                        <select class="form-control input-sm" v-model="param.limit" id="limit" name="limit">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                            <option value="400">400</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" @click="initPage()">搜索</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="reset" class="btn btn-primary btn-danger" @click="param={}" id="reset">清除</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" @click="addEvent" class="btn btn-success">新增</button>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>排序</th>
+                        <th>模块名称</th>
+                        <th>事件名称</th>
+                        <th>事件类型</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="dataTbody">
+                        <tr v-show="eventList.length==0"><td colspan='14' style='text-align: center'>加载中...</td></tr>
+                        <tr v-show="showAddEvent">
+                            <td></td>
+                            <td><input class="form-control input-sm" v-model="add.group_name" name="group_name" placeholder="模块名称" /></td>
+                            <td><input class="form-control input-sm" v-model="add.event_name" name="event_name" placeholder="事件名称" /></td>
+                            <td>
+                                <select class="form-control input-sm" v-model="add.category" name="category">
+                                    <option selected value="1">事件埋点</option>
+                                    <option value="0">页面埋点</option>
+                                </select>
+                            </td>
+                            <td><input class="form-control input-sm" v-model="add.description" name="description" placeholder="描述" /></td>
+                            <td>
+                                <button type="button" @click="saveEvent" class="btn btn-success">保存</button>
+                            </td>
+                        </tr>
+                        <tr v-for="(i,v) in eventList">
+                            <td>${i}</td>
+                            <td>${v.group_name}</td>
+                            <td>${v.event_name}</td>
+                            <td>${v.category}</td>
+                            <td>${v.description}</td>
+                            <td>
+                                <a class="btn btn-warning" href="/event/mapping/?event_name=${v.event_name}">
+                                    <i class=" fa fa-pencil"></i>编辑属性</a>
+                                <button class="btn btn-danger delete-btn" @click="deleteEvent(v)">
+                                    <i class=" fa fa-trash"></i>删除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/vue/vue.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/datePicker/jquery.datetimepicker.full.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/src/data/event.js'></script>
+
+</body>
+</html>

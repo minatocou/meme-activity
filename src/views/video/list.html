@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.appConf }}</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href='../../static/vendor/bootstrap/css/bootstrap.css'/>
+    <link rel='stylesheet' href='../../static/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'/>
+    <link rel='stylesheet' href='../../static/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'/>
+    <link rel='stylesheet' href='../../static/vendor/font-awesome/css/font-awesome.css'/>
+    <link rel='stylesheet' href='../../static/css/common/reset.css'/>
+    <link rel='stylesheet' href='../../static/vendor/pagination/pagination.css'/>
+    <link rel='stylesheet' href='../../static/vendor/bootstrap-select/dist/css/bootstrap-select.min.css'/>
+    <link rel='stylesheet' href='../../static/css/common/global.css'/>
+    <link rel='stylesheet' href='../../static/css/common/header.css'/>
+    <link rel='stylesheet' href='../../static/css/common/sidebar.css'/>
+    <link rel='stylesheet' href='../../static/css/src/create/preview.css'/>
+    <link rel='stylesheet' href='../../static/css/src/ajaxLoading.css'/>
+    <link rel='stylesheet' href='../../static/css/src/video/list.css'/>
+</head>
+<body data-preview="{{config.preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+
+    <div class="appList">
+        <div class="videoHeader">
+            <h2>视频配置</h2>
+            <a href="/video/add" class="btn btn-primary addVideo">{{i18n.addVideo}}</a>
+        </div>
+        <div class="videoBody">
+            <div class="searchContainer">
+                <form class="search">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>ID</th>
+                            <th>状态</th>
+                            <th>最后操作人</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input type="text" name="title" value="{{searchData.title}}"></td>
+                            <td><input type="text" name="video_id" value="{{searchData.video_id}}"></td>
+                            <td>
+                                <select name="status">
+                                    <option value="1" {{#compare searchData.status "==" "1"}}selected{{/compare}} >开启</option>
+                                    <option value="0" {{#compare searchData.status "==" "0"}}selected{{/compare}} >关闭</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="operator" value="{{searchData.operator}}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href="javascript:void(0);" class="btn btn-primary searchBtn">搜索</a>
+                </form>
+            </div>
+            <div class="listContainer table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <th>视频名称</th>
+                        <th>ID</th>
+                        <th>状态</th>
+                        <th>最后操作人</th>
+                        <th>操作</th>
+                    </thead>
+                    <tbody>
+                    {{#if listData.data.length}}
+                        {{#each listData.data}}
+                        <tr data-videoId="{{video_id}}">
+                            <td>{{title}}</td>
+                            <td>{{video_id}}</td>
+                            <td>{{#videostatus status}}{{/videostatus}}</td>
+                            <td>{{operator}}</td>
+                            <td>
+                                <a class="btn btn-info operatorBtn play" target="_blank" href="{{video_url}}">播放</a>
+                                <a class="btn btn-success operatorBtn statusBtn {{#compare status '==' '1'}}open{{/compare}}" href="javascript:void(0);">{{#compare status '==' '0'}}开启{{/compare}}{{#compare status '==' '1'}}关闭{{/compare}}</a>
+                                <a class="btn btn-warning operatorBtn edit" href="/video/add/{{video_id}}">编辑</a>
+                                <a class="btn btn-danger  operatorBtn delete" href="javascript:void(0);">删除</a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="5" style="text-align:center;">暂无数据</td>
+                        </tr>
+                    {{/if}}
+                    </tbody>
+                </table>
+            </div>
+            <div id="pagesObj" style="display: none">
+                {{listData.pageSize}},{{listData.total}}
+            </div>
+            <div id="pagination-container"></div>
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/jquery.validate.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/localization/messages_zh.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/src/video/list.js'></script>
+</body>
+</html>

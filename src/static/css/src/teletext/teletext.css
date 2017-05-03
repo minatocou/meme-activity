@@ -1,0 +1,361 @@
+.main-container {
+    height: calc(100% - 60px);
+}
+.teletext-container {
+    height: 100%;
+    float: left;
+    width: 85%;
+    padding: 5px 20px;
+    box-sizing: border-box;
+}
+.teletext-container .panel {
+    border: 1px solid #eee;
+    padding: 20px 10px 15px;
+}
+.teletext-container .form-inline label {
+    margin-bottom: 10px;
+}
+.teletext-container .form-inline .control-label {
+    display: block;
+}
+.teletext-container .form-inline .form-group {
+    vertical-align: bottom;
+    margin-right: 20px;
+}
+.teletext-container .form-inline .form-group select {
+    width: 100px;
+}
+.teletext-container .form-inline .form-group:nth-of-type(1) input {
+    width: 120px;
+}
+.teletext-container .form-inline .form-group:nth-of-type(3) div input {
+    width: 150px;
+}
+.teletext-container .box {
+    height: 85%;
+    overflow-y: scroll;
+    padding-bottom: 30px;
+}
+.teletext-container .wrap {
+    height: 85%;
+    overflow-y: auto;
+    padding-bottom: 30px;
+}
+.teletext-container .box .form-inline{
+    padding:20px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom:20px;
+}
+.teletext-container .wrap .form-inline{
+    padding:20px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom:20px;
+}
+.teletext-pagination{
+    float: right;
+}
+.teletext-container .tele-page{
+    display: none;
+}
+.teletext-container .table-responsive th {
+    background: #eee;
+}
+.teletext-container .table-responsive th,
+.teletext-container .table-responsive tr {
+    text-align: center;
+}
+.teletext-container .table-responsive table td {
+    vertical-align: middle;
+}
+.teletext-container .table-responsive .div-s {
+    margin: 0 auto;
+}
+.teletext-container .table-responsive .div-l {
+    max-width: 200px;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+.teletext-container .table-responsive .empty-tr{
+    text-align: center;
+    color: #999;
+}
+.teletext-container .teletext-head {
+    padding: 20px 20px 20px 0;
+    border-bottom: 1px solid #eee;
+}
+.teletext-container .teletext-head button{
+    margin-left:15px;
+}
+.teletext-container .teletext-head .high-light {
+    color: #ec6884;
+}
+.teletext-container .f-r {
+    margin-top: -7px;
+}
+.table-responsive .table th {
+    border-bottom: none;
+}
+.teletext-wrap{
+    height: 700px;
+    overflow-y: auto;
+    padding-bottom: 30px;
+}
+.teletext-wrap .teletext-table{
+    padding: 20px 20px 0 150px;
+    line-height:24px;
+    color: #666;
+}
+.teletext-table .teletext-left{
+    float: left;
+    width:150px;
+    font-size:16px;
+    margin-left:-150px;
+    padding:0 10px;
+}
+.tele-validate{
+    display: none;
+    padding-left:10px;
+    color: red;
+    font-size:12px;
+}
+.teletext-left.err .tele-validate{
+    display: inline-block;
+}
+.teletext-table .teletext-right{
+    width:100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.teletext-table .teletext-right .teletext-row{
+    padding-right: 15px;
+}
+.teletext-table .teletext-right .label-list{
+    width:600px;
+    min-height:34px;
+    height:auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.teletext-table .teletext-right .skus-list{
+    width:600px;
+    min-height:34px;
+    padding:0 10px;
+    height:auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.skus-list .skus-item{
+    position: relative;
+    display: inline-block;
+    line-height:24px;
+    height:24px;
+    padding:0 15px;
+    margin:10px 15px 10px 0;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+.skus-item .del-prd{
+    display: inline-block;
+    position: absolute;
+    top:-5px;
+    right:-5px;
+    z-index:6;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    background: #ff5073 url("../../../img/del-icon.png") no-repeat;
+    color: #ffffff;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.teletext-row .upload-btn{
+    width:80px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: #5bc0de;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    margin-right:15px;
+    border-radius: 3px;
+    overflow: hidden;
+    height: 34px;
+    line-height:34px;
+}
+.teletext-row .upload-btn.update{
+    background-color: #337ab7;
+}
+.teletext-row .upload-btn.disable{
+    background-color: #ccc;
+}
+.teletext-row .upload-btn label,
+.teletext-row .upload-btn input[type="file"]{
+    margin:0;
+    width:100%;
+    height:100%;
+}
+.teletext-table .teletext-right .form-control{
+    width:300px;
+    display: inline-block;
+}
+.teletext-table .teletext-right .teletext-content{
+    width:90%;
+    overflow: hidden;
+}
+.teletext-content textarea{
+    height:650px;
+    overflow: hidden;
+    resize: none;
+}
+.teletext-row .tips{
+    display: inline-block;
+    vertical-align: middle;
+}
+.teletext-row button{
+    margin-right:15px;
+}
+.teletext-table .teletext-left .warn{
+    color: red;
+    padding:5px;
+}
+.teletext-imgBox{
+    width:300px;
+    height:150px;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    margin:15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.teletext-imgBox img{
+    width:100%;
+    display: inline-block;
+}
+.teletext-prd{
+    width:100%;
+    position: relative;
+}
+.teletext-prd .tele-cover{
+    width:100%;
+    height:230px;
+    position: absolute;
+    z-index: 5;
+    background: transparent;
+}
+.teletext-prd .teletext-cnt{
+    width:100%;
+    padding:10px;
+    font-size:14px;
+    color: #666;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+.teletext-prd .teletext-place{
+    height:210px;
+    padding-left:230px;
+    position: relative;
+}
+.teletext-prd .teletext-place .img{
+    width:210px;
+    height:210px;
+    margin-left:-230px;
+    float: left;
+    display: inline-block;
+    background-color: #eee;
+}
+.teletext-prd .teletext-place .foot{
+    display: inline-block;
+    width: 140px;
+    height:50px;
+    background-color: #eee;
+    position: absolute;
+    bottom:15px;
+    right:0;
+}
+.teletext-prd .img{
+    width:100%;
+    height:auto;
+    display: inline-block;
+}
+.teletext-prd .title{
+    position: absolute;
+    left:30px;
+    top:30px;
+    display: inline-block;
+}
+.teletext-prd .del-prd{
+    display: inline-block;
+    position: absolute;
+    top:-5px;
+    right:-5px;
+    z-index:6;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    background: #ff5073 url("../../../img/del-icon.png") no-repeat;
+    color: #ffffff;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.upload-icon-container{
+    position: relative;
+    overflow: hidden;
+}
+.upload-icon-container.active{
+    color: #666;
+    border-color: #ccc;
+}
+.upload-icon-container .webuploader-pick{
+    display: block;
+    height:auto;
+}
+.upload-icon-container .webuploader-element-invisible{
+    width:100%;
+}
+.wangEditor-drop-panel .tab-container .uploadTip,
+.wangEditor-drop-panel .tab-container .uploadedTip{
+    display: inline-block;
+    float: right;
+    margin: 0 5px;
+    padding: 5px 5px;
+}
+.wangEditor-drop-panel .tab-container .uploadTip{
+    color: #666;
+}
+.wangEditor-drop-panel .tab-container .uploadedTip{
+    color: red;
+}
+.webuploader-pick {
+    display: inline-block;
+    text-align: center;
+    height: 34px;
+}
+.webuploader-element-invisible {
+    position: absolute!important;
+    clip: rect(1px 1px 1px 1px);
+}
+.tele-dlg-content{
+    text-align: center;
+}
+.tele-dlg-content .tele-dlg-head{
+    padding:10px 0;
+    font-size:16px;
+}
+.tele-dlg-content .tele-dlg-info{
+
+}
+.modal-footer{
+    text-align: center;
+}

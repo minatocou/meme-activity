@@ -1,0 +1,12 @@
+.input-l {
+  display: inline-block;
+  width: 200px;
+  margin: 5px 0;
+}
+#out {
+  width: 80%;
+  margin: 20px 0;
+  border: 1px #ccc solid;
+  padding: 10px;
+  word-break: break-all;
+}

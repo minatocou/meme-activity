@@ -1,0 +1,76 @@
+<div class="video-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#video" href="#video">视频组件</a>
+            </div>
+            <div id="video" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <div class="form-group ">
+                            <div>背景图片URL(建议750*1240)</div>
+                            <img class="thumbnail"  v-if="setting.bg_img" :src="setting.bg_img">
+                            <input class="form-control input-sm bgImg removeSpace" value="${setting.bg_img}" v-model="setting.bg_img" name="bg_img" placeholder="${i18n.bannerBg}"
+                                   type="text">
+                        </div>
+                        <div class="form-group ">
+                            <div><em class="red">*</em>模块title</div>
+                            <input class="form-control input-sm" value="${setting.title}" v-model="setting.title" name="title" type="text">
+                        </div>
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="videoGroup singleConf">
+                        <form  v-for="(i,video) in setting.data" class="videoItem singleItem">
+                            <input type="hidden" class="uid" name="id" value="${video.id}">
+                            <a class="itemTitle" @click="slideItem($event)">视频配置(${video.start_time}-${video.end_time},${status(video)}) <i class="fa fa-caret-down"></i></a>
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div><em class="red">*</em>视频ID</div>
+                                    <input class="form-control input-sm position" @keydown="emptyVideo($event)" value="${video.video_id}" v-model="video.video_id" name="video_id" type="text">
+                                    <a class="btn btn-success btn-sm readVideo" @click="readVideo($event)" type="button">${i18n.read}</a>
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>视频名称</div>
+                                    <input class="form-control input-sm grayInput" value="${video.video_title}" onkeydown="return false" name="video_title" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>视频链接</div>
+                                    <input class="form-control input-sm grayInput" value="${video.video_url}" onkeydown="return false"  name="video_url" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>封面图片</div>
+                                    <input class="form-control input-sm grayInput" value="${video.video_img}" onkeydown="return false" name="video_img" type="text">
+                                    <img class="thumbnail videoImg"  v-show="video.video_img" :src="video.video_img" v-model="video.video_img">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>开始时间</div>
+                                    <input @mousedown="initDate($event,video.end_time,'start')" v-model="video.start_time" class="form-control input-sm startTime" value="${video.start_time}"  name="start_time" placeholder="${i18n.start_time}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>结束时间</div>
+                                    <input @mousedown="initDate($event,video.start_time,'end')" v-model="video.end_time" class="form-control input-sm endTime" value="${video.end_time}" name="end_time" placeholder="${i18n.end_time}" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div class="ops">
+                                        <a class="btn btn-warning btn-sm shutVideo" @click="shutVideo($event)" :class="{'active':video.status==1}" type="button">${i18n.shut}
+                                        </a>
+                                        <a class="btn btn-success btn-sm openVideo" @click="openVideo($event)" :class="{'active':video.status==0}" type="button">${i18n.open}
+                                        </a>
+                                    </div>
+                                    <input class="status" type="hidden" name="status" value="${video.status}">
+                                </div>
+                            </div>
+                            <div class="form-group delIcon">
+                                <div class="ops">
+                                    <a class="btn btn-sm delBanner" @click="deleteVideo($event)" type="button">×</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <a @click="addVideo($event)" class="addVideo btn btn-primary">${i18n.add_config} + </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

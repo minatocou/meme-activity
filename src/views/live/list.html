@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.appConf }}</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href='../../static/vendor/bootstrap/css/bootstrap.css'/>
+    <link rel='stylesheet' href='../../static/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'/>
+    <link rel='stylesheet' href='../../static/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css'/>
+    <link rel='stylesheet' href='../../static/vendor/font-awesome/css/font-awesome.css'/>
+    <link rel='stylesheet' href='../../static/css/common/reset.css'/>
+    <link rel='stylesheet' href='../../static/vendor/pagination/pagination.css'/>
+    <link rel='stylesheet' href='../../static/vendor/bootstrap-select/dist/css/bootstrap-select.min.css'/>
+    <link rel='stylesheet' href='../../static/css/common/global.css'/>
+    <link rel='stylesheet' href='../../static/css/common/header.css'/>
+    <link rel='stylesheet' href='../../static/css/common/sidebar.css'/>
+    <link rel='stylesheet' href='../../static/css/src/create/preview.css'/>
+    <link rel='stylesheet' href='../../static/css/src/ajaxLoading.css'/>
+    <link rel='stylesheet' href='../../static/css/src/live/list.less'/>
+    <link rel="stylesheet" href="../../static/css/src/ajaxLoading.css">
+</head>
+<body data-preview="{{config.preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <div class="liveList">
+            <div class="liveHeader">
+                <h2>直播配置</h2>
+                <a href="/live/add" class="btn btn-primary addLive">{{i18n.addLive}}</a>
+            </div>
+            <div class="liveBody">
+                <div class="listContainer table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="20%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="20%">
+                        </colgroup>
+                        <thead>
+                            <th>ID</th>
+                            <th>直播间名称</th>
+                            <th>密码</th>
+                            <th>主播名称</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>总在线数</th>
+                            <th>点赞数</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </thead>
+                        <tbody>
+                        {{#if listData.data.length}}
+                        {{#each listData.data}}
+                        <tr data-liveroomid="{{liveRoomId}}">
+                            <td>{{liveRoomId}}</td>
+                            <td>{{title}}</td>
+                            <td>{{pwd}}</td>
+                            <td>{{name}}</td>
+                            <td>{{#if startTime}}{{startTime}}{{else}}--{{/if}}</td>
+                            <td>{{#if endTime}}{{endTime}}{{else}}--{{/if}}</td>
+                            <td>{{#if totalUsersCount}}{{totalUsersCount}}{{else}}0{{/if}}</td>
+                            <td>{{like}}</td>
+                            <td>{{#livestatus status}}{{/livestatus}}</td>
+                            <td>
+                                <a class="btn btn-info operatorBtn manage" href='/live/manage/{{liveRoomId}}'>管理</a>
+                                <a class="btn btn-warning operatorBtn edit" href="/live/edit/{{liveRoomId}}">编辑</a>
+                                <a class="btn btn-danger operatorBtn closeLive" href="javascript:void(0);">关闭直播</a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        {{else}}
+                        <tr>
+                            <td colspan="10" style="text-align:center;">暂无数据</td>
+                        </tr>
+                        {{/if}}
+                        </tbody>
+                    </table>
+                </div>
+                <div id="pagesObj" style="display: none">
+                    {{listData.pageSize}},{{listData.total}}
+                </div>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+    </div> 
+    {{>ajaxLoading}}
+</div>
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/jquery.validate.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/localization/messages_zh.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/src/live/list.js'></script>
+</body>
+</html>

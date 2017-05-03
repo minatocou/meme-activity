@@ -1,0 +1,96 @@
+<div class="bulletin-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#bulletin" href="#bulletin">公告栏组件</a>
+            </div>
+            <div id="bulletin" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <div class="form-group">
+                            <div>背景图片URL(建议750*----)</div>
+                            <img class="thumbnail"  v-if="setting.bg_img" :src="setting.bg_img">
+                            <input class="form-control input-sm bgImg removeSpace" value="${setting.bg_img}" v-model="setting.bg_img" name="bg_img" placeholder="${i18n.bannerBg}"
+                                   type="text">
+                        </div>
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="bulletinGroup singleConf">
+                        <form  v-for="(i,bulletin) in setting.data" class="bulletinItem singleItem">
+                            <input type="hidden" class="uid" name="id" value="${bulletin.id}">
+                            <a class="itemTitle" @click="slideItem($event)">配置(${bulletin.position},${status(bulletin)}) <i class="fa fa-caret-down"></i></a>
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div><em class="red">*</em>排序</div>
+                                    <input class="form-control input-sm position" value="${bulletin.position}" v-model="bulletin.position" name="position" placeholder="${i18n.please_input_number}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>消息文字</div>
+                                    <input class="form-control input-sm icon_title" value="${bulletin.bulletin_title}"  name="bulletin_title"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>开始时间</div>
+                                    <input @mousedown="initDate($event,bulletin.end_time,'start')" v-model="bulletin.start_time" class="form-control input-sm startTime" value="${bulletin.start_time}"  name="start_time" placeholder="${i18n.start_time}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>结束时间</div>
+                                    <input @mousedown="initDate($event,bulletin.start_time,'end')" v-model="bulletin.end_time" class="form-control input-sm endTime" value="${bulletin.end_time}" name="end_time" placeholder="${i18n.end_time}" type="text">
+                                </div>
+                                <!--<div class="form-group">
+                                    <div><em class="red">*</em>活动图片URL(建议750*424)</div>
+                                    <img class="thumbnail" v-if="bulletin.banner_img" :src="bulletin.banner_img">
+                                    <input class="form-control input-sm imgSrc removeSpace" v-model="bulletin.banner_img" value="${bulletin.banner_img}" name="banner_img" placeholder="${i18n.bannerSrc}"
+                                           type="text">
+                                </div>-->
+                                <div class="form-group">
+                                    <div>跳转URL/APP原生页面</div>
+                                    <select class="form-control linkKind appLink" name="url_type" @change="changeUrlType($event)" value="${bulletin.url_type}">
+                                        <template v-for="(k,v) in urlType">
+                                            <option v-if="bulletin.url_type==v.value"
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}"
+                                                    selected>
+                                                ${v.value}
+                                            </option>
+                                            <option v-else
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}">
+                                                ${v.value}
+                                            </option>
+                                        </template>
+                                    </select>
+                                    <input class="form-control input-sm inputWord" name="url_text" @change="changeUrlInput($event)" value="${bulletin.url_text}" placeholder="URL" type="text">
+                                    <input class="form-control input-sm" name="item_action_url" type="hidden" v-model="bulletin.item_action_url" value="${bulletin.item_action_url}">
+                                    <input class="form-control input-sm" name="item_action_url_type" type="hidden" value="${bulletin.item_action_url_type}">
+                                </div>
+                                <!--<div class="form-group">
+                                    <div><em class="red">*</em>Category ID</div>
+                                    <input class="form-control input-sm position" value="${bulletin.category_id}"  name="category_id" placeholder="${i18n.please_input_number}"
+                                           type="text">
+                                </div>-->
+                                <div class="form-group">
+                                    <div class="ops">
+                                        <a class="btn btn-warning btn-sm shutBulletin" @click="shutBulletin($event)" :class="{'active':bulletin.status==1}" type="button">${i18n.shut}
+                                        </a>
+                                        <a class="btn btn-success btn-sm openBulletin" @click="openBulletin($event)" :class="{'active':bulletin.status==0}" type="button">${i18n.open}
+                                        </a>
+                                    </div>
+                                    <input class="status" type="hidden" name="status" value="${bulletin.status}">
+                                </div>
+                            </div>
+                            <div class="form-group delIcon">
+                                <div class="ops">
+                                    <a class="btn btn-sm delBanner" @click="deleteBulletin($event)" type="button">×</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <a @click="addBulletin($event)" class="addBulletin btn btn-primary">${i18n.add_config} + </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+<form class="img-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#img" href="#img">{{i18n.img_setting}}</a>
+            </div>
+            <div id="img" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="imgRadios" id="imgRadios" data-value="" checked/>
+                                {{i18n.NA}}
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="imgRadios" id="imgRadios1" data-value='1'/>
+                                {{i18n.top_affix}}
+                                <div class="tip">{{i18n.top_affix_tip}}</div>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="imgRadios" id="imgRadios2" data-value='2'/>
+                                {{i18n.bottom_affix}}
+                                <div class="tip">{{i18n.bottom_affix_tip}}</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control input-sm" form-img name="imgSrc"
+                               placeholder="{{i18n.img_address}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <div>开始时间</div>
+                        <input class="form-control input-sm" form-img name="imgFromTime"
+                               placeholder="{{i18n.start_time}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <div>结束时间</div>
+                        <input class="form-control input-sm" form-img name="imgToTime"
+                               placeholder="{{i18n.end_time}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="imgUrl" placeholder="url" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="isLogin">{{i18n.is_login}}</label>
+                        <input id="isLogin" class="form-control input-sm" name="isLogin" placeholder="{{i18n.is_login}}"
+                               value="1" type="checkbox">
+                    </div>
+                    <div style="display: none" class="form-group loginMsg">
+                        <label>{{i18n.newcomer_loginMsg}}</label>
+                        <input class="form-control input-sm" name="loginMsg"
+                               placeholder="{{i18n.newcomer_loginMsg}}" maxlength="20" type="text">
+                        <label>{{i18n.newcomer_regMsg}}</label>
+                        <input class="form-control input-sm" name="regMsg"
+                               placeholder="{{i18n.newcomer_regMsg}}" maxlength="20" type="text">
+                    </div>
+                    <div class="link-group">
+                        <div style="padding: 0" class="col-xs-12 col-md-8">
+                            <input class="form-control input-sm" id="linkUrl" placeholder="{{i18n.hot_address}}"
+                                   type="text">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <button class="btn btn-success btn-sm" id="addLink" type="button">{{i18n.add_hot}}
+                            </button>
+                        </div>
+                        <div class="tip">
+                            {{i18n.top_affix_tip2}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                         <div>
+                             {{i18n.hot_popup_setting}}
+                             <button type="button" class="btn btn-success btn-sm" id="addPop">{{i18n.add_hot}}</button>
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <div>{{i18n.hot_popup_img_url}}</div>
+                        <input class="form-control input-sm" type="text" id="popupImgUrl">
+                        size:640*870
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            url <input type="radio" name="popType" data-value="0" checked>
+                        </label>
+                        <label>
+                            {{i18n.anchor}} <input type="radio" name="popType" data-value="1">
+                        </label>
+                        <div>{{i18n.url_anchor}}</div>
+                        <input class="form-control input-sm" type="text" id="popupAnchor">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>

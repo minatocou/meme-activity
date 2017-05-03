@@ -1,0 +1,101 @@
+.main-container {
+    height: calc(100% - 60px);
+}
+.appList {
+    float: right;
+    padding: 20px 20px 0 20px;
+    width: 85%;
+}
+.searchContainer {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #cccccc;
+}
+.brand-container {
+    height: 100%;
+    float: left;
+    width: 85%;
+    padding: 5px 20px;
+    box-sizing: border-box;
+}
+.brand-container .panel {
+    border: 1px solid #eee;
+    padding: 20px 10px 15px;
+}
+.brand-container .form-inline label {
+    margin-bottom: 10px;
+}
+.brand-container .form-inline .control-label {
+    display: block;
+}
+.brand-container .form-inline .form-group {
+    vertical-align: bottom;
+    margin-right: 20px;
+}
+.brand-container .form-inline .form-group select {
+    width: 130px;
+}
+.brand-container .form-inline .form-group:nth-of-type(1) input {
+    width: 80px;
+}
+.brand-container .form-inline .form-group:nth-of-type(3) div input {
+    width: 150px;
+}
+.brand-container .box {
+    height: 85%;
+    overflow-y: scroll;
+    padding-bottom: 30px;
+}
+.brand-container .table-responsive th {
+    background: #efefef;
+}
+.brand-container .table-responsive th,
+.brand-container .table-responsive tr {
+    text-align: center;
+}
+.brand-container .table-responsive table td {
+    vertical-align: middle;
+}
+.brand-container .table-responsive table .btn-danger {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #333;
+}
+.brand-container .table-responsive table .btn-danger:hover {
+    background: #efefef;
+}
+.brand-container .table-responsive .div-s {
+    margin: 0 auto;
+}
+.brand-container .table-responsive .div-l {
+    max-width: 200px;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+.brand-container .table-responsive .empty-tr{
+    text-align: center;
+    color: #999;
+}
+.brand-container .breadcrumbs {
+    margin-top: 20px;
+    padding-right:20px;
+}
+.brand-container .breadcrumbs .high-light {
+    color: #ec6884;
+}
+.brand-container .f-r {
+    margin-top: -7px;
+}
+.table-responsive .table th {
+    font-weight: normal;
+    border-bottom: none;
+}
+.modal-body select.title{
+    width: 150px;
+}
+.listContainer thead th{
+    background-color: #eee;
+}

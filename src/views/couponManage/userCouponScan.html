@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.couponManage }}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../static/css/common/reset.css">
+    <link rel="stylesheet" href="../../static/vendor/pagination/pagination.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../static/css/common/global.css">
+    <link rel="stylesheet" href="../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../static/css/common/sidebar.css">
+    <link rel="stylesheet" href="../../static/css/src/create/preview.css">
+    <link rel="stylesheet" href="../../static/css/src/couponManage/userCouponScan.css">
+    <link rel="stylesheet" href="../../static/css/src/ajaxLoading.css">
+
+</head>
+<body data-preview="{{config.preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+
+    <div class="right-content-frame">
+        <div class="search">
+            <label class="control-label">{{i18n.user}}ID
+            </label>
+            <input class="form-control" placeholder="{{i18n.couponUserIDPlaceholder}}" required
+                   name="user_id" id="user_id">
+            <button class="btn btn-default" id="searchBtn">搜索</button>
+        </div>
+        <div class="tab-content main-content">
+            <div id="couponTab">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th key="id">优惠券ID</th>
+                        <th key="name">活动名称</th>
+                        <th key="from_date">优惠券有效期</th>
+                        <th key="is_dynamic">优惠券类型</th>
+                        <th key="status">优惠券使用状态</th>
+                    </tr>
+                    </thead>
+                    <tbody class="data-container text-center" id="couponList-container">
+                    </tbody>
+                </table>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+
+        {{>ajaxLoading}}
+    </div>
+</div>
+
+<script type="text/html" id="couponListTpl">
+    ${each list }
+    <tr>
+        <td>${$value.id}</td>
+        <td>${$value.name}</td>
+        <td>${$value.from_date}－${$value.to_date}</td>
+        <td>${if $value.is_dynamic=='1'}动态券${else}固定券${/if}</td>
+        <td>${if $value.status=='0'}已使用${else}未使用${/if}</td>
+    </tr>
+    ${/each}
+</script>
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/jquery.validate.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/localization/messages_zh.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/src/couponManage/common.js'></script>
+<script type="text/javascript" src='../../static/js/src/couponManage/userCouponScan.js'></script>
+</body>
+</html>

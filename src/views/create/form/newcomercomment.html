@@ -1,0 +1,25 @@
+<form class="newcomercomment-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#newcomercomment" href="#newcomercomment">{{i18n.newcomer_setting}}</a>
+            </div>
+            <div id="newcomercomment" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <!--<label>{{i18n.grouponId}}</label>-->
+                        <!--<input class="form-control input-sm" name="grouponId" placeholder="{{i18n.grouponId}}"-->
+                        <!--type="number">-->
+                        <label>{{i18n.newcomer_num}} {{i18n.default_all}}</label>
+                        <input class="form-control input-sm" name="newcomerNum"
+                               placeholder="{{i18n.newcomer_num}}" min="1" type="number">
+                    </div>
+                    <div  class="form-group">
+                        <label>{{i18n.newcomer_isEssence}}</label>
+                        <input class="form-control input-sm" name="isEssence"
+                                data-value="1" value="1" disabled checked type="checkbox">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

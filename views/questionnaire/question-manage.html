@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.questionnaireManage }}</title>
+    {{> meta}}
+
+    <link rel="stylesheet" href="/css/build/src/views/questionnaire/question-manage.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <div class="block-nav-top justify-container">
+            <h4 class="justify-item">{{i18n.questionnaireManage}}</h4>
+            <!-- <button type="button" class="btn btn-danger" data-update>{{i18n.save}}{{i18n.update}}</button> -->
+        </div>
+
+        <div class="data-container-wrap">
+            <div class="mx-20 mt-20">
+                <table class="table table-bordered v-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>{{i18n.serialNumber}}</th>
+                            <!-- <th>{{i18n.status}}</th> -->
+                            <th>{{i18n.questionnaireInfo}} </th>
+                            <th> {{i18n.questionOpenSetting}} </th>
+                            <th>{{i18n.bonusSetting}} </th>
+                            <!-- <th>{{i18n.explain}} </th> -->
+                            <th> {{i18n.operation}} </th>
+                        </tr>
+                    </thead>
+                    <tbody class="data-container text-center">
+                        
+                    </tbody>
+                </table>
+                <script type="text/html" id="question-list">
+                ${each data as value index}
+                    <tr data-stringify="${value.dataStringify}">
+                        <td  rowspan="2">
+                            <label class="checkbox m-0">
+                                <input type="checkbox" class=" hide" name="needUpdate" ${if !value.survey_id}checked${else}value="${value.survey_id}"${/if}>${index-0+1}
+                            </label>
+                        </td>
+                        <td class="text-left">
+                            <div class="td-max-width">
+                                ${if value.title} 
+                                    <div><span>{{i18n.title}}：</span><span>${value.title}</span> </div>
+                                ${/if}   
+                                ${if value.url}  
+                                    <div>
+                                        <span>{{i18n.questionLink}}：</span><span>${value.url}</span>
+                                    </div>
+                                ${/if}
+                                ${if value.create_time} 
+                                    <div><span>{{i18n.createTime}}：</span><span>${value.create_time}</span> </div>
+                                ${/if} 
+                                ${if value.update_time} 
+                                    <div><span>{{i18n.modifyTime}}：</span><span>${value.update_time}</span> </div>
+                                ${/if} 
+                            </div>
+                        </td>
+                        <td>
+                            <div class="">
+                                <label class="pull-left">{{i18n.timeRegion}}：</label>
+                                <div class="ov-auto relative editable ${if value.survey_id}save-edit${/if}">
+                                    <div class="input-daterange">
+                                        <input type="text" readonly placeholder="{{i18n.start_time}}" name="active_from" data-start class="form-control" value="${value.active_from}">
+                                        <i class="pull-left mt-7">&nbsp;—&nbsp;</i>
+                                        <input type="text" readonly placeholder="{{i18n.end_time}}" name="active_to" data-end class="form-control" value="${value.active_to}">
+                                    </div>
+                                </div>
+                            </div><hr>
+                            <div class="">
+                                <label class="pull-left">{{i18n.showSituation}}：</label>
+                                <div class="ov-h checkbox text-left relative editable ${if value.survey_id}save-edit${/if}">
+                                ${each data.situation}
+                                    <label class="mb-5 col-xs-3">
+                                        <input type="checkbox" name="page_ids" value="${$index}" ${if value.page_ids && value.page_ids.indexOf($index) > -1 }checked${/if}><span class="label-text">${$value}</span>
+                                    </label>
+                                ${/each}
+                                </div>
+                            </div><hr>
+                            <div class="">
+                                <label class="pull-left mt-7">{{i18n.priority}}：</label>
+                                <div class="ov-h editable ${if value.survey_id}save-edit${/if}">
+                                    <input type="number" class="form-control" name="priority" value="${value.priority||0}">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="radio text-left relative editable ${if value.survey_id}save-edit${/if}">
+                                <div class="color-warning mb-20">修改奖励可能会造成用户疑惑，请谨慎修改，<br>必要时请修改为等价奖励</div>
+                                <label  class="block">
+                                    <input data-bonus=".bonus-detail" type="radio" value="rule_id" data-placeholder="输入优惠券id"
+                                    ${if value.rule_id && value.rule_id!='0'}checked${/if}
+                                    ${if (!value.rule_id || value.rule_id=='0') && (!value.point_amount || value.point_amount=='0')}style="display: block;${/if}
+                                    ><span class="label-text">{{i18n.coupon}}</span>
+                                </label>
+                                <label  class="block">
+                                    <input data-bonus=".bonus-detail" type="radio" value="point_amount" data-placeholder="输入蜜豆数量"
+                                    ${if value.point_amount && value.point_amount!='0'}checked${/if}
+                                    ${if (!value.rule_id || value.rule_id=='0') && (!value.point_amount || value.point_amount=='0')}style="display: block;${/if}
+                                    ><span class="label-text">{{i18n.memeBean}}</span>
+                                </label>
+                                <input type="number" class="bonus-detail form-control mt-7" data-placeholder="" readonly placeholder="" 
+                                 ${if value.rule_id && value.rule_id!='0'}name="rule_id" value="${value.rule_id}"${else if value.point_amount && value.point_amount!='0'}name="point_amount" value="${value.point_amount}"${/if}
+                                style="width: 100%;">
+                            </div>
+                        </td>
+                        <td>
+                            <button class="mb-5 btn btn-warning modify-config ${if value.allow_edit_config == '0'}disabled${/if}">
+                                <i class=" fa fa-pencil"></i>
+                                <span>
+                                    {{i18n.modifySettings}}
+                                </span>
+                            </button><br>
+                            <button class="mb-5 btn btn-warning edit-questions ${if value.allow_edit_question == '0'}disabled${/if}">
+                                <i class=" fa fa-pencil"></i>{{i18n.editQuestion}}
+                            </button><br>
+                            <button type="button" data-delete-id="${value.survey_id}" class="mb-5 btn btn-danger ${if value.allow_delete == '0'}disabled${/if}">
+                                <i class=" fa fa-trash"></i>{{i18n.deleteQuestion}}
+                            </button><br>
+                            <button class="btn btn-warning" data-preview-questionnaire="preview-iframe-tmpl">
+                                <i class=" fa fa-eye"></i>{{i18n.previewQuestion}}
+                            </button>
+                        </td>
+                    </tr>
+                    <tr data-stringify="${value.dataStringify}">
+                        <td colspan="4" class="text-left px-30">
+                            <div class="pull-left mt-10">
+                                <label>{{i18n.hasCollectData}}：</label>
+                                <span>${value.collect_count}</span>
+                            </div>
+                            <div class="pull-right">
+                                <form action="" class="inline-block mr-15">
+                                     <div class="radio">
+                                         <label>
+                                             <input type="radio" data-id="${value.survey_id}" value="1" name="is_active" ${if value.is_active == 1 }checked${/if} ${if !value.survey_id }disabled${/if}>{{i18n.open}}
+                                         </label>&nbsp;&nbsp;
+                                         <label>
+                                             <input type="radio" data-id="${value.survey_id}" value="0" name="is_active" ${if value.is_active == 0 || !value.is_active}checked${/if} ${if !value.survey_id }disabled${/if}>{{i18n.shut}}
+                                         </label>
+                                     </div>
+                                 </form>
+                                 <button type="button" ${if value.survey_id}disabled${/if} class="btn btn-danger" data-update>{{i18n.save}}{{i18n.update}}</button>
+                             </div>
+                        </td>
+                    </tr>
+                ${/each}
+                </script>
+            </div>
+        </div>
+        {{>ajaxLoading}}
+
+        <div class="modify-questions-block">
+            <div class="block-nav-top justify-container">
+                <h4 class="justify-item">{{i18n.edit}}</h4>
+                <button type="button" class="btn btn-danger" data-update-question>{{i18n.save}}</button>
+                <button class="close close-panel">&times;</button>
+            </div>
+
+            <div class="data-container-wrap p-12">
+                <div class="col-xs-5 p-0 h-100p">
+                    <div class="panel panel-default mb-0 h-100p ov-auto">
+                      <div class="panel-heading">{{i18n.preview}}</div>
+                      <div class="panel-body" data-hide>
+                            <h3 class="font-20"><strong data-bind="questionSummaryTitle"></strong></h3>
+                            <div data-bind="questionSummaryIntro" style="word-break: break-word;"></div>
+                            <div class="preview-container mt-20">
+                                <ol class="question-preview-list">
+
+                                </ol>
+                            </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xs-7 pr-0 h-100p">
+                    <div class=" h-100p  bt-1 ov-auto">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">{{i18n.baseInfo}}</div>
+                          <div class="panel-body">
+                            <ul class="list-inline col-xs-offset-1">
+                                <li class="radio p-0 mr-10" data-toggle="tab" data-target="#defined-question">
+                                    <label class="control-label" role="button" for>
+                                        <input type="radio" name="questionFrom" checked> {{i18n.definedQuestion}}
+                                    </label>
+                                </li>
+                                <li class="radio p-0 mr-10" data-toggle="tab" data-target="#outside-chain">
+                                    <label class="control-label" role="button" for>
+                                        <input type="radio" name="questionFrom" value="link"> {{i18n.outsideLink}}
+                                    </label>
+                                </li>
+                            </ul>
+                            <div class="tab-content mt-20">
+                                <form class="form-horizontal tab-pane active" id="defined-question" role="form">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">{{i18n.title}}</label>
+                                        <div class="radio col-sm-10 pt-0">
+                                            <input type="text" data-publish class="form-control" name="questionSummaryTitle">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">{{i18n.explain}}</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" name="questionSummaryIntro" data-publish style="resize:vertical;"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form class="form-horizontal tab-pane" id="outside-chain" role="form">
+                                    <div class="form-group">
+                                        <input type="text" class="hide" name="">
+                                        <label class="col-sm-2 control-label">{{i18n.link}}</label>
+                                        <div class="radio col-sm-10 pt-0">
+                                            <input type="url" class="form-control" name="url">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default mb-0" data-hide>
+                            <div class="panel-heading clearfix">
+                                {{i18n.questionInfo}}
+                                <button class="btn btn-primary btn-sm pull-right" data-role="addNewQuestion">
+                                    <i class="fa fa-plus"></i>{{i18n.addNewQuestion}}
+                                </button>
+                                <button style="display: none" class="btn btn-primary btn-sm pull-right mr-10" data-role="saveEditQuestion">
+                                    <i class="fa fa-pencil"></i>{{i18n.save}}{{i18n.edit}}
+                                </button>
+                            </div>
+                            <div class="panel-body">
+                                <div class="mb-20 clearfix">
+                                    <div class="col-xs-2 pl-10">
+                                        <label>{{i18n.type}}：</label>
+                                    </div>
+                                    <div class="radio col-xs-10 m-0">
+                                        <label class="control-label mr-10">
+                                            <input type="radio" name="type" data-tmpl-id="radioCheckboxType" value="1"> {{i18n.radioType}}
+                                        </label>
+                                        <label class="control-label mr-10">
+                                            <input type="radio" name="type" data-tmpl-id="radioCheckboxType" value="2"> {{i18n.checkboxType}}
+                                        </label>
+                                        <label class="control-label">
+                                            <input type="radio" name="type" data-tmpl-id="writeType" value="3"> {{i18n.writeType}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="checkbox changeRelatedProperty pl-10">
+                                    <label>
+                                        <input type="checkbox" class="related-or-not" name="" id="">{{i18n.relatedProperty}}
+                                    </label>
+                                    <div class="inline-block">
+                                        <select class="form-control" name="relatedProperty" style="display: none;">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                     <div class="pl-10">
+                                         <div class="checkbox">
+                                             <label>
+                                                 <input type="checkbox" name="is_required" value="1" id="">{{i18n.mustSubmit}}
+                                             </label>
+                                             <div class="inline-block">
+                                                 
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <hr>
+                                     <div class="question-setting-container">
+                                         
+                                     </div> 
+                                </div>
+                            </div>
+                        
+                            <!-- <div class="mx-20 mb-20">
+                                <button class="btn btn-primary" data-modal="add-property-modal" data-toggle="modal">
+                                    <i class="fa fa-plus"></i>{{i18n.addNewQuestion}}
+                                </button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/html" id="radioCheckboxType">
+    <div class="pl-10">
+        <label>{{i18n.title}}：</label>
+        <div class="clearfix mb-20">
+            <span class="pt-7 col-xs-2">[<span data-bind="relatedProperty"></span>]</span>
+            <div class="col-xs-10">
+                <input placeholder="{{i18n.title}}" class="form-control" name="questionTitle">
+            </div>
+        </div>
+    </div>
+    <label class="pl-10">{{i18n.option}}：<i class="fa fa-plus-square-o fa-lg" data-create="plus" role="button"></i></label>
+    ${include 'question-panel'}
+</script>
+
+<script type="text/html" id="writeType">
+
+    <div class="pl-10">
+        <label>{{i18n.title}}：</label>
+        <div class="clearfix mb-20">
+            <div class="col-xs-12 p-0">
+                <input placeholder="{{i18n.title}}" class="form-control" name="questionTitle">
+            </div>
+        </div>
+    </div>
+    <!-- <div class="pl-10">
+        <label>{{i18n.defaultContent}}：</label>
+        <div class="clearfix mb-20">
+            <div class="col-xs-12 p-0">
+                <textarea placeholder="{{i18n.defaultContent}}" class="form-control" style="resize: vertical;"></textarea>
+            </div>
+        </div>
+    </div> -->
+</script>
+
+<script type="text/html" id="question-panel">
+    <div class="form-group">
+        <ol class="question-option-list">
+            ${include 'option-item-tmpl'}
+        </ol>
+    </div>
+</script>
+
+<script type="text/html" id="option-item-tmpl">
+${if tags}
+    ${each tags}
+        <li>
+            <div class="option-container">
+                <span class="col-sm-2">${if $value.tag_title}[<span data-bind="tags">${$value.tag_title}</span>]${/if}</span>
+                <div class="col-sm-9">
+                    <input type="text" ${if $value.option_id}data-option-id="${$value.option_id}"${/if} ${if $value.value}value="${$value.value}"${/if} data-tag-id="${$value.tag_id}"" placeholder="{{i18n.option}}" class="form-control" name="optionTag">
+                </div>
+                <i class="fa fa-minus-square-o fa-lg" data-create="minus" role="button"></i>
+            </div>
+        </li>
+    ${/each}
+${else}
+    <li>
+        <div class="option-container">
+            <span class="col-sm-2"></span>
+            <div class="col-sm-9">
+                <input type="text" placeholder="{{i18n.option}}" class="form-control" name="optionTag">
+            </div>
+            <i class="fa fa-minus-square-o fa-lg" data-create="minus" role="button"></i>
+        </div>
+    </li>
+    <li>
+        <div class="option-container">
+            <span class="col-sm-2"></span>
+            <div class="col-sm-9">
+                <input type="text" placeholder="{{i18n.option}}" class="form-control" name="optionTag">
+            </div>
+            <i class="fa fa-minus-square-o fa-lg" data-create="minus" role="button"></i>
+        </div>
+    </li>
+${/if}
+</script>
+<script type="text/html" id="question-preview-tmpl">
+${each data as v i}
+    <li data-stringify="${v.dataStringify}">
+        <label>
+            ${v.title} ${if v.is_required == '1'} <span class="color-warning">*</span>${/if}
+            <div class="close hide" data-role="remove-question">×</div>
+        </label>
+        <div class="${if v.type == '1'}radio${else}checkbox${/if}">
+            ${each v.options}
+                <label>
+                    <input type="${if v.type == '1'}radio${else}checkbox${/if}" name="question_preview_${v.dataStringify}">${$value.value}
+                </label>&nbsp;&nbsp;&nbsp;
+            ${/each}
+            ${if v.type == '3'}
+                <div>${}</div>
+                <textarea class="form-control" style="resize:vertical;">
+                    
+                </textarea>
+            ${/if}
+        </div>
+        <div class="question-edit-trigger">
+            <i class="fa fa-pencil mt-20" role="button" data-edit-question-item></i>
+        </div>
+    </li>
+${/each}
+</script>
+<script type="text/html" id="preview-iframe-tmpl">
+    <div class="preview-iframe-container" style="position: fixed; z-index: 2222; left: 0; top: 0; right: 0; bottom: 0; background: rgba(111,111,111,.5);">
+        <div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin: auto; width: 320px; height: 568px; background: #fff;">
+            <span data-destory style="position: absolute; top: -33px; right: 0; height: 30px; width: 30px; font-size: 25px; text-align: center; cursor: pointer;">&times;</span>
+            <iframe width="100%" height="100%" style="border: 0;" src=""></iframe>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/questionnaire/question-manage.js?t=1493261397671"></script>
+</body>
+</html>

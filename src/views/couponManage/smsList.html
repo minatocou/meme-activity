@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.couponManage }}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../static/css/common/reset.css">
+    <link rel="stylesheet" href="../../static/vendor/pagination/pagination.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../static/css/common/global.css">
+    <link rel="stylesheet" href="../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../static/css/common/sidebar.css">
+    <link rel="stylesheet" href="../../static/css/src/create/preview.css">
+    <link rel="stylesheet" href="../../static/css/src/couponManage/sms.css">
+    <link rel="stylesheet" href="../../static/css/src/ajaxLoading.css">
+</head>
+<body data-preview="{{config.preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+
+    <div class="right-content-frame">
+        <ul class="top-block">
+            <li class="tab-pane-btn tab-content">
+                <div>
+                    <label>
+                        活动ID
+                        <input class="form-control" type="text" id="searchActivityId">
+                    </label>
+                    <label>
+                        活动名称
+                        <input class="form-control" type="text" id="searchActivityName">
+                    </label>
+                    <button class="btn btn-default" id="searchBtn">搜索</button>
+                    <a href="/coupon/cn/newsms" class="btn btn-danger px-30">新增</a>
+                </div>
+            </li>
+        </ul>
+        <div class="tab-content main-content">
+            <div id="couponTab">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th key="id">活动ID</th>
+                        <th key="name">活动名称</th>
+                        <th >发送人数</th>
+                        <th >发送时间</th>
+                        <th>最后操作人</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="data-container text-center" id="sasList-container">
+                    </tbody>
+                </table>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+        {{>ajaxLoading}}
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">短信发送详情</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h5>活动ID</h5>
+                        <p id="id"></p>
+                        <h5>活动名称</h5>
+                        <p id="name"></p>
+                        <h5>短信内容</h5>
+                        <p id="content"></p>
+                        <h5>发送用户数</h5>
+                        <p id="count"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="sasListTpl">
+    ${each items }
+    <tr>
+        <td>${$value.id}</td>
+        <td>${$value.name}</td>
+        <td>${$value.count}</td>
+        <td>${$value.created_at}</td>
+        <td>${$value.user}</td>
+        <td>
+            <button type="button" class="btn btn-default goDetails" data-index=${$index} data-toggle="modal"
+                    data-target="#myModal">详情
+            </button>
+        </td>
+    </tr>
+    ${/each}
+</script>
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/jquery.validate.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/localization/messages_zh.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/src/couponManage/common.js'></script>
+<script type="text/javascript" src='../../static/js/src/couponManage/smsList.js'></script>
+</body>
+</html>

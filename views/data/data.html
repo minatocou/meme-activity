@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memebox权限关系管理面板</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href="/css/build/src/views/data/data.css?t=1493261397671" />
+</head>
+<body>
+{{>header}}
+<div class="main-container">
+
+    {{>sidebar}}
+
+    <div class="data-container">
+        <div class="fullfill"><i class="fa fa-arrows-alt" aria-hidden="true"></i>全屏</div>
+        <div class="box">
+            <div class="panel" id="panel">
+                <form action="" class="form-inline">
+                    <div class="form-group time-input" id="time">
+                        <label>开始日期-结束日期</label>
+                        <div>
+                            <input class="form-control input-sm" name="from_date" id="from_date" type="text" placeholder="eg:2017-03-03">
+                            至
+                            <input class="form-control input-sm" name="to_date" id="to_date" type="text" placeholder="eg:2017-03-05">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventName" class="control-label">
+                            事件名称
+                        </label>
+                        <input type="text" id="eventName" name="eventName" class="form-control input-sm" placeholder="eg:start_app">
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="control-label">
+                            事件类型
+                        </label>
+                        <select class="form-control input-sm" id="category" name="category">
+                            <option value="">ALL</option>
+                            <option value="0">页面埋点</option>
+                            <option value="1">事件埋点</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="platform" class="control-label">
+                            平台
+                        </label>
+                        <select class="form-control input-sm" id="platform" name="platform">
+                            <option value="">ALL</option>
+                            <option value="iOS">iOS</option>
+                            <option value="android">android</option>
+                            <option value="h5">h5</option>
+                            <option value="pc">pc</option>
+                            <option value="wechat">微信</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userId" class="control-label">
+                            用户Id
+                        </label>
+                        <input type="text" id="userId" name="userId" class="form-control input-sm" placeholder="eg:816722">
+                    </div>
+                    <div class="form-group">
+                        <label for="deviceId" class="control-label">
+                            设备Id
+                        </label>
+                        <input type="text" id="deviceId" name="deviceId" class="form-control input-sm" placeholder="eg:b1c20e406e824a34b6f84614c25e4bd3">
+                    </div>
+                    <div class="form-group">
+                        <label for="channel" class="control-label">
+                            渠道
+                        </label>
+                        <input type="text" id="channel" name="channel" class="form-control input-sm" placeholder="eg:appstore">
+                    </div>
+                    <div class="form-group">
+                        <label for="model" class="control-label">
+                            机型
+                        </label>
+                        <input type="text" id="model" name="model" class="form-control input-sm" placeholder="eg:iphone">
+                    </div>
+                    <div class="form-group">
+                        <label for="version" class="control-label">
+                            版本号
+                        </label>
+                        <input type="text" id="version" name="version" class="form-control input-sm" placeholder="eg:4.4.0">
+                    </div>
+                    <div class="form-group">
+                        <label for="network" class="control-label">
+                            网络
+                        </label>
+                        <input type="text" id="network" name="network" class="form-control input-sm" placeholder="eg:wifi">
+                    </div>
+                    <div class="form-group">
+                        <label for="browser" class="control-label">
+                            浏览器
+                        </label>
+                        <input type="text" id="browser" name="browser"class="form-control input-sm" placeholder="eg:chrome">
+                    </div>
+                    <div class="form-group">
+                        <label for="url" class="control-label">
+                            URL
+                        </label>
+                        <input type="text" id="url" name="url" class="form-control input-sm" placeholder="eg:http://m.cn.memebox.com/index.html">
+                    </div>
+                    <div class="form-group">
+                        <label for="reffererUrl" class="control-label">
+                            来源URL
+                        </label>
+                        <input type="text" id="reffererUrl" name="reffererUrl" class="form-control input-sm" placeholder="eg:http://m.cn.memebox.com">
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<label for="userToken" class="control-label">-->
+                    <!--用户token-->
+                    <!--</label>-->
+                    <!--<input type="text" id="userToken" class="form-control input-sm" placeholder="eg:b0JhVzlYZzRZUDdVUFBuVnV6KzZKaz">-->
+                    <!--</div>-->
+
+                    <div class="form-group">
+                        <label for="category" class="control-label">
+                            总数
+                        </label>
+                        <select class="form-control input-sm" id="limit" name="limit">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                            <option value="300">300</option>
+                            <option value="400">400</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="search">搜索</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="reset" class="btn btn-primary btn-danger" id="reset">清除</button>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>系统</th>
+                        <th>事件名称</th>
+                        <th>时间</th>
+                        <th>事件属性</th>
+                        <th>事件类型</th>
+                        <th>用户Id</th>
+                        <th>设备Id</th>
+                        <th>渠道</th>
+                        <th>机型</th>
+                        <th>版本号</th>
+                        <th>网络</th>
+                        <th>浏览器</th>
+                        <!--<th>用户Token</th>-->
+                        <th>当前URL</th>
+                        <th>来源URL</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="dataTbody">
+                    </tbody>
+                </table>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script id="data-template" type="text/html">
+    ${each list}
+    <tr>
+        <td>${$value.platform}</td>
+        <td>${$value.eventname}</td>
+        <td>${$value.created_time}</td>
+        <td class="property">${$value.property}</td>
+        <td>${if $value.category == 1} 事件埋点${else}页面埋点 ${/if}</td>
+        <td>${$value.userid}</td>
+        <td class="deviceTD">${$value.deviceid}</td>
+        <td>${$value.channel}</td>
+        <td>${$value.model}</td>
+        <td>${$value.clientversion}</td>
+        <td>${$value.network}</td>
+        <td>${$value.browser}</td>
+        <!--<td class="token">${$value.usertoken}</td>-->
+        <td>${$value.url}</td>
+        <td>${$value.reffererurl}</td>
+
+
+    </tr>
+    ${/each}
+</script>
+
+
+<script type="text/javascript" src="/js/build/src/views/data/data.js?t=1493261397671"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.lapse}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/market/lapse/detail.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <div class="breadcrumbs">
+            {{i18n.market_tools}} ><span> {{i18n.lapse}} ></span><span class="high-light">{{i18n.detail_page}}</span>
+            <div class="f-r"><a class="btn btn-danger" id="marketSaveBtn">{{i18n.save}}</a></div>
+        </div>
+        <hr>
+        <div class="box">
+            <div class="set_attr" id="detail">
+            </div>
+            <div class="explain">
+                <h4>配置说明</h4>
+                <div id="explainText">
+                    <ol>
+                        <li>名称：无需填写数值，标注活动即可，如：春节大促</li>
+                        <li>关联活动：需填写活动页链接</li>
+                        <li>活动规则：
+                            <p><span class="weight">N元购：</span>1）产品*N≥N元购金额  2）最少件数需≥1</p>
+                            <p><span class="weight">满减—件数：</span>1）最少件数需≥1   2）设置N见立减X元时，产品price*N≥立减金额</p>
+                            <p><span class="weight">满折—件数：</span>1）最少件数需≥1   2)  打折数值格式：8.5折—输入8.5   9折输入—9</p>
+                            <p><span class="weight">满减—金额：</span>条件金额≥减扣金额</p>
+                            <p><span class="weight">满折—金额：</span>打折数值格式：8.5折输入8.5 （英文.）   9折输入9</p>
+                        </li>
+                        <li>与优惠券共用：
+                            <p>共用表示优惠券金额不会影响立减金额；</p>
+                            <p>不共用则使用任一优惠券后，本立减金额被扣减；</p>
+                        </li>
+                    </ol>
+                </div>
+                <div id="spreadSwitch">
+                    <span class="fr">{{i18n.spread}}</span>
+                    <span class="fr">{{i18n.retract}}</span>
+                </div>
+            </div>
+            <div class="log">
+                <h4>操作日志</h4>
+                <div id="logTable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="logTbody">
+                        </tbody>
+                    </table>
+                    <div id="pagination-container"></div>
+                </div>
+                <div id="logBtn">
+                    <span class="fr">{{i18n.spread}}</span>
+                    <span class="fr">{{i18n.retract}}</span>
+                </div>
+            </div>
+            <hr>
+            <a class="btn btn-default btn-sm active" data-toggle="modal" data-target="#myModal">< {{i18n.go_back}}</a>
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    确定要返回吗
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    取消
+                </button>
+                <button type="button" class="btn btn-primary" id="goBack">
+                    {{i18n.sure}}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script id="detailTpl" type="text/x-handlebars-template">
+    <form>
+        <h4>
+            {{i18n.base_attribute}}
+        </h4>
+        <div class="non-empty group prompt-box">
+            <label for="name">{{i18n.market_name}}</label>
+            <input type="text" class="form-control input-l" id="name" value="\{{name}}" name="name">
+            <span class="prompt">无需填写数值，标注活动即可，如：春节大促</span>
+        </div>
+        <div class="group non-empty">
+            <label for="description" class="">{{i18n.use_explain}}</label>
+            <input type="text" class="form-control input-l" id="description" value="\{{description}}" name="description">
+        </div>
+        <div class="non-empty group">
+            <label for="status" >{{i18n.state}}</label>
+            <select class="form-control input-l" id="status" name="status">
+                \{{#select status }}
+                <option value="1">{{i18n.open}}</option>
+                <option value="2">{{i18n.pause}}</option>
+                \{{/select}}
+            </select>
+        </div>
+        <div class="group non-empty">
+            <label>{{i18n.use_time}}</label>
+            <input class="form-control input-l" id="from_date" type="text" value="\{{from_date}}" name="from_date">
+            -
+            <input class="form-control input-l" id="to_date" type="text" value="\{{to_date}}" name="to_date">
+        </div>
+        <div class="group non-empty prompt-box">
+            <label for="activity_url">{{i18n.connect_activity}}</label>
+            <input type="text"
+                   id="activity_url"
+                   class="form-control input-l"
+                   placeholder="{{i18n.please_input_activity_url}}"
+                   value="\{{activity_url}}"
+                   name="activity_url"
+            >
+            <span class="prompt">需填写活动页链接</span>
+        </div>
+        <div class="non-empty group">
+            <label for="weight">{{i18n.weight}}</label>
+            <input type="number"
+                   id="weight"
+                   class="form-control input-l"
+                   placeholder="{{i18n.please_input_number}}，{{i18n.weight_placeholder}}"
+                   value="\{{weight}}"
+                   name="weight"
+                   min="0"
+            >
+        </div>
+        <div class="non-empty group">
+            <label for="customer_group">{{i18n.user_group}}</label>
+            <select class="form-control input-l" id="customer_group" name="customer_group">
+                <option value="0">ALL</option>
+            </select>
+        </div>
+        <h4>
+            {{i18n.set_rule}}
+        </h4>
+        <div class="non-empty group">
+            <label for="type">{{i18n.type}}</label>
+            <select class="form-control input-l" id="type" name="type">
+                \{{#select type }}
+                <option value="0">{{i18n.N_yuan_shop}}</option>
+                <option value="1">{{i18n.fill_minus_pieces}}</option>
+                <option value="2">{{i18n.fill_minus_money}}</option>
+                <option value="3">{{i18n.fill_discount_pieces}}</option>
+                <option value="4">{{i18n.fill_discount_money}}</option>
+                <option value="6">加价购-件数</option>
+                <option value="7">加价购-金额</option>
+                <option value="8">场增-件数</option>
+                <option value="9">场增-金额</option>
+                \{{/select}}
+            </select>
+        </div>
+        <div id="discount">
+            <div class="non-empty group prompt-box">
+                <label>{{i18n.set_discount}}</label>
+                <span>{{i18n.fill}}</span>
+                <input type="number" min="0" class="form-control input-s" value="\{{discount.[0].[0]}}">
+                <span class="s1">件 - 共</span>
+                <input type="number" min="0"  class="form-control input-s" value="\{{discount.0.[1]}}">
+                <span class="s2">{{i18n.yuan}}</span>
+                <span class="prompt">1）产品*N≥N元购金额  2）最少件数需≥1</span>
+                <div class="inline-block change-sale">
+                    <span class="ex">买</span>
+                    <div class="changeType">
+                        <label class="category-list">
+                            <input type="radio" name="g0" value="1" data-index="0"  \{{#compare discount.[0].[2].type '==' '1'}}checked\{{/compare}}>Category
+                            <input type="text" class="form-control input-s" readonly  value=\{{#compare discount.[0].[2].type '==' '1'}}\{{discount.[0].[2].list}}\{{/compare}}>
+                        </label>
+                        <span>或</span>
+                        <label class="sku-list">
+                            <input type="radio" name="g0" value="2" data-index="1" \{{#compare discount.[0].[2].type '==' '2'}}checked\{{/compare}}>SKU List
+                            <input type="text" class="form-control input-s hall-gift-sku" readonly value=\{{#compare discount.[0].[2].type '==' '2'}}\{{discount.[0].[2].list}}\{{/compare}}>
+                        </label>
+                    </div>
+                    <span class="ex">允许买</span>
+                    <input type="number" class="form-control input-s qty ex" value="\{{discount.[0].[2].qty}}">
+                    <span class="ex">件</span>
+                </div>
+                <p style="padding-left: 114px;"></p>
+            </div>
+            <div class="content-r group">
+                <span>{{i18n.fill}}</span>
+                <input type="number" min="0"  class="form-control input-s"  value="\{{discount.[1].[0]}}">
+                <span  class="s1">件 - 共</span>
+                <input type="number" min="0"  class="form-control input-s" value="\{{discount.[1].[1]}}">
+                <span class="s2">{{i18n.yuan}}</span>
+                <div class="inline-block change-sale">
+                    <span class="ex">买</span>
+                    <div class="changeType">
+                        <label class="category-list">
+                            <input type="radio" name="g1" value="1" data-index="0"   \{{#compare discount.[1].[2].type '==' '1'}}checked\{{/compare}}>Category
+                            <input type="text" class="form-control input-s" readonly value=\{{#compare discount.[1].[2].type '==' '1'}}\{{discount.[1].[2].list}}\{{/compare}}>
+                        </label>
+                        <span>或</span>
+                        <label class="sku-list">
+                            <input type="radio" name="g1" value="2" data-index="1"  \{{#compare discount.[1].[2].type '==' '2'}}checked\{{/compare}}>SKU List
+                            <input type="text" class="form-control input-s hall-gift-sku" readonly value=\{{#compare discount.[1].[2].type '==' '2'}}\{{discount.[1].[2].list}}\{{/compare}}>
+                        </label>
+                    </div>
+                    <span class="ex">允许买</span>
+                    <input type="number" class="form-control input-s qty ex" value="\{{discount.[1].[2].qty}}">
+                    <span class="ex">件</span>
+                </div>
+                <p></p>
+            </div>
+            <div class="content-r group">
+                <span>{{i18n.fill}}</span>
+                <input type="number" min="0"  class="form-control input-s" value="\{{discount.[2].[0]}}">
+                <span  class="s1">件 - 共</span>
+                <input type="number" min="0"  class="form-control input-s" value="\{{discount.[2].[1]}}">
+                <span class="s2">{{i18n.yuan}}</span>
+                <div class="inline-block change-sale">
+                    <span class="ex">买</span>
+                    <div class="changeType">
+                        <label class="category-list">
+                            <input type="radio" name="g2" value="1" data-index="0" \{{#compare discount.[2].[2].type '==' '1'}}checked\{{/compare}}>Category
+                            <input type="text" class="form-control input-s" readonly value=\{{#compare discount.[2].[2].type '==' '1'}}\{{discount.[2].[2].list}}\{{/compare}}>
+                        </label>
+                        <span>或</span>
+                        <label class="sku-list">
+                            <input type="radio" name="g2" value="2" data-index="1"  \{{#compare discount.[2].[2].type '==' '2'}}checked\{{/compare}}>SKU List
+                            <input type="text" class="form-control input-s hall-gift-sku" readonly value=\{{#compare discount.[2].[2].type '==' '2'}}\{{discount.[2].[2].list}}\{{/compare}}>
+                        </label>
+                    </div>
+                    <span class="ex">允许买</span>
+                    <input type="number" class="form-control input-s qty ex" value="\{{discount.[2].[2].qty}}">
+                    <span class="ex">件</span>
+                </div>
+                <p></p>
+            </div>
+        </div>
+        <div class="non-empty group">
+            <label for="warehouse">{{i18n.select_product}}</label>
+            <select class="form-control input-l" id="warehouse">
+                \{{#select warehouse }}
+                <option value="2" >{{i18n.china_pro}}</option>
+                <option value="1" >{{i18n.korea_pro}}</option>
+                <option value="4" >{{i18n.ftz_pro}}</option>
+                <option value="8">Epass</option>
+                \{{/select}}
+            </select>
+        </div>
+        <div class="content-r group">
+            <label class="radio-inline">
+                <input type="radio"  value="Category" checked>Category
+            </label>
+            <!--<label class="radio-inline">-->
+            <!--<input type="radio" name="pro_type" value="SKU">SKU-->
+            <!--</label>-->
+            <textarea class="form-control" rows="3" id="category" name="category">\{{category}}</textarea>
+        </div>
+        <h4>
+            {{i18n.restrict_discount}}
+        </h4>
+        <div class="group" id="compatible_coupon">
+            <label style="width: auto" class="prompt-box">
+                <input type="checkbox" value="0" name="compatible_coupon" \{{#compare compatible_coupon '==' '1'}}checked\{{/compare}}>
+                与优惠券共用 (不勾选则不共用)
+                <p class="prompt">共用表示优惠券金额不会影响立减金额；不共用则使用任一优惠券后，本立减金额被扣减</p>
+            </label>
+        </div>
+    </form>
+</script>
+<script id="logTpl" type="text/x-handlebars-template">
+    \{{#each list}}
+    <tr>
+        <td>\{{user_name}}</td>
+        <td>\{{time}}</td>
+        <td>\{{#compare action '==' 'new'}}新建\{{/compare}}\{{#compare action '==' 'edit'}}编辑\{{/compare}}</td>
+    </tr>
+    \{{/each}}
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/market/lapse/detail.js?t=1493261397671"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<div class="group group-m group-box" v-for="(gIndex,g) in groups">
+    <span class="fa fa-close close"
+          v-show="gIndex!=0"
+          @click="remove(g.id,[gIndex])"
+    ></span>
+    <span class="title name">秒杀组${gIndex+1}</span>
+    <div class="group-s">
+        <div class="border-b">
+            <span class="title title-s">日期</span>
+            <input type="text" class="date" v-model="g.date" @click="timeInit($event,0,[gIndex])">
+            <button class="btn btn-default add-group" type="button" @click="add()">新增秒杀组</button>
+        </div>
+        <div class="group-time durations" v-for="(dIndex,d) in g.durations">
+            <span class="fa fa-close close"
+                  v-show="$index!=0"
+                  @click="remove(d.id,[gIndex,dIndex])"
+            ></span>
+            <div class="time">
+                <span class="title title-s">时间</span>
+                <input type="text" class="from_date start" v-model="d.start" @click="timeInit($event,1,[gIndex,dIndex],'start')">
+                －
+                <input type="text" class="to_date end" v-model="d.end" @click="timeInit($event,1,[gIndex,dIndex],'end')">
+                <button class="btn btn-default add-time" type="button" @click="add(gIndex)" v-show="dIndex==0">新增时间
+                </button>
+            </div>
+            <div class="tab-box products">
+                <span class="title title-s">sku</span>
+                <table class="table table-bordered table-hover sku-tab">
+                    <thead>
+                    <tr>
+                        <th>sku</th>
+                        <th>秒杀限制</th>
+                        <th>秒杀价</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(pIndex,p) in d.products">
+                        <td>
+                            <input type="text" class="sku" v-model="p.sku">
+                        </td>
+                        <td>
+                            <input type="number" class="limit" v-model="p.limit">
+                        </td>
+                        <td>
+                            <input type="number" class="price" v-model="p.price">
+                            <span class="fa fa-close close"
+                                  v-show="$index!=0"
+                                  @click="remove(p.id,[gIndex,dIndex,pIndex])"
+                            ></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button class="btn-default btn add-sku" type="button" @click="add(gIndex,dIndex)">+</button>
+            </div>
+        </div>
+    </div>
+</div>

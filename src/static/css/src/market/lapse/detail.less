@@ -1,0 +1,40 @@
+.inline-block {
+  input {
+    margin-right: 5px;
+  }
+}
+
+.changeType {
+  display: inline-block;
+  label {
+    width: auto;
+    &:after {
+      display: none;
+    }
+  }
+}
+
+#discount {
+  overflow-x: scroll;
+  .group {
+    min-width: 1100px;
+    p {
+      display: none;
+    }
+  }
+  &.hall-gift {
+    .changeType{
+      label:nth-child(1){
+        display: none;
+      }
+      span{
+        display: none;
+      }
+    }
+    p {
+      display: block;
+      color: red;
+      margin: 0;
+    }
+  }
+}

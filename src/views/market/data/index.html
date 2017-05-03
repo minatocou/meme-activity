@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.data}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="../../../static/css/common/reset.css">
+    <link rel="stylesheet" href="../../../static/css/common/global.css">
+    <link rel="stylesheet" href="../../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../../static/css/common/sidebar.css">
+    <link rel="stylesheet" href="../../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../static/vendor/pagination/pagination.css">
+    <link rel="stylesheet" href="../../../static/css/src/market/data/data.css">
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <h2>{{i18n.coupon}}</h2>
+        <div class="table-responsive">
+            <div>
+                <label>
+                    {{i18n.coupon}}ID
+                    <input id="rule_id" type="text">
+                </label>
+                <label>
+                    {{i18n.time}}
+                        <input id="rule_from_date" type="text" name="time" > －
+                        <input id="rule_to_date" type="text" name="time" >
+                </label>
+                <button class="btn btn-default search" name="rule">{{i18n.search}}</button>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        {{i18n.coupon}}ID
+                    </th>
+                    <th>
+                        绑定人数
+                    </th>
+                    <th>
+                        提交订单数
+                    </th>
+                    <th>
+                        使用订单数
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <h2>{{i18n.lapse}}</h2>
+        <div class="table-responsive">
+            <div>
+                <label>
+                    {{i18n.lapse}}ID
+                    <input id="preference_id" type="text">
+                </label>
+                <label>
+                    {{i18n.time}}
+                    <input id="preference_from_date" type="text" name="time" > －
+                    <input id="preference_to_date" type="text" name="time" >
+                </label>
+                <button class="btn btn-default search" name="preference">{{i18n.search}}</button>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        {{i18n.lapse}}ID
+                    </th>
+                    <th>
+                        提交订单数
+                    </th>
+                    <th>
+                        使用订单数
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <h2>{{i18n.warehouse}}</h2>
+        <div class="table-responsive">
+            <div>
+                <label>
+                    {{i18n.warehouse}}ID
+                    <input id="promotion_id" type="text">
+                </label>
+                <label>
+                    {{i18n.time}}
+                    <input id="promotion_from_date" type="text" name="time" > －
+                    <input id="promotion_to_date" type="text" name="time" >
+                </label>
+                <button class="btn btn-default search" name="promotion">{{i18n.search}}</button>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        {{i18n.lapse}}ID
+                    </th>
+                    <th>
+                        提交订单数
+                    </th>
+                    <th>
+                        使用订单数
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+        <h2>{{i18n.order}}</h2>
+        <div class="table-responsive">
+            <div>
+                <label>
+                    {{i18n.order_number}}
+                    <input id="order_id" type="text">
+                </label>
+                <button class="btn btn-default search" name="order">{{i18n.search}}</button>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        {{i18n.order_number}}
+                    </th>
+                    <th>
+                        {{i18n.lapse}}ID
+                    </th>
+                    <th>
+                        {{i18n.warehouse}}ID
+                    </th>
+                    <th>
+                        {{i18n.coupon}}ID
+                    </th>
+                    <th>
+                        {{i18n.coupon_code}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src='../../../static/vendor/jquery/jquery.js'></script>
+<script src='../../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script src='../../../static/vendor/moment/moment.js'></script>
+<script src='../../../static/vendor/laydate/laydate.js'></script>
+<script src='../../../static/vendor/handlebars/handlebars.js'></script>
+<script src='../../../static/vendor/pagination/pagination.js'></script>
+<script src='../../../static/js/common/common.js'></script>
+<script src='../../../static/js/common/header.js'></script>
+<script src='../../../static/js/common/sidebar.js'></script>
+<script src='../../../static/js/common/footer.js'></script>
+<script src='../../../static/js/src/market/data/index.js'></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+$("#countdownFrom").datetimepicker({onShow:function(){this.setOptions({maxDate:$("#countdownTo").val()?$("#countdownTo").val():!1})}}),$("#countdownTo").datetimepicker({onShow:function(){this.setOptions({minDate:$("#countdownFrom").val()?$("#countdownFrom").val():!1})}});

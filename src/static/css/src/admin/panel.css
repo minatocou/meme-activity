@@ -1,0 +1,166 @@
+.panel-container {
+    float: left;
+    width: 85%;
+    padding: 5px 20px;
+    box-sizing: border-box;
+}
+
+/*.panel-container .top{
+    line-height:30px;
+    color:#000;
+    font-size: 20px;
+    padding:10px 0 10px 5px;
+    border-bottom:1px solid #ccc;
+}*/
+
+.panel-main{
+    margin-top:15px;
+}
+.newUser{
+    text-align: right;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-right: 5px;
+}
+.newUser button,.search-btn button{
+    margin: 0;
+    padding: 0;
+    background: #337ab7;
+    border-radius: 4px;
+    width: 90px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor:pointer;
+}
+.newUser button:hover,.search-btn button:hover{
+    background-color: #23527c;
+}
+.search{
+    margin-top:10px;
+    padding:10px 5px 10px 0;
+    overflow:hidden;
+    border-bottom:1px solid #ccc;
+}
+.search table{
+    float:left;
+}
+.search table tr th,.search table td{
+    padding:5px 10px 10px;
+}
+.search table td input[type='text']{
+    width: 300px;
+    height: 32px;
+    line-height: 32px;
+    padding: 5px 10px;
+    outline:none;
+    box-sizing: border-box;
+}
+.search .search-btn{
+    float: right;
+}
+.user-list{
+    margin-top:20px;
+}
+.user-list table{
+    border: 1px solid #dcdcdc;
+    width: 100%;
+    line-height: 24px;
+}
+.user-list table th ,.user-list table td{
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+.user-list table th {
+     background: #f9f9f9;
+     color: #333;
+ }
+.user-list table td button{
+    color: #337ab7;
+    text-decoration: none;
+    background:none;
+    border:0;
+}
+.user-list table td button:focus{
+    outline: none;
+}
+.user-list table td button:hover{
+    color: #23527c;
+}
+.user-list table td button.edit{
+    margin-right:15px;
+}
+
+
+.modal.in .modal-dialog {
+    margin-top: 120px;
+}
+.modal-header button{
+    outline:none;
+}
+.modal-footer{
+    text-align: center;
+}
+.modal form{
+    padding: 10px 30px;
+}
+.modal form th,.modal form td{
+    padding:10px 0;
+}
+.modal form th{
+    text-align: right;
+    padding-right: 20px;
+    box-sizing: border-box;
+    width: 100px;
+}
+.modal form td label{
+    margin-left:3px;
+}
+.modal .jurisdiction{
+    vertical-align: top;
+}
+.btn-primary.focus, .btn-primary:focus,.btn-primary:active, .btn-primary:active ,
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+    outline:none;
+}
+
+.modal form td input[type='text'],
+.modal form td input[type='password']{
+    width: 280px;
+    padding: 3px 10px;
+    outline: none;
+}
+.modal form td input[type='text'].valid,
+.modal form td input[type='password'].valid{
+    border:1px #a94442 solid !important;
+}
+.modal form td input[type='text']{
+    border:1px solid #ccc;
+}
+.modal form td input[type='text']:focus{
+    border:1px solid #999;
+}
+#deleteModal .modal-body{
+    text-align:center;
+}
+.loading{
+    display: none;
+}
+.user-pagination nav{
+    text-align: right;
+}
+.valid-msg{
+    color: #a94442;
+}
+.chk-group > div {
+    margin-right: 10px;
+}
+#pagination-container{
+    float: right;
+    margin-top: 20px;
+}

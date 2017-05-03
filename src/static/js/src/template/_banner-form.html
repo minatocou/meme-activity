@@ -1,0 +1,87 @@
+<div class="banner-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#banner" href="#banner">banner配置</a>
+            </div>
+            <div id="banner" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <div class="form-group ">
+                            <div>背景图片URL(建议750*1240)</div>
+                            <img class="thumbnail"  v-if="setting.bg_img" :src="setting.bg_img">
+                            <input class="form-control input-sm bgImg removeSpace" value="${setting.bg_img}" v-model="setting.bg_img" name="bg_img" placeholder="${i18n.bannerBg}"
+                                   type="text">
+                        </div>
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="bannerGroup singleConf">
+                        <form  v-for="(i,banner) in setting.data" class="bannerItem singleItem">
+                            <input type="hidden" class="uid" name="id" value="${banner.id}">
+                            <a class="itemTitle" @click="slideItem($event)">Banner配置(排序:<span>${banner.position}</span> , ${status(banner)}) <i class="fa fa-caret-down"></i></a>
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div><em class="red">*</em>排序</div>
+                                    <input class="form-control input-sm position" value="${banner.position}" v-model="banner.position" name="position" placeholder="${i18n.please_input_number}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>开始时间</div>
+                                    <input @mousedown="initDate($event,banner.end_time,'start')" class="form-control input-sm startTime" value="${banner.start_time}" v-model="banner.start_time" name="start_time" placeholder="${i18n.start_time}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>结束时间</div>
+                                    <input @mousedown="initDate($event,banner.start_time,'end')" class="form-control input-sm endTime" value="${banner.end_time}" v-model="banner.end_time" name="end_time" placeholder="${i18n.end_time}" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>Banner图片URL(建议630*315)</div>
+                                    <img class="thumbnail" v-if="banner.banner_img" :src="banner.banner_img">
+                                    <input class="form-control input-sm imgSrc removeSpace" value="${banner.banner_img}" v-model="banner.banner_img" name="banner_img" placeholder="${i18n.bannerSrc}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>跳转URL/APP原生页面</div>
+                                    <select class="form-control linkKind appLink" name="url_type" @change="changeUrlType($event)" value="${banner.url_type}">
+                                        <template v-for="(k,v) in urlType">
+                                            <option v-if="banner.url_type==v.value"
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}"
+                                                    selected>
+                                                ${v.value}
+                                            </option>
+                                            <option v-else
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}">
+                                                ${v.value}
+                                            </option>
+                                        </template>
+                                    </select>
+                                    <input class="form-control input-sm inputWord" name="url_text" @change="changeUrlInput($event)" value="${banner.url_text}" placeholder="URL" type="text">
+                                    <input class="form-control input-sm" name="item_action_url" type="hidden" v-model="banner.item_action_url" value="${banner.item_action_url}">
+                                    <input class="form-control input-sm" name="item_action_url_type" type="hidden" value="${banner.item_action_url_type}">
+                                </div>
+                                <div class="form-group">
+                                    <div class="ops">
+                                        <a class="btn btn-warning btn-sm shutBanner" @click="shutBanner($event)" :class="{'active':banner.status==1}" type="button">${i18n.shut}
+                                        </a>
+                                        <a class="btn btn-success btn-sm openBanner" @click="openBanner($event)" :class="{'active':banner.status==0}" type="button">${i18n.open}
+                                        </a>
+                                        <!--<span class="status">状态:${status(banner)}</span>-->
+                                    </div>
+                                    <input class="status" type="hidden" name="status" value="${banner.status}">
+                                </div>
+                            </div>
+                            <div class="form-group delIcon">
+                                <div class="ops">
+                                    <a class="btn btn-sm delBanner" @click="deleteBanner($event)" type="button">×</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <a @click="addbanner($event)" class="addBanner btn btn-primary">${i18n.addBanner}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox{{i18n.wechat_setting}}</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href="../../static/css/common/reset.css">
+    <link rel='stylesheet' href="../../static/css/common/global.css">
+    <link rel='stylesheet' href="../../static/css/common/header.css">
+    <link rel='stylesheet' href="../../static/css/common/sidebar.css">
+    <link rel='stylesheet' href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel='stylesheet' href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel='stylesheet' href="../../static/vendor/pagination/pagination.css">
+    <link rel='stylesheet' href='../../static/css/src/wechat/reply.css'>
+</head>
+<body>
+{{>header}}
+{{>sidebar}}
+<div class="main-container">
+    <div id="opt-list">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#r1" @click="saveTabNum(1)" data-toggle="tab">关键词回复</a>
+            </li>
+            <li>
+                <a href="#r2" @click="saveTabNum(2)" data-toggle="tab">消息回复</a>
+            </li>
+            <li>
+                <a href="#r3" @click="saveTabNum(3)" data-toggle="tab">被添加回复</a>
+            </li>
+        </ul>
+    </div>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="r1">
+            <span @click="addM" id="add-menu">添加规则</span>
+            <span class="preview-menu" @click="matchTab?shutdown():reopen()">${matchTab? '停用':'开启'}</span>
+            <ul class="g">
+                <li v-for="(mi,match) in key_match" class="keywords_rule_item" :class="{'open':match.open}">
+                    <div class="keywords_rule_hd" @click="changeMatch(match)">
+                        <div class="info">
+                            规则${match.id}:${match.title}
+                        </div>
+                        <div class="opr">
+                            <a href="javascript:void(0);" class="icon_dropdown_switch"><i class="arrow arrow_up"></i><i class="arrow arrow_down"></i></a>
+                        </div>
+                    </div>
+                    <div class="keywords_rule_bd keywords_rule_overview" style="display: none" v-show="!match.open">
+                        <div class="keywords_info keywords">
+                            <strong class="keywords_info_title">关键词</strong>
+                            <div class="keywords_info_detail">
+                                <ul class="overview_keywords_list" id="Js_keywordsOverview_422546891">
+                                    <li v-for="k in match.keyword"><em class="keywords_name">${k.key}</em></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="keywords_info reply">
+                            <strong class="keywords_info_title">回复</strong>
+                            <div class="keywords_info_detail">
+                                <p class="reply_info">
+                                    <em class="num">${match.reply_content.length}</em>条(
+                                    <em class="num Js_reply_cnt2">${filterRC('text',match.reply_content)}</em>条文字，
+                                    <em class="num Js_reply_cnt2">${filterRC('image',match.reply_content)}</em>条图片，
+                                    <em class="num Js_reply_cnt2">${filterRC('voice',match.reply_content)}</em>条语音，
+                                    <em class="num Js_reply_cnt2">${filterRC('video',match.reply_content)}</em>条视频，
+                                    <em class="num Js_reply_cnt2">${filterRC('news',match.reply_content)}</em>条图文）
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-show="match.open" style="display: none">
+                        <div class="keywords_rule_bd">
+                            <div class="rule_name_area">
+                                <div class="frm_control_group">
+                                    <label for="" class="frm_label">规则名</label>
+                                    <div class="frm_controls">
+                                        <span class="frm_input_box"><input v-model="match.title" maxlength="60" type="text" class="frm_input" ></span>
+                                        <p class="frm_tips">规则名最多60个字</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="keywords_tap keywords ">
+                                <div class="keywords_tap_hd">
+                                    <div class="info">
+                                        <h4>关键字</h4>
+                                    </div>
+                                    <div class="opr">
+                                        <a href="javascript:;" @click="addKey(match)" class="Js_keyword_add">添加关键字</a>
+                                    </div>
+                                </div>
+                                <div class="keywords_tap_bd">
+                                    <ul class="keywords_list" id="Js_keywordList_422546891">
+                                        <li v-for="(i,r) in match.keyword">
+                                            <div class="desc">
+                                                <strong class="title Js_keyword_val">${r.key}</strong>
+                                            </div>
+                                            <div class="opr">
+                                                <a @click="changeTag(r)" href="javascript:;" class="keywords_mode_switch Js_keyword_mode">
+                                                    ${r.match_tag==1 ? '完全匹配' : '未完全匹配'}
+                                                </a>
+                                                <a href="javascript:;" @click="editKey(r)" class="icon14_common edit_gray Js_keyword_edit">编辑</a>
+                                                <a href="javascript:;" @click="removeByIndex(i,match.keyword)" class="icon14_common del_gray Js_keyword_del">删除</a>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="keywords_tap reply ">
+                                <div class="keywords_tap_hd">
+                                    <div class="info">
+                                        <h4>回复 <span class="msg">(随机回复一条)</span></h4>
+                                    </div>
+                                    <p class="media_stat info">
+                                        文字(<em class="num Js_reply_cnt">${filterRC('text',match.reply_content)}</em>)、
+                                        图片(<em class="num Js_reply_cnt">${filterRC('image',match.reply_content)}</em>)、
+                                        语音(<em class="num Js_reply_cnt">${filterRC('voice',match.reply_content)}</em>)、
+                                        视频(<em class="num Js_reply_cnt">${filterRC('video',match.reply_content)}</em>)、
+                                        图文(<e class="num Js_reply_cnt">${filterRC('news',match.reply_content)}</e>)
+                                    </p>
+                                    <ul class="media_type_list">
+                                        <li class="tab_text" data-tooltip="文字"><a href="javascript:;" @click="replyText(match)"  class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                                        <li class="tab_img" data-tooltip="图片"><a href="javascript:;" @click="replyImg(match)" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                                        <li class="tab_audio" data-tooltip="语音"><a href="javascript:;" @click="replyVoice(match)" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                                        <li class="tab_video" data-tooltip="视频"><a href="javascript:;" @click="replyVideo(match)" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                                        <li class="tab_appmsg" data-tooltip="图文"><a href="javascript:;" @click="replyNews(match)" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                                    </ul>
+                                    <!--<div class="opr">-->
+                                        <!--<label for="Js_replyAll_i" class="frm_checkbox_label">-->
+                                            <!--<input id="Js_replyAll_i" type="checkbox" class="frm_checkbox Js_reply_all">-->
+                                            <!--回复全部-->
+                                        <!--</label>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="keywords_tap_bd">
+                                    <ul class="keywords_list">
+                                        <li v-for="(i,r) in match.reply_content">
+                                            <div class="desc">
+                                                <div v-show="r.type=='text'" class="media_content Js_media_content">
+                                                    [文字] ${r.content}
+                                                </div>
+                                                <div v-show="r.type=='image'" class="media_content Js_media_content">
+                                                    <div class="appmsgSendedItem simple_img">
+                                                        <a class="title_wrp" href="" target="_blank">
+                                                            <img :src="'/api/wechat/getImg?url='+r.url">
+                                                            <span class="img-title">[${r.name}]</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div v-show="r.type=='voice'" class="media_content Js_media_content" >
+                                                    <div class="audio_msg">
+                                                        <div class="icon_audio_wrp">
+                                                            <span class="img-title">[音频]</span>
+                                                            <span class="icon_audio_msg"></span>
+                                                        </div>
+                                                        <div class="audio_content">
+                                                            <div class="audio_title">${r.name}</div>
+                                                            <!--<div class="audio_length"></div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-show="r.type=='video'" class="media_content Js_media_content">
+                                                    <div class="richvideo Js_videomsg">
+                                                        <div class="richvideo_content" style="z-index: 0">
+                                                            <h4 class="title">[视频] ${r.name}</h4>
+                                                            <!--<div class="video_info">-->
+                                                                <!--<em class="time"></em>-->
+                                                                <!--<em class="res"></em>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="video_wrp Js_videoContent">-->
+                                                                <!--<div class="wxVideoPlayContent video_player">-->
+                                                                    <!--<video class="video-js vjs-default-skin" preload="auto" controls="controls" data-src=""></video>-->
+                                                                <!--</div>-->
+                                                                <!--&lt;!&ndash;<div class="wxNetworkVideo video_shot">&ndash;&gt;-->
+                                                                    <!--&lt;!&ndash;<img src="http://mmbiz.qpic.cn/mmbiz_jpg/KfAerbQBtjfWNSlayhHCWpGARsMWPFOIkiaNnWiaIsyc3Aa8n24qe2xVib8gHykvbicno4h74Jtj17uprJJg344TWg/0?wx_fmt=jpeg">&ndash;&gt;-->
+                                                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                                            <!--</div>-->
+                                                            <!--<div class="video_desc" data-digest="1">1</div>-->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div v-show="r.type=='news'" class="media_content Js_media_content">
+                                                    <div class="appmsg single has_first_cover">
+                                                        <div class="appmsg_content">
+                                                            <div class="appmsg_info">
+                                                                <em class="appmsg_date">${setTime(r.update_time)}</em>
+                                                            </div>
+                                                            <div class="appmsg_item">
+                                                                <h4 class="appmsg_title js_title">
+                                                                    <a target="_blank">${r.content.Title}</a>
+                                                                </h4>
+                                                                <img :src="'/api/wechat/getImg?url='+r.content.PicUrl" class="appmsg_thumb_wrp">
+                                                                <div class="appmsg_thumb_wrp" style="background-image:url('https://mmbiz.qlogo.cn/mmbiz_jpg/KfAerbQBtje8ckxiaEKiaElP3erej4yxXmuAHRbrgcc1GFAX60Smc7VVxPeB1unQ0JnDRRxdpOM2uxCqiblnx2JYQ/0?wx_fmt=jpeg')">
+                                                                </div>
+                                                                <p class="appmsg_desc">${r.content.Description}</p>
+                                                                <!--<a href="" class="edit_mask preview_mask js_preview">-->
+                                                                    <!--<div class="edit_mask_content">-->
+                                                                        <!--<p class="">-->
+                                                                            <!--预览文章-->
+                                                                        <!--</p>-->
+                                                                    <!--</div>-->
+                                                                    <!--<span class="vm_box"></span>-->
+                                                                <!--</a>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="opr">
+                                                <a href="javascript:;" v-show="r.type=='text'" @click="replyText(match,r)" class="icon14_common edit_gray  Js_reply_edit">编辑</a>
+                                                <a href="javascript:;" @click="removeByIndex(i,match.reply_content)" class="icon14_common del_gray Js_reply_del">删除</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="keywords_rule_ft">
+
+                                <div class="opr">
+                                    <button type="button" @click="saveMatch(match)" class="btn btn-primary Js_rule_save">保存</button>
+                                    <button href="javascript:;" @click="removeRule(mi,key_match,match)" class="btn btn-danger Js_rule_del">删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-pane fade in" id="r2">
+            <span class="preview-menu" @click="unMatchTab?shutdown():reopen()">${unMatchTab? '停用':'开启'}</span>
+            <ul class="g">
+                <li v-for="(mi,match) in key_unmatch" class="keywords_rule_item open">
+                    <div class="keywords_rule_hd toolbar">
+                        <ul class="media_type_list" role="tablist">
+                            <li class="tab_text active" role="presentation" data-tooltip="文字"><a href="#text" role="tab" data-toggle="tab" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                            <li class="tab_img" data-tooltip="图片"><a href="#image" role="tab" data-toggle="tab" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                            <li class="tab_audio" data-tooltip="语音"><a href="#audio" role="tab" data-toggle="tab" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                            <li class="tab_video" data-tooltip="视频"><a href="#video" role="tab" data-toggle="tab" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content tab-group">
+                        <div role="tabpanel" class="tab-pane active" id="text">
+                            <textarea maxlength="600" class="news-content" placeholder="请输入要回复的文字内容，最多可输入600个字符，也可点击上方图标，切换其他回复形式。" v-model="UMreply">${match.reply_content.type=='text'?match.reply_content.content:''}</textarea>
+                            <div class="keywords_rule_ft">
+                                <a class="news-icon" href="javascript:;">
+                                    <!-- <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i> -->
+                                </a>
+                                <div class="opr">
+                                    <!-- <button href="javascript:;" class="btn btn-danger Js_rule_del">删除</button> -->
+                                    <button type="button" @click="saveUText(match)" class="btn btn-primary Js_rule_save">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="image">
+                            <div class="news-box">
+                                <ul class="news-list">
+                                    <li v-show="match.reply_content.type=='image'">
+                                        <img class="unmatch_image" :src="'/api/wechat/getImg?url='+match.reply_content.url" alt="">
+                                    </li>
+                                    <li>
+                                        <a class="news-list-item" @click="replyImg(match)" href="javascript:;" data-toggle="modal" data-target="#replyImgse">
+                                            <div class="news-list-content">
+                                                <div><i class="fa fa-plus fa-2x" aria-hidden="true"></i></div>
+                                                <div>从素材库中选择</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="keywords_rule_ft">
+                                <div class="opr">
+                                    <!-- <button href="javascript:;" class="btn btn-danger Js_rule_del">删除</button> -->
+                                    <button type="button" @click="saveUnmatch(match)" class="btn btn-primary Js_rule_save">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="audio">
+                            <div class="news-box">
+                                <ul class="news-list">
+                                    <li v-show="match.reply_content.type=='voice'">
+                                        <div class="unmatch_voice audio_msg">
+                                            <div class="icon_audio_wrp">
+                                                <span class="img-title">[音频]</span>
+                                                <span class="icon_audio_msg"></span>
+                                            </div>
+                                            <div class="audio_content">
+                                                <div class="audio_title">${match.reply_content.name}</div>
+                                                <!--<div class="audio_length"></div>-->
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="news-list-item" @click="replyVoice(match)" href="javascript:;" data-toggle="modal" data-target="#replyVoicese">
+                                            <div class="news-list-content">
+                                                <div><i class="fa fa-plus fa-2x" aria-hidden="true"></i></div>
+                                                <div>从素材库中选择</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="keywords_rule_ft">
+                                <div class="opr">
+                                    <!-- <button href="javascript:;" class="btn btn-danger Js_rule_del">删除</button> -->
+                                    <button type="button" @click="saveUnmatch(match)" class="btn btn-primary Js_rule_save">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="video">
+                            <div class="news-box">
+                                <ul class="news-list">
+                                    <li v-show="match.reply_content.type=='video'">
+                                        <div class=" unmatch_video richvideo_content" style="z-index: 0">
+                                            <h4 class="title">[视频] ${match.reply_content.name}</h4>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="news-list-item" @click="replyVideo(match)" href="javascript:;" data-toggle="modal" data-target="#replyVideose">
+                                            <div class="news-list-content">
+                                                <div><i class="fa fa-plus fa-2x" aria-hidden="true"></i></div>
+                                                <div>从素材库中选择</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="keywords_rule_ft">
+                                <div class="opr">
+                                    <!-- <button href="javascript:;" class="btn btn-danger Js_rule_del">删除</button> -->
+                                    <button type="button" @click="saveUnmatch(match)" class="btn btn-primary Js_rule_save">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+        <div class="tab-pane fade in" id="r3">
+            <span class="preview-menu" @click="subTab?shutdown():reopen()">${subTab? '停用':'开启'}</span>
+            <ul class="g">
+
+                <li v-for="(mi,match) in subscribe" class="keywords_rule_item open">
+                    <div class="keywords_rule_hd toolbar">
+                        <ul class="media_type_list" role="tablist">
+                            <li class="tab_text active" role="presentation" data-tooltip="文字"><a href="#txt" role="tab" data-toggle="tab" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                            <li class="tab_img" data-tooltip="图片"><a href="#img" role="tab" data-toggle="tab" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                            <li class="tab_audio" data-tooltip="语音"><a href="#aud" role="tab" data-toggle="tab" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                            <li class="tab_video" data-tooltip="视频"><a href="#vid" role="tab" data-toggle="tab" class="Js_reply_add">&nbsp;<i class="icon_msg_sender"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content tab-group">
+                        <div role="tabpanel" class="tab-pane active" id="txt">
+                            <textarea maxlength="600" class="news-content" placeholder="请输入要回复的文字内容，最多可输入600个字符，也可点击上方图标，切换其他回复形式。" v-model="Sreply">${match.reply_content.type=='text'?match.reply_content.content:''}</textarea>
+                            <div class="keywords_rule_ft">
+                                <a class="news-icon" href="javascript:;">
+                                    <!-- <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i> -->
+                                </a>
+                                <div class="opr">
+                                    <!-- <button href="javascript:;" class="btn btn-danger Js_rule_del">删除</button> -->
+                                    <button type="button" @click="saveSText(match)" class="btn btn-primary Js_rule_save">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="img">
+                            <div class="news-box">
+                                <ul class="news-list">
+                                    <li v-show="match.reply_content.type=='image'">
+                                        <img class="subscribe_image" :src="'/api/wechat/getImg?url='+match.reply_content.url" alt="">
+                                    </li>
+                                    <li>
+                                        <a class="news-list-item" @click="replyImg(match)" href="javascript:;" data-toggle="modal" data-target="#replyImgthi">
+                                            <div class="news-list-content">
+                                                <div><i class="fa fa-plus fa-2x" aria-hidden="true"></i></div>
+                                                <div>从素材库中选择</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="keywords_rule_ft">
+                                <div class="opr">
+                                    <!-- <button href="javascript:;" class="btn btn-danger Js_rule_del">删除</button> -->
+                                    <button type="button" @click="saveSubscribe(match)" class="btn btn-primary Js_rule_save">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="aud">
+                            <div class="news-box">
+                                <ul class="news-list">
+                                    <li v-show="match.reply_content.type=='voice'">
+                                        <div class="subscribe_voice audio_msg">
+                                            <div class="icon_audio_wrp">
+                                                <span class="img-title">[音频]</span>
+                                                <span class="icon_audio_msg"></span>
+                                            </div>
+                                            <div class="audio_content">
+                                                <div class="audio_title">${match.reply_content.name}</div>
+                                                <!--<div class="audio_length"></div>-->
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="news-list-item" @click="replyVoice(match)" href="javascript:;" data-toggle="modal" data-target="#replyVoicethi">
+                                            <div class="news-list-content">
+                                                <div><i class="fa fa-plus fa-2x" aria-hidden="true"></i></div>
+                                                <div>从素材库中选择</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="keywords_rule_ft">
+                                <div class="opr">
+                                    <!-- <button href="javascript:;" class="btn btn-danger Js_rule_del">删除</button> -->
+                                    <button type="button" @click="saveSubscribe(match)" class="btn btn-primary Js_rule_save">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="vid">
+                            <div class="news-box">
+                                <ul class="news-list">
+                                    <li v-show="match.reply_content.type=='video'">
+                                        <div class=" subscribe_video richvideo_content" style="z-index: 0">
+                                            <h4 class="title">[视频] ${match.reply_content.name}</h4>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="news-list-item" @click="replyVideo(match)" href="javascript:;" data-toggle="modal" data-target="#replyVideothi">
+                                            <div class="news-list-content">
+                                                <div><i class="fa fa-plus fa-2x" aria-hidden="true"></i></div>
+                                                <div>从素材库中选择</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="keywords_rule_ft">
+                                <div class="opr">
+                                    <!-- <button href="javascript:;" class="btn btn-danger Js_rule_del">删除</button> -->
+                                    <button type="button" @click="saveSubscribe(match)" class="btn btn-primary Js_rule_save">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<!--<div class="dialog_wrap" style="display: none" v-show="showMaterial && materials.length">-->
+    <!--<div class="dialog">-->
+        <!--<div class="dialog_hd">-->
+            <!--<span>选择素材</span>-->
+            <!--<a href="javascript:;" class="close_material" @tap="closeMaterial()">×</a>-->
+        <!--</div>-->
+        <!--<div class="dialog_bd">-->
+            <!--<ul class="pick_image">-->
+                <!--<li v-for="item in materials" class="pick_image_item">-->
+                    <!--<img :src="'/api/wechat/getImg?url='+item.url" alt="">-->
+                    <!--<span class="label">{{item.name}}</span>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="dialog_ft">-->
+            <!--<button class="ma-access">确认</button>-->
+            <!--<button class="ma-cancel">取消</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="dialog_wrap" style="display: none" v-show="showKey_m">
+    <div class="dialog">
+        <div class="dialog_hd">
+            <span>添加关键词</span>
+            <a href="javascript:;" class="close_material" @click="showKey_m = false">×</a>
+        </div>
+        <div class="">
+            <textarea maxlength="30" class="news-content" v-model="newKey" placeholder="请输入要添加的关键词，最多可输入30个字符。"></textarea>
+        </div>
+        <div class="dialog_ft">
+            <button @click="saveKey" class="ma-access">确认</button>
+            <button @click="showKey_m=false" class="ma-cancel">取消</button>
+        </div>
+    </div>
+</div>
+
+<div class="dialog_wrap" style="display: none" v-show="showText">
+    <div class="dialog">
+        <div class="dialog_hd">
+            <span>添加文字回复 </span>
+            <a href="javascript:;" class="close_material" @click="showText = false">×</a>
+        </div>
+        <div class="">
+            <textarea maxlength="300" class="news-content" v-model="replyT" placeholder="请输入要回复的文字内容，最多可输入300个字符，也可点击上方图标，切换其他回复形式。"></textarea>
+        </div>
+        <div class="dialog_ft">
+            <button @click="saveText()" class="ma-access">确认</button>
+            <button @click="showText=false" class="ma-cancel">取消</button>
+        </div>
+    </div>
+</div>
+<!-- 选择图片回复-->
+<div class="modal fade"  :class="{'in': showImg,'show':showImg}"  id="replyImg" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" v-show="showImg">
+    <div class="modal-dialog">
+        <div class="dialog modal-content">
+            <div class="dialog_hd">
+                <span>选择图片回复 </span>
+                <a href="javascript:;" class="close_material" data-dismiss="modal" @click="showImg = false">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="dialog_bd">
+                <ul class="pick_image">
+                    <li v-for="(i,item) in materials" @click="selectImg(item)" :class="{'select':item.media_id==select.img.content}" class="pick_image_item">
+                        <img :src="'/api/wechat/getImg?url='+item.url" alt="${item.name}">
+                    </li>
+                </ul>
+            </div>
+            <div class="dialog_ft">
+                <button @click="checkImg()" class="ma-access">确认</button>
+                <button @click="showImg=false" class="ma-cancel">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 选择语音回复-->
+<div class="modal fade" :class="{'in': showVoice,'show':showVoice}" id="replyVoice" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" v-show="showVoice">
+    <div class="modal-dialog">
+        <div class="dialog modal-content">
+            <div class="dialog_hd">
+                <span>选择语音回复</span>
+                <a href="javascript:;" class="close_material" data-dismiss="modal" @click="showVoice=false">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <ul class="news-audio">
+                    <li v-for="(i,item) in materials" @click="selectAudio(item)" :class="{'select':item.media_id==select.voice.content}" class="pick_voice_item">
+                        <div class="audio-list">
+                            <span class="audio-list-left">
+                                <input type="radio" name="audio" value="1">${item.name}
+                            </span>
+                            <span class="audio-list-time">${setTime(item.update_time)}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="dialog_ft">
+                <button @click="checkVoice()" class="ma-access">确认</button>
+                <button @click="showVoice=false" class="ma-cancel">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 选择视频回复-->
+<div class="modal fade" :class="{'in': showVideo,'show':showVideo}" id="replyVideo" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" v-show="showVideo">
+    <div class="modal-dialog">
+        <div class="dialog modal-content">
+            <div class="dialog_hd">
+                <span>选择视频回复</span>
+                <a href="javascript:;" class="close_material" data-dismiss="modal" @click="showVideo=false">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <ul class="news-video">
+                    <li v-for="(i,item) in materials" @click="selectVideo(item)" :class="{'select':item.media_id==select.video.content}" class="pick_video_item">
+                        <div class="audio-list">
+                            <span class="audio-list-left">
+                                <input type="radio" name="audio" value="1">${item.name}
+                            </span>
+                            <span class="audio-list-time">${setTime(item.update_time)}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="dialog_ft">
+                <button @click="checkVideo()" class="ma-access">确认</button>
+                <button @click="showVideo=false" class="ma-cancel">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 选择图文回复-->
+<div class="modal fade"  :class="{'in': showNews,'show':showNews}"  id="replyNews" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" v-show="showNews">
+    <div class="modal-dialog">
+        <div class="dialog modal-content">
+            <div class="dialog_hd">
+                <span>选择图文回复 </span>
+                <a href="javascript:;" class="close_material" data-dismiss="modal" @click="showNews = false">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            <div class="dialog_bd">
+                <ul class="pick_image">
+                    <li v-for="(i,item) in materials" @click="selectNews(item)" :class="{'select':item.media_id==select.news.media_id}" class="pick_image_item">
+                        <img :src="'/api/wechat/getImg?url='+item.content.news_item[0].thumb_url" alt="${item.name}">
+                        <p>${item.content.news_item[0].title}</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="dialog_ft">
+                <button @click="checkNews()" class="ma-access">确认</button>
+                <button @click="showNews=false" class="ma-cancel">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="bd" style="display: none" v-show="showMaterial && materials.length"></div> -->
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/vue/vue.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/src/wechat/reply.js'></script>
+</body>
+</html>

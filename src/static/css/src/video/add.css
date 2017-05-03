@@ -1,0 +1,294 @@
+.header {
+  overflow: hidden;
+}
+.videoCon {
+  width: 85%;
+  float: right;
+}
+.videoCon .videoHeader {
+  overflow: hidden;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.videoCon .videoHeader h2 {
+  float: left;
+  font-size: 16px;
+  line-height: 34px;
+  margin: 0;
+}
+.videoCon .videoHeader h2 span {
+  color: #2e6da4;
+  font-size: 14px;
+  vertical-align: middle;
+}
+.videoCon .videoHeader .saveVideo {
+  float: right;
+}
+.videoCon .saveVideo {
+  padding: 4px 12px;
+}
+.videoCon .videoBody {
+  width: 100%;
+  padding: 20px;
+}
+.videoCon .videoBody .container {
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.videoCon .videoBody .container .title {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+}
+.videoCon .videoBody .container .videoForm table {
+  width: 100%;
+}
+.videoCon .videoBody .container .videoForm table tr {
+  font-size: 14px;
+}
+.videoCon .videoBody .container .videoForm table tr input,
+.videoCon .videoBody .container .videoForm table tr select {
+  width: 400px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+.videoCon .videoBody .container .videoForm table tr textarea {
+  width: 598px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+.videoCon .videoBody .container .videoForm table tr input:focus,
+.videoCon .videoBody .container .videoForm table tr select:focus,
+.videoCon .videoBody .container .videoForm table tr textarea:focus {
+  outline: none;
+  border-color: #aaa;
+}
+.videoCon .videoBody .container .videoForm table tr td {
+  padding: 5px;
+}
+.videoCon .videoBody .container .videoForm table tr td:first-child {
+  vertical-align: top;
+}
+.videoCon .videoBody .container .videoForm table tr .uploadImgBox {
+  overflow: hidden;
+  position: relative;
+}
+.videoCon .videoBody .container .videoForm table tr .uploadImgBox img {
+  margin-top: 5px;
+  max-width: 200px;
+  max-height: 120px;
+}
+.videoCon .videoBody .container .videoForm table tr .videoImg {
+  margin-top: 5px;
+  max-width: 200px;
+  max-height: 120px;
+}
+.videoCon .videoBody .container .videoForm table tr .uploadBox {
+  overflow: hidden;
+}
+.videoCon .videoBody .container .videoForm table tr .uploadBox #uploadFile {
+  float: left;
+}
+.videoCon .videoBody .container .videoForm table tr .uploadBox #uploadFile .pickBtn {
+  padding: 0 10px;
+  font-size: 14px;
+  border: 0;
+  display: inline-block;
+  cursor: pointer;
+  background: #00b7ee;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  overflow: hidden;
+  height: 30px;
+  line-height: 30px;
+}
+.videoCon .videoBody .container .videoForm table tr .uploadBox #uploadProgress {
+  float: left;
+  margin-left: 20px;
+  line-height: 30px;
+}
+.videoCon .videoBody .container .videoForm table tr .uploadBox #uploadProgress span {
+  display: none;
+  color: #ff5073;
+}
+.videoCon .videoBody .container .videoForm table tr .uploadBox #uploadProgress span span {
+  display: inline;
+}
+.videoCon .videoBody .container .videoForm table tr .uploadBox #uploadProgress .tip {
+  color: #333;
+  display: inline;
+}
+.videoCon .videoBody .container .videoForm table .imgBox {
+  position: relative;
+  display: none;
+}
+.videoCon .videoBody .container .videoForm table .imgBox .close-btn {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  line-height: 18px;
+  font-size: 20px;
+  background: #ff5073;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  font-style: normal;
+  cursor: pointer;
+}
+.videoCon .videoBody .container .videoForm table .showImg {
+  display: inline-block;
+}
+.videoCon .videoBody .container .videoForm table .star {
+  font-size: 12px;
+  vertical-align: top;
+  color: #f00;
+  margin-left: 3px;
+}
+.videoCon #upload-img .webuploader-pick {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  background: #00b7ee;
+  padding: 0 10px;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  overflow: hidden;
+  height: 30px;
+  line-height: 30px;
+}
+.videoCon #upload-img .webuploader-element-invisible {
+  position: absolute!important;
+  clip: rect(1px 1px 1px 1px);
+}
+/** 标签-start **/
+.label-wrap {
+  width: 600px;
+}
+.label-wrap .label-list {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+.label-list ul {
+  min-height: 34px;
+  padding: 5px 0;
+  margin-bottom: 0;
+}
+.label-list ul li {
+  display: inline-block;
+  float: left;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 8px;
+  text-align: center;
+  color: #fff;
+  margin-left: 10px;
+  background-color: #696c7f;
+}
+.label-list ul li .close-btn {
+  font-style: normal;
+  margin-left: 10px;
+  height: 24px;
+  line-height: 24px;
+}
+.label-wrap .label-group {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.label-wrap .label-group .label-head {
+  border-bottom: 1px solid #ccc;
+  padding-right: 80px;
+}
+.label-head .label-category {
+  height: 40px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.label-category li {
+  display: inline-block;
+  float: left;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+  text-align: center;
+  color: #666;
+  cursor: pointer;
+  margin: 8px 0 8px 15px;
+}
+.label-category li:hover {
+  text-decoration: none;
+  background-color: #f0f0f0;
+}
+.label-category li.current,
+.label-category li.current:hover {
+  color: #fff;
+  background-color: #696c7f;
+}
+.label-head .label-more {
+  display: inline-block;
+  float: right;
+  color: #337ab7;
+  height: 40px;
+  padding: 8px 0;
+  margin-right: -60px;
+  cursor: pointer;
+}
+.label-head .label-more .fa {
+  margin-left: 5px;
+  font-size: 1.2em;
+}
+.label-more.open + .label-category {
+  height: auto;
+}
+.label-wrap .label-group .label-content {
+  padding: 10px;
+  min-height: 150px;
+}
+.label-content .label-tags {
+  width: 100%;
+  margin-bottom: 0;
+}
+.label-content .label-tags:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.label-tags li {
+  display: inline-block;
+  float: left;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+  text-align: center;
+  background-color: #f2f2f4;
+  color: #a9a9b5;
+  cursor: pointer;
+}
+.label-tags li:hover,
+.label-tags li.current {
+  background-color: #fdf3f2;
+  color: #da786b;
+}
+.label-tags li .fa {
+  margin-left: 6px;
+  margin-right: 0;
+}
+/** 标签-end **/

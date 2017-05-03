@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.queryReport }}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../static/css/common/reset.css">
+    <link rel="stylesheet" href="../../static/vendor/pagination/pagination.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../static/css/common/global.css">
+    <link rel="stylesheet" href="../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../static/css/common/sidebar.css">
+    <link rel="stylesheet" href="../../static/css/src/list/list.css">
+    <link rel="stylesheet" href="../../static/css/src/create/preview.css">
+    <link rel="stylesheet" href="../../static/css/src/gift/gift-tab.css">
+    <link rel="stylesheet" href="../../static/css/src/ajaxLoading.css">
+
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <ul class="gift-tab">
+            <li class="tab-list-item active" data-target="#giftStorageQuery" data-toggle="tab" data-print="/report/giftStockToXls">
+                {{i18n.giftStorageQuery}}
+            </li>
+            <li class="tab-list-item" data-target="#partStorageQuery" data-toggle="tab" data-print="/report/productStockToXls">
+                {{i18n.partStorageQuery}}
+            </li>
+            <li class="tab-list-item" data-target="#outStorageQuery"  data-toggle="tab" data-print="/report/outstockToXls">
+                {{i18n.outStorageQuery}}
+            </li>
+            <li class="tab-list-item" data-target="#inStorageQuery"  data-toggle="tab" data-print="/report/instockToXls">
+                {{i18n.inStorageQuery}}
+            </li>
+            <li class="tab-pane-btn tab-content pull-right">
+                <div class="tab-pane active">
+                    <button class="btn btn-danger px-30" data-origin-url="" data-print-url="">{{i18n.export}}</button>
+                </div>
+            </li>
+        </ul>
+        <div id="list" class="tab-content">
+            <div class="tab-pane active" id="giftStorageQuery">
+                <div class="search-form-wrap" style="">
+                    <form data-api="/report/giftStock" class="form-inline search-form need-max-width" data-tmpl="table-list-tmpl">
+                        <div class="table table-layout text-center">
+                            <div class="form-group">
+                                <label>{{i18n.giftBox}}SKU </label>
+                                <div>
+                                    <input type="text" class="form-control" name="sku">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >{{i18n.giftBoxName}}</label>
+                                <div>
+                                    <input type="text" class="form-control" id="" name="boxName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >{{i18n.boxCode}}</label>
+                                <div>
+                                    <input type="number" class="form-control" id="" name="barCode">
+                                </div>
+                            </div>
+                            <input type="hidden" name="pageNum" value="">
+                            <input type="hidden" name="pageSize" value="3">
+                            <div class="form-group pull-right">
+                                <div>&nbsp;</div>
+                                <input type="submit" class="btn btn-default" value="{{i18n.search}}" id="search-btn">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered v-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>{{i18n.giftBox}}SKU </th>
+                                <th> {{i18n.allGiftBoxesQty}} </th>
+                                <th> {{i18n.giftBoxName}} </th>
+                                <th> {{i18n.boxCode}} </th>
+                                <th> {{i18n.giftBoxesQty}} </th> 
+                            </tr>
+                        </thead>
+                        <tbody class="data-container text-center">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div id="pagination-container"></div>
+            </div>
+
+            <div class="tab-pane " id="partStorageQuery">
+                <div class="search-form-wrap" style="">
+                    <form data-api="/report/productStock" class="form-inline search-form need-max-width" data-tmpl="table-list-tmpl">
+                        <div class="table table-layout text-center">
+                            <div class="form-group">
+                                <label>{{i18n.giftBox}}SKU </label>
+                                <div>
+                                    <input type="text" class="form-control" name="boxSku">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >{{i18n.giftBoxName}}</label>
+                                <div>
+                                    <input type="text" class="form-control" id="" name="boxName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >{{i18n.wares}}SKU</label>
+                                <div>
+                                    <input type="text" class="form-control" id="" name="productSku">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >{{i18n.waresCode}}</label>
+                                <div>
+                                    <input type="text" class="form-control" id="" name="barCode">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >{{i18n.waresName}}</label>
+                                <div>
+                                    <input type="text" class="form-control" id="" name="productName">
+                                </div>
+                            </div>
+                            <input type="hidden" name="pageNum" value="">
+                            <input type="hidden" name="pageSize" value="3">
+                            <div class="form-group pull-right">
+                                <div>&nbsp;</div>
+                                <input type="submit" class="btn btn-default" value="{{i18n.search}}" id="search-btn">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered v-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>{{i18n.giftBox}}SKU </th>
+                                <th> {{i18n.giftBoxName}} </th>
+                                <th> {{i18n.wares}}SKU </th>
+                                <th> {{i18n.waresCode}} </th>
+                                <th> {{i18n.waresName}} </th> 
+                                <th> {{i18n.giftBoxesStorageCount}} </th> 
+                            </tr>
+                        </thead>
+                        <tbody class="data-container text-center">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div id="pagination-container"></div>
+            </div>
+            <div class="tab-pane " id="outStorageQuery">
+                <div class="search-form-wrap" style="">
+                    <form data-api="/report/outstock" class="form-inline search-form" data-tmpl="table-list-tmpl">
+                        <div class="table table-layout text-center">
+                            <div class="form-group">
+                                <label>{{i18n.outStorageDate}}</label>
+                                <div>
+                                    <div class="input-daterange input-group" id="datepicker">
+                                        <input type="text" class=" form-control" name="fromDate" placeholder="{{i18n.start_time}}" readonly />
+                                        <span class="input-group-addon">➡️</span>
+                                        <input type="text" class=" form-control" name="toDate" placeholder="{{i18n.end_time}}" readonly />
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <input type="hidden" name="pageNum" value="">
+                            <input type="hidden" name="pageSize" value="3">
+                            <div class="form-group pull-right">
+                                <div>&nbsp;</div>
+                                <input type="submit" class="btn btn-default pull-right" value="{{i18n.search}}" id="search-btn">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered v-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>{{i18n.giftBox}}SKU </th>
+                                <th> {{i18n.giftBoxName}} </th>
+                                <th> {{i18n.wares}}SKU </th>
+                                <th> {{i18n.waresCode}} </th>
+                                <th> {{i18n.waresName}} </th> 
+                                <th> {{i18n.outCount}} </th> 
+                            </tr>
+                        </thead>
+                        <tbody class="data-container text-center">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div id="pagination-container"></div>
+            </div>
+            <div class="tab-pane " id="inStorageQuery">
+                <div class="search-form-wrap" style="">
+                    <form data-api="/report/instock" class="form-inline search-form" data-tmpl="table-list-tmpl">
+                        <div class="table table-layout text-center">
+                            <div class="form-group">
+                                <label>{{i18n.inStorageDate}}</label>
+                                <div>
+                                    <div class="input-daterange input-group" id="datepicker">
+                                        <input type="text" class=" form-control" name="fromDate" placeholder="{{i18n.start_time}}" readonly />
+                                        <span class="input-group-addon">➡️</span>
+                                        <input type="text" class=" form-control" name="toDate" placeholder="{{i18n.end_time}}" readonly />
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <input type="hidden" name="pageNum" value="">
+                            <input type="hidden" name="pageSize" value="3">
+                            <div class="form-group pull-right">
+                                <div>&nbsp;</div>
+                                <input type="submit" class="btn btn-default pull-right" value="{{i18n.search}}" id="search-btn">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered v-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>{{i18n.giftBox}}SKU </th>
+                                <th> {{i18n.giftBoxName}} </th>
+                                <th> {{i18n.wares}}SKU </th>
+                                <th> {{i18n.waresCode}} </th>
+                                <th> {{i18n.waresName}} </th> 
+                                <th> {{i18n.inCount}} </th> 
+                            </tr>
+                        </thead>
+                        <tbody class="data-container text-center">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+<script type="text/html" id="table-list-tmpl">
+    ${each list as v i}
+        ${each v.detail}
+            <tr>
+                ${if $index == 0}
+                    <td class="v-middle text-center" rowspan="${this.length}">${v.sku}</td>
+                    ${if typeof v.qty !== 'undefined'}<td rowspan="${this.length}">${v.qty}</td>${/if}
+                    <td class="v-middle text-center" rowspan="${this.length}" title="${v.name}"><div class="td-max-width">${v.name}</div></td>
+
+                    ${if typeof $value.sku !== 'undefined'}<td >${$value.sku}</td>${/if}
+                    <td>${$value.barCode }</td>
+                    ${if typeof $value.name !== 'undefined'}<td title="${$value.name}"><div class="td-max-width">${$value.name}</div></td>${/if}
+                    <td>${$value.qty}</td>
+                ${else}
+                    ${if typeof $value.sku !== 'undefined'}<td >${$value.sku}</td>${/if}
+                    <td>${$value.barCode }</td>
+                    ${if typeof $value.name !== 'undefined'}<td title="${$value.name}"><div class="td-max-width">${$value.name}</div></td>${/if}
+                    <td>${$value.qty}</td>
+                ${/if}
+            </tr>
+        ${/each}
+    ${/each} 
+</script>
+
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/jquery.validate.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/localization/messages_zh.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/src/gift/common.js'></script>
+<script type="text/javascript" src='../../static/js/src/gift/reportQuery.js'></script>
+</body>
+</html>

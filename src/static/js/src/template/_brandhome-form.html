@@ -1,0 +1,117 @@
+<div class="brandcate-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a data-toggle="collapse" data-parent="#brandhome" href="#brandhome">品牌页属性</a>
+            </div>
+            <div id="brandhome" class="panel-collapse collapse brandWrap">
+                <div class="panel-body">
+                    <div class="cateGroup singleConf">
+                        <form  class="cateItem singleItem" id="brandInfo">
+                            <a class="itemTitle" @click="slideItem($event)">品牌信息<i class="fa fa-caret-down"></i></a>
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌序号</div>
+                                    <input class="form-control input-sm" name="orderNo" type="text" value="${brandData.orderNo}" placeholder="品牌序号">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌ID</div>
+                                    <input class="form-control input-sm" name="brandId" type="text" value="${brandData.brandId}" placeholder="品牌ID">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌名称</div>
+                                    <input class="form-control input-sm" name="name" type="text" value="${brandData.name}" placeholder="品牌名称">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌简介</div>
+                                    <input class="form-control input-sm" name="intro" type="text" value="${brandData.intro}" placeholder="品牌简介">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌LOGO</div>
+                                    <img class="thumbnail" v-if="brandData.logo" :src="brandData.logo">
+                                    <input class="form-control input-sm" name="logo" type="text" v-model="brandData.logo" value="${brandData.logo}" placeholder="品牌LOGO">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌主页背景图</div>
+                                    <img class="thumbnail"  v-if="brandData.banner" :src="brandData.banner">
+                                    <input class="form-control input-sm" name="banner" type="text" v-model="brandData.banner" value="${brandData.banner}" placeholder="品牌主页背景图">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌主页LOGO</div>
+                                    <img class="thumbnail"  v-if="brandData.nameLogo" :src="brandData.nameLogo">
+                                    <input class="form-control input-sm" name="nameLogo" type="text" v-model="brandData.nameLogo" value="${brandData.nameLogo}" placeholder="品牌主页LOGO">
+                                </div>
+                            </div>
+                            <div class="itemBody">
+                                <div class="form-head">搜索页品牌入口</div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>搜索关键字</div>
+                                    <input class="form-control input-sm" name="searchKey" type="text" value="${brandData.searchKey}" placeholder="搜索关键字">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌搜索页图片</div>
+                                    <img class="thumbnail"  v-if="brandData.cardImg" :src="brandData.cardImg">
+                                    <input class="form-control input-sm" name="cardImg" type="text" v-model="brandData.cardImg" value="${brandData.cardImg}" placeholder="品牌搜索页图片">
+                                </div>
+                            </div>
+                            <div class="itemBody" style="display: none;">
+                                <div class="form-head">视频配置</div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌视频封面</div>
+                                    <img class="thumbnail"  v-if="brandData.mediaImg" :src="brandData.mediaImg">
+                                    <input class="form-control input-sm" name="mediaImg" type="text" v-model="brandData.mediaImg" value="${brandData.mediaImg}" placeholder="品牌视频封面">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌视频地址</div>
+                                    <input class="form-control input-sm" name="video" type="text" value="${brandData.video}" placeholder="品牌视频地址">
+                                </div>
+                            </div>
+                            <div class="itemBody"><div class="form-head">品牌主题颜色</div>
+
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌主题色</div>
+                                    <input class="form-control input-sm" name="brandThemeColor" type="text" value="${brandData.brandThemeColor}" placeholder="品牌主题色">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌主页背景色</div>
+                                    <input class="form-control input-sm" name="bannerThemeColor" type="text" value="${brandData.bannerThemeColor}" placeholder="品牌主页背景色">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌全部商品分类蒙版色</div>
+                                    <input class="form-control input-sm" name="categoryThemeColor" type="text" value="${brandData.categoryThemeColor}" placeholder="品牌全部商品分类蒙版色">
+                                </div>
+                            </div>
+                            <div class="itemBody">
+                                <div class="form-head">品牌频道页ID</div>
+                                <div class="form-group">
+                                    <div class="form-line"><em class="red">*</em>品牌频道页ID</div>
+                                    <input class="form-control input-sm" name="channelId" type="text" value="${brandData.channelId}" placeholder="品牌频道ID">
+                                </div>
+                            </div>
+                        </form>
+                        <form  class="cateItem singleItem" id="channelInfo">
+                            <a class="itemTitle" @click="slideItem($event)">品牌频道页<i class="fa fa-caret-down"></i></a>
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div>首页频道一</div>
+                                    <input class="form-control input-sm category_title" value="${channelsData.one.name}"  name="brandNav1" type="text" placeholder="首页频道一名称">
+                                    <input class="form-control input-sm" name="brandNav1_link" type="text" value="${channelsData.one.url}" placeholder="首页频道一链接">
+                                </div>
+                                <div class="form-group">
+                                    <div>首页频道二</div>
+                                    <input class="form-control input-sm" name="brandNav2" type="text" value="${channelsData.two.name}" placeholder="首页频道二名称">
+                                    <input class="form-control input-sm" name="brandNav2_link" type="text" value="${channelsData.two.url}" placeholder="首页频道二链接">
+                                </div>
+                                <div class="form-group">
+                                    <div>首页自定义导航</div>
+                                    <input class="form-control input-sm" name="brandNav3" type="text" value="${channelsData.three.name}" placeholder="首页频道二名称">
+                                    <input class="form-control input-sm" name="brandNav3_link" type="text" value="${channelsData.three.url}" placeholder="首页自定义导航链接">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

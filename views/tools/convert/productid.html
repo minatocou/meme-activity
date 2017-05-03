@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.tools}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/tools/convert/productid.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <div class="breadcrumbs">
+            {{i18n.market_tools}} ><span> {{i18n.tools}} ></span><span
+                class="high-light">{{i18n.detail_page}}</span>
+            <!--<div class="f-r"><a class="btn btn-danger" id="marketSaveBtn">{{i18n.save}}</a></div>-->
+        </div>
+        <hr>
+
+        <div class="non-empty group prompt-box">
+            <label>转换为app可访问url</label>
+
+        </div>
+        <select class="form-control input-l" id="type">
+            <option value="1">产品id</option>
+            <option value="2">活动链接</option>
+        </select>
+        <input type="text" class="form-control input-l" id="productId">
+
+        <div><a class="btn btn-danger" id="convertId">转换</a></div>
+        <div id="out">
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/build/src/views/tools/convert/productid.js?t=1493261397671"></script>
+</body>
+</html>

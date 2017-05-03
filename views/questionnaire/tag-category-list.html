@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.userPropertyManage }}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/questionnaire/tag-category-list.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <div class="block-nav-top font-20">
+            <h4 class="text-center">{{i18n.definedTag}}</h4>
+        </div>
+		<div class="tag-list-container">
+			<div class="tag-left-list">
+				<div class="list-container">
+					<table class="table table-hover v-middle text-center">
+						<thead>
+	                        <tr class="nowrap">
+	                            <th> {{i18n.categorySort}} </th>
+	                            <th>{{i18n.categoryName}} </th>
+	                            <th>{{i18n.relatedObj}} </th>
+	                            <th>{{i18n.status}} </th>
+	                            <th> {{i18n.operation}} </th>
+	                        </tr>
+	                    </thead>
+	                    <tbody class="data-container">
+	                    	
+	                    </tbody>
+					</table>
+					<div class="col-xs-12">
+						<button class="btn-block btn btn-default btn-lg" data-toggle="modal" data-modal="add" type="button">
+							{{i18n.add}}{{i18n.category}} <i class="fa fa-plus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="footer-pagenation bt-1">
+					
+				</div>
+				<script type="text/html" id="tag-category-tmpl">
+					${each items as v i}
+						<tr data-stringify="${v.stringify}">
+							<td class="b-0"><div class="p-12">${v.sort}</div></td>
+							<td class="b-0">${v.name}</td>
+							<td class="b-0">
+								${each v.scene}
+								<div>${items.scene[$value]}</div>
+								${/each}
+							</td>
+							<td class="b-0">${items.statsObj[v.status]}</td>
+							<td class="b-0">
+								<button data-toggle="modal" data-modal="edit" class="btn btn-default" type="button">{{i18n.edit}}</button>
+							</td>
+						</tr>
+					${/each}
+				</script>
+			</div>
+			<div class="tag-right-content" style="display: none;">
+				<div class="block-nav-top font-20 text-right">
+					<button type="button" data-add-item class="btn btn-default">{{i18n.addNewTag}}</button>
+					<button type="button" class="btn btn-danger" data-save="tagList">{{i18n.save}}</button>
+		        </div>
+				<div class="list-container">
+					<div class="h-100p ov-auto bb-1 bt-1">
+						<table class="table table-hovered table-bordered v-middle mb-0">
+						
+						</table>
+					</div>
+				</div>
+				<div class="footer-pagenation">
+					
+				</div>
+				<script type="text/html" id="tag-list-tmpl">
+					<thead>
+	                    <tr class="nowrap">
+	                        <th>{{i18n.sort}} </th>
+	                    	${each sceneArr}
+	                        	<th>${scene[$value]} </th>
+	                        ${/each}
+	                        <th>{{i18n.status}} </th>
+	                    </tr>
+	                </thead>
+	                <tbody class="data-container">
+						${include 'tag-list-item-tmpl'}
+	                </tbody>
+				</script>
+				<script type="text/html" id="tag-list-item-tmpl">
+					${each items as v i}
+						<tr class="nowrap text-center ${if items.modified}modified${/if}" data-stringify="${v.stringify}">
+							<input type="hidden" data-serialize name="tag_id" value="${v.tag_id}">
+			                <td><input type="number" data-serialize data-number class="form-control input-80" name="sort" value="${v.sort}"></td>
+			                ${each v.list }
+			                <td>
+		                		<form>
+		                			<input type="text" name="label" class="form-control" maxlength="10" placeholder="请输入标签名" value="${$value.label}">
+		                			<input type="hidden" name="scene_id" value="${$value.scene_id}">
+		                			<div class="checkbox">
+		                				<label>
+		                					<input type="checkbox" name="is_visible" value="1" ${if $value.is_visible == '1'}checked${/if}>用户可见
+		                				</label>
+		                			</div>
+		                		</form>
+			                </td>
+			                ${/each }
+			                <td>
+			                	<form data-divide>
+			                		<div class="radio">
+			                		    <label>
+			                		        <input type="radio" data-serialize value="1" name="status" ${if v.status == '1'}checked${/if}>{{i18n.open}}
+			                		    </label>&nbsp;&nbsp;
+			                		    <label>
+			                		        <input type="radio" data-serialize value="2" name="status" ${if v.status != '1'}checked${/if}>{{i18n.shut}}
+			                		    </label>
+			                		</div>
+			                	</form>
+			                </td>
+		                </tr>
+					${/each}
+				</script>
+			</div>
+		</div>
+
+        {{>ajaxLoading}}
+    </div>
+</div>
+<script type="text/html" id="modal-template">
+    <div class="modal fade" id="modal-frame" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            <h4 class="modal-title">${modalTitle}</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal need-validate-form" role="form">
+	            <input type="hidden" name="id" value="">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.status}}</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="status">
+                        	<option value="1">{{i18n.open}}</option>
+                        	<option value="2">{{i18n.shut}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.categoryName}}</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="name" maxlength="10" placeholder="" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.categorySort}}</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" maxlength="5" numberCheck="true" name="sort" placeholder="" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.relatedObj}}</label>
+                    <div class="checkbox col-sm-10 pt-0">
+                        <label class="control-label">
+                            <input type="checkbox" name="scene" value="1" required>{{i18n.user}}
+                        </label>&nbsp;&nbsp;
+                        <label class="control-label">
+                            <input type="checkbox" name="scene" value="2" required>{{i18n.content}}
+                        </label>&nbsp;&nbsp;
+                        <label class="control-label">
+                            <input type="checkbox" name="scene" value="3" required>{{i18n.wares}}
+                        </label>
+	                    <label id="scene-error" class="error" for="scene" style="display: none; font-weight: bold;">这是必填字段</label>
+                    </div>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default px-30" data-dismiss="modal">{{i18n.cancel}}</button>
+            <button type="submit" class="btn btn-primary px-30 modal-submit-btn">${btnName}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</script>
+
+
+<script type="text/javascript" src="/js/build/src/views/questionnaire/tag-category-list.js?t=1493261397671"></script>
+</body>
+</html>

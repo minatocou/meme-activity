@@ -1,0 +1,47 @@
+<div class="imagetext-attr" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a data-toggle="collapse" data-parent="#imagetext" href="#imagetext">图文组件</a>
+            </div>
+            <div id="imagetext" class="panel-collapse collapse imagetextWrap">
+                <div class="panel-body singleConf">
+                    <div class="commonConf">
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </div>
+                    <form class="teletextItem singleItem" data-val="${setting.id}">
+                        <a class="itemTitle" @click="slideItem($event)">图文组件配置 <i class="fa fa-caret-down"></i></a>
+                        <div class="itemBody">
+                            <div class="form-group">
+                                <div><em class="red">*</em>开始时间</div>
+                                <input @mousedown="initDate($event,setting.end_time,'start')" class="form-control input-sm startTime" value="${setting.start_time}" name="start_time" placeholder="${i18n.start_time}"
+                                       type="text">
+                            </div>
+                            <div class="form-group">
+                                <div><em class="red">*</em>结束时间</div>
+                                <input @mousedown="initDate($event,setting.start_time,'end')" class="form-control input-sm endTime" value="${setting.end_time}" name="end_time" placeholder="${i18n.end_time}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <div><em class="red">*</em>组件标题(长度不能大于<span style="color:red;">16个字符</span>)</div>
+                                <input class="form-control input-sm title" value="${setting.title}" name="title" placeholder="${i18n.teletextName}" type="text">
+                            </div>
+                            <div class="form-group teleId">
+                                <div><em class="red">*</em>图文ID(多个图文id请用<span style="color:red;">英文逗号</span>分隔)</div>
+                                <input class="form-control input-sm position" value="${setting.data.ids}" name="ids" type="text">
+                            </div>
+                            <div class="form-group">
+                                <div class="ops">
+                                    <a class="btn btn-warning btn-sm shutImagetext" @click="shutImagetext($event)" :class="{'active':setting.status==1}" type="button">${i18n.shut}
+                                    </a>
+                                    <a class="btn btn-success btn-sm openImagetext" @click="openImagetext($event)" :class="{'active':setting.status==0}" type="button">${i18n.open}
+                                    </a>
+                                </div>
+                                <input class="status" type="hidden" name="status" value="${setting.status}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

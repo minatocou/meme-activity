@@ -1,0 +1,18 @@
+.inline-block input {
+  margin-right: 5px;
+}
+.changeType {
+  display: inline-block;
+}
+.changeType label {
+  width: auto;
+}
+.changeType label:after {
+  display: none;
+}
+#discount {
+  overflow-x: scroll;
+}
+#discount .group {
+  min-width: 1100px;
+}

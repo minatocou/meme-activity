@@ -1,0 +1,86 @@
+.header-container{
+    position: relative;
+    z-index: 1000;
+    width:100%;
+    height:60px;
+    background:#eee;
+    border-bottom: 1px solid #ccc;
+}
+.header-container .logo{
+    width: 186px;
+    margin-top: 17px;
+    margin-left: 16px;
+}
+.header-container .logo img{
+    width: 100%;
+}
+.header-container .fr{
+    float:right;
+}
+.header-container .fl{
+    float:left;
+}
+.header-container h1{
+    font-size:20px;
+    line-height:60px;
+    margin-left:15px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.header-container .private-container{
+}
+.header-container .private-container>ul>li{
+    float:left;
+    position:relative;
+}
+.user-avater{
+    height: 60px;
+    line-height: 60px;
+    width: 60px;
+    display: inline-block;
+    text-align: center;
+    cursor:pointer;
+}
+.user-avater i{
+    color:#337ab7;
+}
+.user-avater i.fa-user{
+    margin-right:10px;
+}
+.list{
+    width: 150px;
+    position: absolute;
+    right: 0;
+    background: #fff;
+    top: 60px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display:none;
+}
+.list li{
+    padding:5px 10px;
+    cursor:pointer;
+}
+.list li a{
+    display: block;
+}
+.list li:first-child{
+    padding-top:10px;
+}
+.list li.logout{
+    border-top:1px solid #ddd;
+    line-height:30px;
+}
+.header-container .private-container>ul>li.current .user-avater, .header-container .private-container>ul>li:hover .user-avater{
+    background:#ddd;
+}
+.header-container .private-container>ul>li.current .user-avater i, .header-container .private-container>ul>li:hover .user-avater i{
+    color:#23527c;
+}
+.list li:hover{
+    background:#eee;
+}
+.header-container .user-name{
+    height: 60px;
+    line-height: 60px;
+}

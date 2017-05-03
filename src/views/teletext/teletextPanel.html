@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.teletextManage}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="../../static/css/common/reset.css">
+    <link rel="stylesheet" href="../../static/css/common/global.css">
+    <link rel="stylesheet" href="../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../static/css/common/sidebar.css">
+    <link rel="stylesheet" href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href='../../static/vendor/editor/wangEditor.css'>
+    <link rel="stylesheet" href="../../static/vendor/pagination/pagination.css">
+    <link rel="stylesheet" href="../../static/css/src/ajaxLoading.css">
+    <link rel="stylesheet" href="../../static/css/src/create/preview.css">
+    <link rel="stylesheet" href="../../static/css/src/teletext/teletext.css">
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="teletext-container">
+        <div class="teletext-head clearfix">
+            {{i18n.teletextManage}} ><span class="high-light"> {{i18n.teletextDetail}}</span>
+            <div class="f-r">
+                <button class="btn btn-info preview-btn" data-url="" disabled>
+                    <i class="fa fa-eye"></i>{{i18n.preview}}
+                </button>
+                <button class="btn btn-success publish-btn" data-val="">
+                    <i class="fa fa fa-arrow-up"></i><span>发布</span>
+                </button>
+                <button class="btn btn-danger" id="teletext-save">
+                    <i class="fa fa-check"></i><span>{{i18n.save}}</span>
+                </button>
+            </div>
+        </div>
+        <div class="teletext-wrap">
+            <form id="teletext-content">
+                <div class="teletext-table clearfix">
+                    <div class="teletext-left t-cover">
+                        <span class="warn">*</span>图文封面<br/>
+                        <span class="tele-validate">必填项不完整</span>
+                    </div>
+                    <div class="teletext-right clearfix">
+                        <div class="teletext-row">
+                            <span class="upload-btn" id="upload-img"><span class="upload-txt">上传图片</span><i class="fa fa-spin"></i></span>
+                            <span class="tips">建议图片尺寸750*448</span>
+                            <div class="teletext-imgBox"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="teletext-table clearfix">
+                    <div class="teletext-left t-title">
+                        <span class="warn">*</span>图文标题<br/>
+                        <span class="tele-validate">必填项不完整</span>
+                    </div>
+                    <div class="teletext-right clearfix">
+                        <input class="form-control" name="title" type="text" placeholder="填写标题名称">
+                    </div>
+                </div>
+                <div class="teletext-table clearfix">
+                    <div class="teletext-left t-author">
+                        <span class="warn">*</span>作者姓名<br/>
+                        <span class="tele-validate">必填项不完整</span>
+                    </div>
+                    <div class="teletext-right clearfix">
+                        <input class="form-control" name="author" type="text" placeholder="填写作者姓名">
+                    </div>
+                </div>
+                <div class="teletext-table clearfix">
+                    <div class="teletext-left t-content">
+                        <span class="warn">*</span>正文编辑<br/>
+                        <span class="tele-validate">必填项不完整</span>
+                    </div>
+                    <div class="teletext-right clearfix">
+                        <div class="teletext-content">
+                            <textarea id="editor"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="teletext-table clearfix">
+                    <div class="teletext-left t-skus">
+                        <span class="warn"></span>相关商品<br/>
+                        <span class="tele-validate">必填项不完整</span>
+                    </div>
+                    <div class="teletext-right clearfix">
+                        <div class="skus-list" id="tele-skus"></div>
+                    </div>
+                </div>
+                <div class="teletext-table clearfix">
+                    <div class="teletext-left t-tags">
+                        <span class="warn"></span>标签<br/>
+                        <span class="tele-validate">必填项不完整</span>
+                    </div>
+                    <div class="teletext-right clearfix">
+                        <div class="label-wrap">
+                            <div class="label-list">
+                                <ul class="clearfix"></ul>
+                            </div>
+                            <div class="label-group">
+                                <div class="label-head clearfix">
+                                    <span class="label-more">更多<i class="fa fa-angle-right"></i></span>
+                                    <ul class="label-tags clearfix"></ul>
+                                </div>
+                                <div class="label-content">
+                                    <ul class="label-table"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--上传失败弹窗-->
+<div class="modal fade" id="errModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="tele-dlg-content">
+                    <div class="tele-dlg-head">上传失败</div>
+                    <div class="tele-dlg-info">
+                        图片上传失败请重新上传<br/>
+                        (图片格式JPG或PNG,图片尺寸建议750*350)
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">重新上传</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--预览-->
+<div class="preview-wrapper">
+    <div class="preview-container">
+        <div class="preview-header">
+            <h4>{{i18n.preview}}</h4>
+        </div>
+        <div class="preview-con">
+            <div class="preview">
+
+            </div>
+            <div class="qr">
+                <span class="tip">{{i18n.scan}}</span>
+                <div id="qrCode"></div>
+                <div class="p-link">
+                    {{i18n.scan_link}}:
+                    <p></p>
+                </div>
+                <div class="teletextId p-link">图文ID: <span></span></div>
+            </div>
+        </div>
+        <div class="close"><i class="fa fa-times"></i></div>
+    </div>
+</div>
+
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/vue/vue.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/webuploader/webuploader.js'></script>
+<script type="text/javascript" src='../../static/vendor/editor/wangEditor.js'></script>
+<script type="text/javascript" src='../../static/vendor/moment/moment.js'></script>
+<script type="text/javascript" src='../../static/vendor/laydate/laydate.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/vendor/handlebars/handlebars.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/common.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/js/src/teletext/upload.js'></script>
+<script type="text/javascript" src='../../static/js/src/teletext/custom-menu.js'></script>
+<script type="text/javascript" src='../../static/js/src/teletext/telePanel.js'></script>
+</body>
+</html>

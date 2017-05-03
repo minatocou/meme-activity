@@ -1,0 +1,232 @@
+<div class="tab-pane" id="boxProduct">
+    <div class="search-form-wrap" style="">
+        <form data-api="/master/searchgift" action="" class="form-inline search-form" role="form" align="center" data-func="boxProductData" data-tmpl="boxProduct-tmpl">
+        <div class="table table-layout">
+            <div class="form-group">
+                <label>{{i18n.giftBox}}SKU </label>
+                <div>
+                    <input type="text" class="form-control" name="sku">
+                </div>
+            </div>
+            <div class="form-group">
+                <label >{{i18n.giftBoxName}}</label>
+                <div>
+                    <input type="text" class="form-control" id="" name="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label >{{i18n.remark}}</label>
+                <div>
+                    <input type="text" class="form-control" id="" name="comment">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{i18n.createTime}}</label>
+                <div>
+                    <div class="input-daterange input-group" id="datepicker">
+                        <input type="text" class=" form-control" name="createdFrom" placeholder="{{i18n.start_time}}" readonly />
+                        <span class="input-group-addon">➡️</span>
+                        <input type="text" class=" form-control" name="createdTo" placeholder="{{i18n.end_time}}" readonly />
+                    </div>
+                </div>
+            
+            </div>
+            <div class="form-group">
+                <label>{{i18n.createUser}}</label>
+                <div>
+                    <input type="text" class="form-control" name="creater">
+                </div>
+            
+            </div>
+        </div>
+            <input type="hidden" name="pageNum" value="">
+            <input type="hidden" name="pageSize" value="">
+            <div class="form-group pull-right">
+                <input type="submit" class="btn btn-default" value="{{i18n.search}}" id="search-btn">
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover v-middle mb-0">
+            <thead>
+                <tr>
+                    <th>{{i18n.giftBox}}SKU </th>
+                    <th> {{i18n.giftBoxName}} </th>
+                    <th> {{i18n.remark}} </th>
+                    <th> {{i18n.createTime}} </th> 
+                    <th> {{i18n.createUser}} </th> 
+                    <th> {{i18n.operation}} </th> 
+                </tr>
+            </thead>
+            <tbody class="data-container text-center">
+                
+            </tbody>
+        </table>
+        <script type="text/html" id="boxProduct-tmpl">
+            ${each list}
+                <tr>
+                    <td>${$value.sku}</td>
+                    <td title="${$value.name}"><div class="td-max-width">${$value.name}</div></td>
+                    <td title="${$value.comment}"><div class="td-max-width">${$value.comment}</div></td>
+                    <td>${$value.createdAt}</td>
+                    <td>${$value.creater}</td>
+                    <td>
+                        <button data-value="${$value.dataStringify}" data-sku="${$value.sku}" type="button" class="btn btn-warning" data-toggle="modal" data-target="#query-component-modal">
+                            <i class=" fa fa-eye"></i>{{i18n.get_detail}}
+                        </button>
+                        ${if $value.validRemove == 'N'} 
+                            <button type="button" class="btn btn-default delete-btn " disabled>
+                                <i class=" fa fa-trash"></i>{{i18n.delete}}
+                            </button> 
+                        ${else}
+                            <button type="button" data-delete-sku="${$value.sku}" data-url="/master/removegift" class="btn btn-danger delete-btn" >
+                                <i class=" fa fa-trash"></i>{{i18n.delete}}
+                            </button>
+                        ${/if}
+                            
+                    </td> 
+                </tr>
+            ${/each}  
+        </script>
+        <div class="modal fade" id="query-component-modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg relative">
+            <div class="modal-content">
+              <div class="modal-header pb-0">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <ul class="ov-h">
+                    <li class="tab-box-item active" data-target=".show-item-detail" data-tmpl="showItemDetail" data-toggle="tab" data-api="/master/searchgroup">
+                        {{i18n.boxComponent}}
+                    </li>
+                    <li class="tab-box-item" data-target=".show-box-code" data-tmpl="showBoxCode" data-toggle="tab" data-api="/master/giftbarcode">
+                        {{i18n.boxCode}}
+                    </li>
+                </ul>
+              </div>
+              <div class="modal-body tab-content">
+                <div class="tab-pane active show-item-detail">
+                    <div class="radio col-xs-7">
+                        <label> <input type="radio" name="showType" value="barcode">{{i18n.showItemByCode}}</label>
+                        &nbsp;
+                        <label><input type="radio" name="showType" value="sku" checked>{{i18n.showItemBySKU}} </label>
+                    </div>   
+                    <div class="ov-auto table">
+                        <div class="table dis-table b-1 data-container">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane show-box-code">
+                    <div class="scroll-container bt-1 bb-1">
+                        <table class="table table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th>{{i18n.boxCode}}</th>
+                                    <th>{{i18n.wares}}SKU</th>
+                                    <th>{{i18n.waresCode}}</th>
+                                    <th>{{i18n.waresName}}</th>
+                                    <th>{{i18n.operation}}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="data-container">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clearfix mt-20">
+                        &nbsp;&nbsp;<div class="pull-left">{{i18n.boxCategoryCount}}：<span data-bind="code-category-count"></span></div>
+                        <a href target="_blank" class="btn btn-primary px-30 pull-right" data-req="/master/exportGiftBarCode?sku=" data-url>{{i18n.getAllBoxCode}}</a>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/html" id="item-detail-tmpl">
+            ${each showItemDetail}
+                <div class="table-cell v-top item-input-container">
+                    <div class="text-center p-7 th">{{i18n.assemblyItem}}${$index}</div>
+                    <div class="item-cell-container">
+                        ${each $value}
+                            <input type="text" readonly data-sku="${$value.prodSku}" data-barcode="${$value.prodBarCode}" class="item-input" value="${$value.prodSku}">
+                        ${/each}
+                    </div>    
+                </div>
+            ${/each}
+
+            ${each showBoxCode as v i}
+                ${each v}
+                    <tr>
+                        ${if $index == 0}
+                            <td class="v-middle text-center" rowspan="${v.length}">${i}</td>
+                            <td>${$value.prodSku}</td>
+                            <td>${$value.productBarCode }</td>
+                            <td>${$value.name}</td>
+                            <td class="v-middle text-center" rowspan="${v.length}"><a href="javascript:;" class="btn btn-default" data-print-url="/master/printgift?barCode=${i}&operator={{user.realname}}">{{i18n.printBoxCode}}</a></td>
+                        ${else}
+                            <td>${$value.prodSku}</td>
+                            <td>${$value.productBarCode}</td>
+                            <td>${$value.name}</td>
+                        ${/if}
+                    </tr>
+                ${/each}
+            ${/each}
+
+        </script>
+    </div>
+    <div id="pagination-container"></div>
+</div>
+<script type="text/html" id="add-box-modal">
+    <form class="form-horizontal need-validate-form" role="form" action="${action}">
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span class="color-warning">*</span>{{i18n.giftBox}}SKU </label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" data-unique name="sku" placeholder="" stringCheck="true" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span class="color-warning">*</span>{{i18n.giftBoxName}}</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" required name="name" maxlength="50" placeholder="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">{{i18n.remark}}</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="comment" maxlength="50" placeholder="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">{{i18n.giftBoxCount}}</label>
+            <div class="col-sm-2">
+                <input type="number" class="form-control" numberCheck="true" data-create-item value="2" min="1" placeholder="">
+            </div>
+            <div class="radio col-xs-7">
+                <label> <input type="radio" name="prodType"  value="barCode">{{i18n.addItemByCode}}</label>
+                &nbsp;
+                <label><input type="radio" name="prodType" value="sku" checked>{{i18n.addItemBySKU}} </label>
+            </div>   
+        </div>
+        <div class="ov-auto">
+            <div class="table dis-table b-1 data-container submit-data-container">
+                
+            </div>
+        </div>
+    </form>
+</script>
+<script type="text/html" id="create-item-input">
+${each list}
+${if $value}
+    <div class="table-cell v-top item-input-container">
+        <div class="text-center p-7 th">
+            <!-- <i data-target=".item-cell-container" class="fa fa-minus fa-lg remove-one-line" role="button"></i> -->
+            {{i18n.assemblyItem}}${$index-0+1}&nbsp;
+            <!-- <i data-target=".item-cell-container" data-clone='[name="validItem"]' class="fa fa-plus fa-lg add-new-line" role="button"></i> -->
+        </div>
+        <div class="item-cell-container">
+            <!-- <input type="text" data-sku="" data-barcode="" name="validItem" placeholder="{{i18n.pleaseEnter}}" stringCheck="true" class="item-input" value=""> -->
+            <textarea rows="10" data-sku="" data-barcode="" placeholder="{{i18n.pleaseEnter}}"></textarea>
+        </div>    
+    </div>
+${/if}
+${/each}
+</script>          

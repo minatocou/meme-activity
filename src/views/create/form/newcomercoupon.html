@@ -1,0 +1,34 @@
+<form class="newcomercoupon-attr attr-form" style="display: none" role="form" action="">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#newcomercoupon" href="#newcomercoupon">{{i18n.newcomercoupon}}</a>
+            </div>
+            <div id="newcomercoupon" class="panel-body panel-collapse collapse">
+                <label>
+                    <span>背景色</span>
+                    <input class="form-control input-sm" type="text" name="bgcolor"  placeholder="背景色">
+                </label>
+                <div class="newcomercoupon-body">
+                </div>
+                <button id="newcomercouponAdd" type="button" class="btn btn-default">{{i18n.add_hot}}</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script id="newcomercouponTemplate" type="text/html">
+    ${each couponInfo as coupon i}
+    <hr>
+    <div class="form-group">
+        <i class="fa fa-close remove-table"></i>
+        <label>
+            <span>券id</span>
+            <span class="index">-No${i}</span>
+            <input class="form-control input-sm" value="${coupon.ruleId}" type="text" name="ruleId" placeholder="券id">
+        </label>
+        <label>
+            <span>券封面图</span>
+            <input class="form-control input-sm" type="text" value="${coupon.ruleImg}" name="ruleImg" placeholder="券封面图">
+        </label>
+    </div>
+    ${/each}
+</script>

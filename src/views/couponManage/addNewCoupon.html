@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.add }}</title>
+    {{> meta}}
+   <link rel="stylesheet" href="../../static/vendor/bootstrap/css/bootstrap.css">
+   <link rel="stylesheet" href="../../static/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+   <link rel="stylesheet" href="../../static/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+   <link rel="stylesheet" href="../../static/vendor/font-awesome/css/font-awesome.css">
+   <link rel="stylesheet" href="../../static/css/common/reset.css">
+   <link rel="stylesheet" href="../../static/vendor/pagination/pagination.css">
+   <link rel="stylesheet" href="../../static/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+   <link rel="stylesheet" href="../../static/css/common/global.css">
+   <link rel="stylesheet" href="../../static/css/common/header.css">
+   <link rel="stylesheet" href="../../static/css/common/sidebar.css">
+   <link rel="stylesheet" href="../../static/css/src/create/preview.css">
+   <link rel="stylesheet" href="../../static/css/src/couponManage/addNewCoupon.css">
+   <link rel="stylesheet" href="../../static/css/src/ajaxLoading.css">
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <div class="top-block py-10">
+            <h4 class="pull-left py-10">{{i18n.add}}</h4>
+            <div class="pull-right">
+                <a href="/coupon/cn/manage" class="btn btn-default px-30" type="button">{{i18n.go_back}}</a>
+                <button class="btn btn-primary px-30" type="button" data-form-btn=".addNewCouponForm">
+                    {{i18n.confirmAndSend}}
+                </button>
+            </div>
+        </div>
+        <div class="main-content clearfix">
+            <form class="form-horizontal need-validate-form mt-20 clearfix addNewCouponForm" role="form"
+                  action="/coupon/bind">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.activity_name}}
+                    </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" placeholder="请输入活动名称" required
+                                  name="activity_name" id="activity_name"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.coupon}}ID </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="coupon_id"
+                               placeholder="{{i18n.couponIDPlaceholder}}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{i18n.activity_explanation}}</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" placeholder="活动说明"
+                                  name="desc"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label margin-b-10"><span class="color-warning">*</span>发券用户</label>
+                    <div class="about-user">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户ID</label>
+                            <div class="col-sm-9">
+                                <textarea id="userIdBox" class="form-control"
+                                          placeholder="{{i18n.couponUserIDPlaceholder}}"
+                                          required
+                                          name="customers"></textarea>
+                            </div>
+                            <div class="import-excel">
+                                <div class="excel-box">
+                                    <label>
+                                        <span id="showFileName">点击上传文件</span>
+                                        <input id="uploadExcelFile" type="file">
+                                    </label>
+                                    <button type="button" class="btn btn-default" id="importUserIdBtn">
+                                        确认批量导入用户ID
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label"><input type="checkbox"> 会员等级</label>-->
+                        <!--<div class="col-sm-9">-->
+                        <!--<textarea class="form-control" placeholder="{{i18n.couponUserIDPlaceholder}}" name="customers"></textarea>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label"><input type="checkbox"> 特殊场景用户</label>-->
+                        <!--<div class="col-sm-9">-->
+                        <!--<textarea class="form-control" placeholder="{{i18n.couponUserIDPlaceholder}}" name="customers"></textarea>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+
+                </div>
+            </form>
+            <div class="show-total">
+                <span>
+                    发券统计
+                </span>
+                <table border="1">
+                    <thead>
+                    <tr>
+                        <th>发券用户数</th>
+                        <th>绑定总数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>——</td>
+                        <td>——</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/jquery.validate.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/localization/messages_zh.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/src/couponManage/common.js'></script>
+<script type="text/javascript" src='../../static/js/src/couponManage/addNewCoupon.js'></script>
+
+</body>
+</html>

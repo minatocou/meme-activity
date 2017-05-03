@@ -1,0 +1,85 @@
+<div class="activity-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#activity" href="#activity">活动组件</a>
+            </div>
+            <div id="activity" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="activityGroup singleConf">
+                        <form  v-for="(i,activity) in setting.data" class="activityItem singleItem">
+                            <input type="hidden" class="uid" name="id" value="${activity.id}">
+                            <a class="itemTitle" @click="slideItem($event)">配置(${activity.position},${status(activity)}) <i class="fa fa-caret-down"></i></a>
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div><em class="red">*</em>排序</div>
+                                    <input class="form-control input-sm position" value="${activity.position}" v-model="activity.position" name="position" placeholder="${i18n.please_input_number}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>开始时间</div>
+                                    <input @mousedown="initDate($event,activity.end_time,'start')" v-model="activity.start_time" class="form-control input-sm startTime" value="${activity.start_time}"  name="start_time" placeholder="${i18n.start_time}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>结束时间</div>
+                                    <input @mousedown="initDate($event,activity.start_time,'end')" v-model="activity.end_time" class="form-control input-sm endTime" value="${activity.end_time}" name="end_time" placeholder="${i18n.end_time}" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>活动图片URL(建议750*424)</div>
+                                    <img class="thumbnail" v-if="activity.banner_img" :src="activity.banner_img">
+                                    <input class="form-control input-sm imgSrc removeSpace" v-model="activity.banner_img" value="${activity.banner_img}" name="banner_img" placeholder="${i18n.bannerSrc}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>跳转URL/APP原生页面</div>
+                                    <select class="form-control linkKind appLink" name="url_type" @change="changeUrlType($event)" value="${activity.url_type}">
+                                        <template v-for="(k,v) in urlType">
+                                            <option v-if="activity.url_type==v.value"
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}"
+                                                    selected>
+                                                ${v.value}
+                                            </option>
+                                            <option v-else
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}">
+                                                ${v.value}
+                                            </option>
+                                        </template>
+                                    </select>
+                                    <input class="form-control input-sm inputWord" name="url_text" @change="changeUrlInput($event)" value="${activity.url_text}" placeholder="URL" type="text">
+                                    <input class="form-control input-sm" name="item_action_url" type="hidden" v-model="activity.item_action_url" value="${activity.item_action_url}">
+                                    <input class="form-control input-sm" name="item_action_url_type" type="hidden" value="${activity.item_action_url_type}">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>Category ID</div>
+                                    <input class="form-control input-sm position" value="${activity.category_id}"  name="category_id" placeholder="${i18n.please_input_number}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div class="ops">
+                                        <a class="btn btn-warning btn-sm shutActivity" @click="shutActivity($event)" :class="{'active':activity.status==1}" type="button">${i18n.shut}
+                                        </a>
+                                        <a class="btn btn-success btn-sm openActivity" @click="openActivity($event)" :class="{'active':activity.status==0}" type="button">${i18n.open}
+                                        </a>
+                                    </div>
+                                    <input class="status" type="hidden" name="status" value="${activity.status}">
+                                </div>
+                            </div>
+                            <div class="form-group delIcon">
+                                <div class="ops">
+                                    <a class="btn btn-sm delBanner" @click="deleteActivity($event)" type="button">×</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <a @click="addActivity($event)" class="addActivity btn btn-primary">${i18n.add_config} + </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

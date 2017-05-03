@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新增视频</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href='../../static/css/common/reset.css'/>
+    <link rel='stylesheet' href='../../static/css/common/global.css'/>
+    <link rel='stylesheet' href='../../static/vendor/font-awesome/css/font-awesome.css'/>
+    <link rel='stylesheet' href='../../static/vendor/bootstrap/css/bootstrap.css'/>
+    <link rel='stylesheet' href='../../static/vendor/datePicker/jquery.datetimepicker.css'/>
+    <link rel='stylesheet' href='../../static/vendor/jquery-ui/jquery-ui.min.css'/>
+    <link rel='stylesheet' href='../../static/css/src/video/highlight.less'/>
+    <link rel='stylesheet' href='../../static/css/common/global.css'/>
+    <link rel='stylesheet' href='../../static/css/common/header.css'/>
+    <link rel='stylesheet' href='../../static/css/common/sidebar.css'/>
+    <link rel='stylesheet' href='../../static/css/src/create/preview.css'/>
+    <link rel='stylesheet' href='../../static/css/src/ajaxLoading.css'/>
+    <link rel='stylesheet' href='../../static/css/src/video/add.less'/>
+</head>
+<body id="videoContainer" data-preview="{{config.preview}}" data-page-id="{{setting.pageId}}" data-magento="{{config.magento.domain}}" data-state="{{setting.status}}" data-server-time="{{setting.server_time}}" data-localize="{{i18n.localize}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+
+    <div class="videoCon">
+        <div class="videoHeader">
+            <h2>视频配置 ><span>详情页</span></h2>
+            <a class="btn btn-primary saveVideo">{{i18n.save}}</a>
+        </div>
+        <div class="videoBody">
+            <div class="container">
+                <div class="title">基本属性</div>
+                <div class="text-left col-md-12 wrapper">
+                    <input type="hidden" id="domain" value="{{domain}}">
+                    <!--<input type="hidden" id="uptoken" value="{{uptoken}}">-->
+                    <input type="hidden" id="qiniuFileHeader" value="{{qiniuFileHeader}}">
+                </div>
+                <form class="videoForm">
+                    <input type="hidden" name="operator" value="{{user.username}}">
+                    <input type="hidden" name="video_id" value="{{videoData.video_id}}">
+                    <table>
+                        <colgroup>
+                            <col width="100">
+                            <col width="">
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>视频分类<span class="star">*</span></td>
+                                <td>
+                                    <select name="category">
+                                        <option>请选择</option>
+                                        <option {{#compare videoData.category '==' '1'}}selected{{/compare}} value="1">测评试色</option>
+                                        <option {{#compare videoData.category '==' '2'}}selected{{/compare}} value="2">教程</option>
+                                        <option {{#compare videoData.category '==' '3'}}selected{{/compare}} value="3">品牌介绍</option>
+                                        <option {{#compare videoData.category '==' '4'}}selected{{/compare}} value="4">商品介绍</option>
+                                        <option {{#compare videoData.category '==' '5'}}selected{{/compare}} value="5">线下活动</option>
+                                        <option {{#compare videoData.category '==' '6'}}selected{{/compare}} value="6">新品预告</option>
+                                        <option {{#compare videoData.category '==' '7'}}selected{{/compare}} value="7">资讯</option>
+                                        <option {{#compare videoData.category '==' '8'}}selected{{/compare}} value="8">其他</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>上传视频<span class="star">*</span></td>
+                                <td>
+                                    <input type="hidden" name="video_url" value="{{videoData.video_url}}">
+                                    <input type="hidden" name="video_img" value="{{videoData.video_img}}">
+                                    <div class="uploadBox">
+                                        <div id="uploadFile">
+                                            <a class="btn btn-default btn-lg pickBtn" id="pickfiles" href="#" >
+                                                <sapn>{{#if videoData.video_url}}重新上传{{else}}立即上传{{/if}}</sapn>
+                                            </a>
+                                        </div>
+                                        <div id="uploadProgress">
+                                            <span class="tip">建议视频格式mp4,视频大小不能超过2GB</span>
+                                            <span class="pro">上传进度: <span></span></span>
+                                            <span class="success"></span>
+                                            <span class="waiting"></span>
+                                            <span class="fail"></span>
+                                        </div>
+                                    </div>
+                                    <img class="videoImg" src="{{videoData.video_img}}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>视频名称<span class="star">*</span></td>
+                                <td><input type="text" name="title" value="{{videoData.title}}"></td>
+                            </tr>
+                            <tr>
+                                <td>视频状态<span class="star">*</span></td>
+                                <td>
+                                    <select name="status">
+                                        <option {{#compare videoData.status '==' '1'}}selected{{/compare}} value="1">开启</option>
+                                        <option {{#compare videoData.status '==' '0'}}selected{{/compare}}  value="0">关闭</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>片头图片</td>
+                                <td class="uploadImgBox">
+                                    <div id="upload-img">{{i18n.upload}}</div>
+                                    <input type="hidden" name="img_url" value="{{#if videoData.img_url}}{{videoData.img_url}}{{/if}}">
+                                    <div class="{{#if videoData.img_url}}showImg{{/if}} imgBox">
+                                        <img class="imgUrl" src="{{#if videoData.img_url}}{{videoData.img_url}}{{/if}}">
+                                        <i class="close-btn">×</i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>简介<span class="star">*</span></td>
+                                <td>
+                                    <textarea name="short_desc">{{videoData.short_desc}}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>标签<span class="star">*</span></td>
+                                <td class="tagsContainer">
+                                    <input type="hidden" name="tags" value="">
+                                    <div class="label-wrap">
+                                        <div class="label-list">
+                                            <ul class="clearfix"></ul>
+                                        </div>
+                                        <div class="label-group">
+                                            <div class="label-head clearfix">
+                                                <span class="label-more">更多<i class="fa fa-angle-right"></i></span>
+                                                <ul class="label-category clearfix"></ul>
+                                            </div>
+                                            <div class="label-content">
+                                                <ul class="label-tags">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>关联商品SKU</td>
+                                <td>
+                                    <input type="text" name="skus" value="{{videoData.skus}}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>搜索关键词</td>
+                                <td>
+                                    <input type="text" name="keyword" value="{{videoData.keyword}}">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </form>
+            </div>
+            <a href="/video/list" class="btn btn-default btn-sm active">&lt; 返回</a>
+            <a class="btn btn-primary saveVideo">{{i18n.save}}</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/vue/vue.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-ui/jquery-ui.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/underscore/underscore.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/moment/moment.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/datePicker/jquery.datetimepicker.full.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/webuploader/webuploader.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<!--<script type="text/javascript" src='../../static/js/src/video/loader/moxie.js'></script>
+<script type="text/javascript" src='../../static/js/src/video/loader/plupload.min.js'></script>-->
+<script type="text/javascript" src='../../static/js/src/video/loader/pinyin.js'></script>
+<script type="text/javascript" src='../../static/js/src/video/loader/imgupload.js'></script>
+<script type="text/javascript" src='../../static/js/src/video/loader/plupload.full.min.js'></script>
+<script type="text/javascript" src='../../static/js/src/video/loader/ui.js'></script>
+<script type="text/javascript" src='../../static/js/src/video/loader/highlight.js'></script>
+<script type="text/javascript" src='../../static/js/src/video/loader/qiniu.js'></script>
+<script type="text/javascript" src='../../static/js/src/video/upload.js'></script>
+<script type="text/javascript" src='../../static/js/src/video/add.js'></script>
+
+</body>
+</html>

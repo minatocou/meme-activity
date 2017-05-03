@@ -1,0 +1,194 @@
+.right-content-frame {
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+.header {
+  overflow: hidden;
+}
+.liveCon .liveHeader {
+  overflow: hidden;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.liveCon .liveHeader h2 {
+  float: left;
+  font-size: 16px;
+  line-height: 34px;
+  margin: 0;
+}
+.liveCon .liveHeader h2 span {
+  color: #2e6da4;
+  font-size: 14px;
+  vertical-align: middle;
+}
+.liveCon .liveHeader .liveName {
+  float: right;
+  line-height: 26px;
+  margin-top: 10px;
+}
+.liveCon .liveHeader .liveName span {
+  font-size: 18px;
+}
+.liveCon .saveLive {
+  padding: 4px 12px;
+}
+.liveCon .liveBody {
+  width: 100%;
+  padding: 20px;
+}
+.liveCon .liveBody .container {
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 20px;
+}
+.liveCon .liveBody .container .hostInfo {
+  overflow: hidden;
+  line-height: 62px;
+  margin-bottom: 15px;
+}
+.liveCon .liveBody .container .hostInfo .hostAvatar {
+  width: 60px;
+  height: 60px;
+  float: left;
+  border-radius: 50%;
+}
+.liveCon .liveBody .container .hostInfo .hostAvatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.liveCon .liveBody .container .hostInfo .hostName {
+  float: left;
+  margin-left: 15px;
+}
+.liveCon .liveBody .container .watchInfo .likesNum {
+  margin-left: 15px;
+}
+.liveCon .liveBody .container .liveRoom {
+  min-height: 500px;
+  border: 1px solid #ccc;
+  margin-top: 30px;
+  border-radius: 5px;
+  padding-bottom: 66px;
+  position: relative;
+  font-size: 16px;
+}
+.liveCon .liveBody .container .liveRoom .message {
+  padding: 8px 15px;
+}
+.liveCon .liveBody .container .liveRoom .message-list-container {
+  height: 373px;
+  padding: 10px 5px;
+  overflow: auto;
+}
+.liveCon .liveBody .container .liveRoom .message-list-container .text-message-list-item {
+  line-height: 1.7;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.liveCon .liveBody .container .liveRoom .message-list-container .bonus-tips {
+  padding: 8px 15px;
+  margin: 12px 0;
+  background: #eee;
+  border-radius: 6px;
+  display: inline-block;
+}
+.liveCon .liveBody .container .liveRoom .message-list-container .bonus-tips .color-user-name {
+  color: #3fb147;
+}
+.liveCon .liveBody .container .liveRoom .message-list-container .color-user-name {
+  color: #1ca2f8;
+}
+.liveCon .liveBody .container .liveRoom .sendMessage {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 82px 15px 15px;
+}
+.liveCon .liveBody .container .liveRoom .sendMessage .adminInput {
+  width: 100%;
+  height: 36px;
+  border: 1px solid #ccc;
+  line-height: 36px;
+  border-radius: 4px;
+  padding: 0 10px;
+}
+.liveCon .liveBody .container .liveRoom .sendMessage .adminInput:focus {
+  outline: none;
+  border-color: #aaa;
+}
+.liveCon .liveBody .container .liveRoom .sendMessage .sendBtn {
+  position: absolute;
+  right: 15px;
+  height: 35px;
+  line-height: 35px;
+  bottom: 15px;
+  padding: 0 12px;
+}
+.pb-5 {
+  padding-bottom: 5px;
+}
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: auto;
+  white-space: nowrap;
+}
+.color-warning,
+label.error[for] {
+  color: #e33;
+  margin-bottom: 0;
+}
+.liveMain {
+  padding-right: 320px;
+  position: relative;
+}
+.sensitiveWord {
+  width: 300px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 15px 10px;
+}
+.sensitiveWord .addWord input {
+  width: 218px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  padding: 0 10px;
+}
+.sensitiveWord .addWord input:focus {
+  border-color: #999;
+}
+.sensitiveWord .addWord .addWordBtn {
+  padding: 0 10px;
+  line-height: 28px;
+  height: 28px;
+  margin-top: -2px;
+  display: inline-block;
+}
+.sensitiveWord .sensitiveList {
+  margin-top: 20px;
+  height: 390px;
+  overflow: auto;
+}
+.sensitiveWord .sensitiveList table {
+  margin: 0;
+}
+.sensitiveWord .sensitiveList table tr td:first-child {
+  vertical-align: middle;
+  word-break: break-all;
+  padding: 5px 10px;
+}
+.sensitiveWord .sensitiveList .deleteWordBtn {
+  padding: 0 10px;
+  line-height: 28px;
+  height: 28px;
+  margin-top: -2px;
+  display: inline-block;
+}

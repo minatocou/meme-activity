@@ -1,0 +1,138 @@
+<div class="tab-pane active" id="partProduct">
+    <div class="search-form-wrap" style="">
+        <form data-api="/master/index" action="" class="form-inline search-form" role="form" align="center" data-func="partProductData" data-tmpl="partProduct-tmpl">
+        <div class="table table-layout">
+            <div class="form-group">
+                <div class="radio">
+                    <label>{{i18n.wares}}SKU <input type="radio" name="searchType" data-name="sku" data-bind="#search-category" value="sku" checked></label>
+                    &nbsp;
+                    <label>{{i18n.waresCode}} <input type="radio" name="searchType" data-name="barCode" value="barCode" data-bind="#search-category"></label>
+                </div>                    
+                <div>
+                    <input type="text" class="form-control" id="search-category" name="sku">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="url_key">{{i18n.waresName}}</label>
+                <div>
+                    <input type="text" class="form-control" id="" name="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{i18n.remark}}</label>
+                <div>
+                    <input type="text" class="form-control" id="" name="comment">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{i18n.createTime}}</label>
+                <div>
+                    <div class="input-daterange input-group" id="datepicker">
+                        <input type="text" class=" form-control" name="createdFrom" placeholder="{{i18n.start_time}}" readonly />
+                        <span class="input-group-addon">➡️</span>
+                        <input type="text" class=" form-control" name="createdTo" placeholder="{{i18n.end_time}}" readonly />
+                    </div>
+                </div>
+            
+            </div>
+            <div class="form-group">
+                <label>{{i18n.createUser}}</label>
+                <div>
+                    <input type="text" class="form-control" name="creater">
+                </div>
+            
+            </div>
+        </div>
+            <input type="hidden" name="pageNum" value="">
+            <input type="hidden" name="pageSize" value="">
+            <div class="form-group pull-right">
+                <input type="submit" class="btn btn-default" value="{{i18n.search}}" id="search-btn">
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover v-middle mb-0">
+            <thead>
+                <tr>
+                    <th>{{i18n.wares}}SKU </th>
+                    <th> {{i18n.waresCode}} </th>
+                    <th>{{i18n.waresName}}</th>
+                    <th> {{i18n.remark}} </th>
+                    <th> {{i18n.createTime}} </th> 
+                    <th> {{i18n.createUser}} </th> 
+                    <th> {{i18n.operation}} </th> 
+                </tr>
+            </thead>
+            <tbody class="data-container text-center">
+                
+            </tbody>
+        </table>
+        <script type="text/html" id="partProduct-tmpl">
+            ${each list}
+                <tr>
+                    <td>${$value.sku}</td>
+                    <td>${$value.barCode}</td>
+                    <td title="${$value.name}"><div class="td-max-width">${$value.name}</div></td>
+                    <td title="${$value.comment}"><div class="td-max-width">${$value.comment}</div></td>
+                    <td>${$value.createdAt}</td>
+                    <td>${$value.creater}</td>
+                    <td>
+                        <button data-value="${$value.dataStringify}" type="button" class="btn btn-warning" data-toggle="modal" data-modal="edit-part-modal">
+                            <i class=" fa fa-pencil"></i>{{i18n.edit}}
+                        </button>
+                        ${if $value.validRemove == 'N'} 
+                            <button type="button" class="btn btn-default delete-btn " disabled>
+                                <i class=" fa fa-trash"></i>{{i18n.delete}}
+                            </button> 
+                        ${else}
+                            <button type="button" data-delete-sku="${$value.sku}" data-url="/master/removeproduct" class="btn btn-danger delete-btn " >
+                                <i class=" fa fa-trash"></i>{{i18n.delete}}
+                            </button> 
+                        ${/if}
+                        
+                    </td> 
+                </tr>
+            ${/each}  
+        </script>
+    </div>
+    <div id="pagination-container"></div>
+</div>
+<script type="text/html" id="add-part-modal">
+    <form class="form-horizontal need-validate-form" role="form" action="${action}">
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.wares}}SKU </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" data-unique name="sku" placeholder="{{i18n.waresSKUPlaceholder}}" stringCheck="true" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.waresCode}}</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" data-unique name="barCode" placeholder="{{i18n.waresCodePlaceholder}}" numberCheck="true" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{i18n.waresName}}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="name" maxlength="50" placeholder="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{i18n.remark}}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="comment" maxlength="50" placeholder="">
+            </div>
+        </div>
+    </form>
+</script>
+<script type="text/html" id="import-file-modal">
+    <form class="need-validate-form" role="form" action="${action}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="control-label"><span class="color-warning pull-left">*</span>{{i18n.chooseFile}} </label>
+            <div class="">
+                <input type="hidden" name="operator" value="{{user.realname}}">
+                <input type="file" class="input-file-style" name="fileName" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" placeholder="" required>
+            </div>
+        </div>
+    </form>
+</script>

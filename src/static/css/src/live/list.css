@@ -1,0 +1,32 @@
+.right-content-frame {
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+.liveHeader {
+  overflow: hidden;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.liveHeader h2 {
+  float: left;
+  font-size: 16px;
+  line-height: 34px;
+}
+.liveHeader .addLive {
+  float: right;
+}
+.liveBody {
+  padding: 20px;
+}
+.liveBody .listContainer {
+  border-radius: 4px;
+}
+.liveBody .listContainer table th {
+  background: #eee;
+  font-weight: normal;
+  border-bottom-width: 1px;
+}
+.liveBody .listContainer table td {
+  vertical-align: middle;
+}

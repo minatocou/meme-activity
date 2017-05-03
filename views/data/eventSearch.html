@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memebox事件关系管理面板</title>
+    {{> meta}}    <!-- <link rel='stylesheet' href="../../static/vendor/datePicker/jquery.datetimepicker.css"> -->
+    <link rel='stylesheet' href="/css/build/src/views/data/eventSearch.css?t=1493261397671" />
+</head>
+<body>
+{{>header}}
+<div class="main-container">
+
+    {{>sidebar}}
+
+    <div class="data-container">
+        <div class="title">memebox event search</div>
+        <div class="dat param">
+            <span>时间</span>
+            <input type="text" v-model="dateFrom" placeholder="eg:2017-1-1">
+             ~
+            <input type="text" v-model="dateTo" placeholder="eg:2017-5-1">
+        </div>
+        <div class="ver param">
+            <span>版本</span>
+            <template v-for="(index,client) in clientversions" v-if="index<10">
+                <input type="checkbox" :value="client.client_version" v-model="client_version">
+                <label :for="client.client_version">${client.client_version}</label>
+            </template>
+        </div>
+        <div class="plt param">
+            <span>平台</span>
+            <input type="checkbox" value="iOS" v-model="platform">
+            <label for="iOS">iOS</label>
+            <input type="checkbox" value="android" v-model="platform">
+            <label for="android">android</label>
+            <input type="checkbox" value="h5" v-model="platform">
+            <label for="h5">h5</label>
+            <input type="checkbox" value="pc" v-model="platform">
+            <label for="pc">pc</label>
+            <input type="checkbox" value="wechat" v-model="platform">
+            <label for="wechat">wechat</label>
+        </div>
+        <div class="cha param">
+            <span>渠道</span>
+            <input type="text" v-model="channel" placeholder="">
+        </div>
+        <div class="eve param">
+            <span>事件名</span>
+            <input type="text" placeholder="" @keyup="eventAssociate()" v-model="event_name">
+            <ul v-if="associate.length !=0">
+                <li v-for="event in associate" @click="choseE(event)">${event.event_name}</li>
+            </ul>
+        </div>
+        <div class="pro param">
+            <span class="tit">property</span>
+            <span @click="addpro" class="opt">+</span>
+            <div v-if="property.length!=0" class="pros">
+                <div v-for="(index, pro) in property">
+                    <span @click="removepro(index)" class="opt">-</span>
+                    <select name="" id="" v-model="pro.preproty">
+                        <option v-bind:value="allpro.mapping" v-for="allpro in allpros">${allpro.description}</option>
+                    </select>
+                    <select name="" id="" v-model="pro.opt">
+                        <option value="like">包含</option>
+                        <option value="eq">=</option>
+                        <option value="noteq">≠</option>
+                    </select>
+                    <input type="text" v-model="pro.val">
+                </div >
+            </div>
+        </div>
+        <div class="search" @click="gosearch()">搜索</div>
+        <div class="result ss"></div>
+        <div class="result ll" v-if="reports.length > 0">
+            <ul>
+                <li>日期</li>
+                <li>数量</li>
+            <template v-for="report in reports">
+                <li>${(new Date(report.date).toLocaleString()).split(',')[0]}</li>
+                <li>${report.count}</li>
+            </template>
+            </ul>
+        </div>
+        <div class="loading" v-if="loading">
+            <img src="/img/static/img/loadingx.gif" alt="">
+        </div>
+    </div>
+</div><!-- <script type="text/javascript" src='../../static/vendor/datePicker/jquery.datetimepicker.full.min.js'></script> -->
+
+<script type="text/javascript" src="/js/build/src/views/data/eventSearch.js?t=1493261397671"></script>
+</body>
+</html>

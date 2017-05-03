@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memebox角色关系管理面板</title>
+    {{> meta}}
+    <link rel='stylesheet' href="../../../static/css/common/reset.css">
+    <link rel='stylesheet' href="../../../static/css/common/global.css">
+    <link rel='stylesheet' href="../../../static/css/common/header.css">
+    <link rel='stylesheet' href="../../../static/css/common/sidebar.css">
+    <link rel='stylesheet' href="../../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel='stylesheet' href="../../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel='stylesheet' href="../../../static/vendor/pagination/pagination.css">
+    <link rel='stylesheet' href="../../../static/css/src/admin/role.css">
+</head>
+<body>
+{{>header}}
+
+
+<div class="main-container">
+    {{>sidebar}}
+
+    <div class="role-container">
+        <div class="newRole f-r"><button class="btn btn-primary">{{i18n.new_role}}</button></div>
+        <div>
+            <table>
+                <colgroup>
+                    <col width="30%">
+                    <col width="35%">
+                    <col width="35%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>{{i18n.role}}</th>
+                    <th>{{i18n.privilege}}</th>
+                    <th>{{i18n.operation}}</th>
+                </tr>
+                </thead>
+                <tbody id="role-body">
+
+                </tbody>
+            </table>
+            <div id="pagination-container"></div>
+        </div>
+    </div>
+    <div class="modal fade" id="updateModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">{{i18n.update}}</h4>
+                </div>
+                <div class="modal-body" style="overflow: hidden">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{i18n.cancel}}</button>
+                    <button type="button" class="btn btn-primary modal-btn-update" data-roleid="">{{i18n.update}}</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>
+<script id="action-template" type="text/x-handlebars-template">
+    \{{#each data}}
+        <div class="f-l" style="margin-right:10px">
+            <span>\{{name}}</span>
+            <input type="checkbox" data-action="\{{id}}" />
+        </div>
+    \{{/each}}
+</script>
+<script id="role-template" type="text/x-handlebars-template">
+    \{{#each .}}
+    <tr data-roleid="\{{id}}">
+        <td>\{{rolename}}</td>
+        <td>
+
+                \{{#each Actions}}
+                    \{{name}},
+                    <div class="hide action-item">
+                        \{{id}}
+                    </div>
+                \{{/each}}
+
+        </td>
+        <td>
+            <button class="btn btn-info states-btn update-role" data-roleid="\{{id}}">
+                <i class="fa fa-check"></i>{{i18n.update}}
+            </button>
+            <button class="btn btn-danger delete-btn" data-roleid="\{{id}}">
+                <i class=" fa fa-trash"></i>{{i18n.delete}}
+            </button>
+        </td>
+    </tr>
+    \{{/each}}
+</script>
+<script id="empty-template" type="text/x-handlebars-template">
+    <tr >
+        <td><input type="text" class="form-control role-view" /></td>
+        <td>
+            \{{#each data}}
+            <div class="f-l" style="margin-right:10px">
+                <span>\{{name}}</span>
+                <input type="checkbox" data-actionid="\{{id}}" />
+            </div>
+            \{{/each}}
+        </td>
+        <td>
+            <button class="btn btn-success states-btn role-save" >
+                <i class="fa fa-check"></i>{{i18n.save}}
+            </button>
+            <button class="btn btn-danger  new-del" >
+                <i class="fa fa-check"></i>{{i18n.delete}}
+            </button>
+        </td>
+    </tr>
+</script>
+
+<script type="text/javascript" src='../../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../../static/vendor/handlebars/handlebars.js'></script>
+<script type="text/javascript" src='../../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../../static/js/src/admin/role.js'></script>
+</body>
+</html>

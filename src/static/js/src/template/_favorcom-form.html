@@ -1,0 +1,42 @@
+<div class="favorcom-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#favorcom" href="#favorcom">猜你喜欢组件</a>
+            </div>
+            <div id="favorcom" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <!--<div class="form-group ">
+                            <div>*背景图片URL(建议大小?*?)</div>
+                            <input class="form-control input-sm bgImg" value="${setting.bg_img}" name="bg_img" placeholder="${i18n.bg_url}"
+                                   type="text">
+                        </div>-->
+                        <input class="form-control input-sm" name="action_url" type="hidden" value="${actionUrl}">
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="favorcomGroup singleConf">
+                        <form v-for="(i,favorcom) in setting.data" class="favorcomItem singleItem">
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div><em class="red">*</em>开始时间</div>
+                                    <input @mousedown="initDate($event,favorcom.end_time,'start')" v-model="favorcom.start_time" class="form-control input-sm startTime" value="${favorcom.start_time}"  name="start_time" placeholder="${i18n.start_time}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>结束时间</div>
+                                    <input @mousedown="initDate($event,favorcom.start_time,'end')" v-model="favorcom.end_time" class="form-control input-sm endTime" value="${favorcom.end_time}" name="end_time" placeholder="${i18n.end_time}" type="text">
+                                </div>
+                                <!--<div class="form-group">
+                                    <div>展示商品数量</div>
+                                    <input class="form-control input-sm position" value="${favorcom.show_num}" name="show_num" />
+                                    <div class="tips">若不填写,展示全部商品</div>
+                                </div>-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

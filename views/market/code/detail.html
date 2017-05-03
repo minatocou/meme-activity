@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.discount_code}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/market/code/detail.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <div class="breadcrumbs">
+            {{i18n.market_tools}} ><span> {{i18n.discount_code}} ></span><span
+                class="high-light">{{i18n.detail_page}}</span>
+            <div class="f-r"><a class="btn btn-danger" id="marketSaveBtn">{{i18n.save}}</a></div>
+        </div>
+        <hr>
+        <div class="box">
+            <div class="set_attr" id="detail">
+            </div>
+            <div class="explain">
+                <h4>配置说明</h4>
+                <div id="explainText">
+                    <p>123</p>
+                    <p>345</p>
+                </div>
+                <div id="spreadSwitch">
+                    <span class="fr">{{i18n.spread}}</span>
+                    <span class="fr">{{i18n.retract}}</span>
+                </div>
+            </div>
+            <div class="log">
+                <h4>操作日志</h4>
+                <div id="logTable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="logTbody">
+                        </tbody>
+                    </table>
+                    <div id="pagination-container"></div>
+                </div>
+                <div id="logBtn">
+                    <span class="fr">{{i18n.spread}}</span>
+                    <span class="fr">{{i18n.retract}}</span>
+                </div>
+            </div>
+            <hr>
+            <a class="btn btn-default btn-sm active" data-toggle="modal" data-target="#myModal">< {{i18n.go_back}}</a>
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    确定要返回吗
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    取消
+                </button>
+                <button type="button" class="btn btn-primary" id="goBack">
+                    {{i18n.sure}}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script id="detailTpl" type="text/x-handlebars-template">
+    <form>
+        <h4>
+            {{i18n.base_attribute}}
+        </h4>
+        <div class="non-empty group">
+            <label for="name">{{i18n.market_name}}</label>
+            <input type="text" class="form-control input-l" id="name" value="\{{name}}">
+        </div>
+        <div class="group non-empty">
+            <label for="description" class="">{{i18n.use_explain}}</label>
+            <input type="text" class="form-control input-l" id="description" value="\{{description}}">
+        </div>
+        <div class="non-empty group">
+            <label for="status">{{i18n.state}}</label>
+            <select class="form-control input-l" id="status">
+                \{{#select status}}
+                <option value="1">{{i18n.open}}</option>
+                <option value="2">{{i18n.pause}}</option>
+                \{{/select}}
+            </select>
+        </div>
+        <div class="non-empty group">
+            <label for="is_public">{{i18n.type}}</label>
+            <select class="form-control input-l" id="is_public" \{{#compare is_public '!=' null}}disabled\{{/compare}} >
+            \{{#select is_public}}
+            <option value="1">{{i18n.public_code}}</option>
+            <option value="0">{{i18n.private_code}}</option>
+            \{{/select}}
+            </select>
+        </div>
+        \{{#compare is_public '==' null}}
+        <div class="group  non-empty public-code">
+            <label for="publicPrefix">{{i18n.public_code}}</label>
+            <input type="text" class="input-l form-control" id="publicPrefix"
+                   placeholder="{{i18n.please_input_public_code}}">
+        </div>
+        <div class="non-empty group private-code">
+            <label for="total">{{i18n.total_num}}</label>
+            <input type="number" min="0" id="total" class="input-l form-control">
+        </div>
+        <div class="non-empty group private-code">
+            <label for="privatePrefix">{{i18n.prefix}}</label>
+            <input type="text" id="privatePrefix" class="input-l form-control">
+        </div>
+        \{{/compare}}
+        \{{#compare is_public '==' '1'}}
+        <div class="group  non-empty ">
+            <label for="publicPrefix">{{i18n.public_code}}</label>
+            <input type="text"
+                   id="publicPrefix"
+                   class="input-l form-control"
+                   placeholder="{{i18n.please_input_public_code}}" disabled
+                   value="\{{prefix}}">
+        </div>
+        \{{/compare}}
+        \{{#compare is_public '==' '0'}}
+        <div class="non-empty group">
+            <label for="total">{{i18n.total_num}}</label>
+            <input type="text"
+                   id="total" class="input-l form-control" disabled value="\{{total}}">
+        </div>
+        <div class="group non-empty">
+            <label for="privatePrefix">{{i18n.prefix}}</label>
+            <input type="text"
+                   id="privatePrefix"
+                   class="input-l form-control" disabled value="\{{prefix}}">
+        </div>
+        \{{/compare}}
+        <!--<div class="content-r group ">-->
+        <!--<span class="btn-l" data-toggle="modal"-->
+        <!--data-target="#myModal">{{i18n.check_private_code}}</span>-->
+        <!--</div>-->
+        <div class="non-empty group">
+            <label>{{i18n.validity}}</label>
+            <input class="form-control input-l" id="from_date" type="text" value="\{{from_date}}">
+            {{i18n.to}}
+            <input class="form-control input-l" id="to_date" type="text" value="\{{to_date}}">
+        </div>
+        <div class=" group non-empty">
+            <label for="total_use_limit">{{i18n.use_quantity}}</label>
+            <input type="number" min="0" id="total_use_limit" class="form-control input-l"
+                   placeholder="{{i18n.please_input_number}}" value="\{{total_use_limit}}">
+        </div>
+        <div class="group non-empty">
+            <label for="customer_use_limit">{{i18n.use_times}}</label>
+            <div class="input-group-after">
+                <input class="form-control input-l"
+                       id="customer_use_limit"
+                       type="number"
+                       min="0"
+                       value="\{{customer_use_limit}}">
+                <span>/{{i18n.person}}</span>
+            </div>
+        </div>
+        <div class="non-empty group">
+            <label>{{i18n.use_platform}}</label>
+            <input type="checkbox" value="app" checked disabled> APP
+            <input type="checkbox" value="pc" checked disabled> PC
+            <input type="checkbox" value="offline" checked disabled> 线下
+        </div>
+        <h4>
+            {{i18n.set_rule}}
+        </h4>
+        <div id="discountCoupon">
+            <div class="non-empty group">
+                <label for="discount_type">折扣{{i18n.type}}</label>
+                <select class="form-control input-l" id="discount_type">
+                    \{{#select discount_type}}
+                    <option value="1">直减码</option>
+                    <option value="2">打折码</option>
+                    \{{/select}}
+                </select>
+            </div>
+            <div class="non-empty group">
+                <label>{{i18n.set_discount}}</label>
+                <span>{{i18n.fill}}</span>
+                <input type="number" class="form-control input-s" id="rule" value="\{{rule}}" min="0">
+                <span class="s1">{{i18n.yuan}} - {{i18n.minus}}</span>
+                <input type="number" class="form-control input-s" id="discount" value="\{{discount}}" min="0">
+                <span class="s2">{{i18n.yuan}}</span>
+            </div>
+        </div>
+
+        <div class="non-empty group">
+            <label for="warehouse">{{i18n.select_product}}</label>
+            <select class="form-control input-l" id="warehouse">
+                \{{#select warehouse}}
+                <option value="2">{{i18n.china_pro}}</option>
+                <option value="1">{{i18n.korea_pro}}</option>
+                <option value="4">{{i18n.ftz_pro}}</option>
+                <option value="8">Epass</option>
+                <option value="15">通用仓</option>
+                \{{/select}}
+            </select>
+        </div>
+        <div class="content-r group">
+            <label class="radio-inline">
+                <input type="radio" name="pro_type" value="Category" checked>Category
+            </label>
+            <textarea class="form-control" rows="3" id="category">\{{category}}</textarea>
+        </div>
+    </form>
+</script>
+<script id="logTpl" type="text/x-handlebars-template">
+    \{{#each list}}
+    <tr>
+        <td>\{{user_name}}</td>
+        <td>\{{time}}</td>
+        <td>\{{#compare action '==' 'new'}}新建\{{/compare}}\{{#compare action '==' 'edit'}}编辑\{{/compare}}</td>
+    </tr>
+    \{{/each}}
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/market/code/detail.js?t=1493261397671"></script>
+</body>
+</html>

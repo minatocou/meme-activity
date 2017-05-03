@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>memebox{{i18n.appdownload}}</title>
+	    {{> meta}}
+		<link rel='stylesheet' href="../../static/css/common/reset.css">
+		<link rel='stylesheet' href="../../static/css/common/global.css">
+		<link rel='stylesheet' href="../../static/css/common/header.css">
+		<link rel='stylesheet' href="../../static/css/common/sidebar.css">
+		<link rel='stylesheet' href="../../static/vendor/font-awesome/css/font-awesome.css">
+		<link rel='stylesheet' href="../../static/vendor/bootstrap/css/bootstrap.css">
+		<link rel='stylesheet' href='../../static/css/src/app/download.css'>
+
+	</head>
+    <body>
+    {{>header}}
+    <div class="main-container">
+    	{{>sidebar}}
+    	<button type="button" class="btn btn-primary add" @click='addChannel()'>{{i18n.add}}</button>
+    	<div class="app-download">
+    		<table class="table table-bordered table-hover">
+	    		<thead>
+	    			<th>id</th>
+	    			<th>{{i18n.downloadchannel}}</th>
+	    			<th>ios</th>
+	    			<th>android</th>
+	    			<th>wechat</th>
+	    			<th>{{i18n.operation}}</th>
+	    		</thead>
+				<tbody>
+					<tr v-for="(index,item) in list">
+						<td>${item.id}</td>
+						<td><input type="text" value="${item.urlKey}" @input="item.urlKey = $event.target.value"></td>
+						<td><input type="text" value="${item.ios}" @input="item.ios = $event.target.value"></td>
+						<td><input type="text" value="${item.android}" @input="item.android = $event.target.value"></td>
+						<td><input type="text" value="${item.wechat}" @input="item.wechat = $event.target.value"></td>
+						<td>
+							<button class="btn btn-danger delete-btn" @click='delDownloadSetting(index)'>
+								<i class=" fa fa-trash">{{i18n.delete}}</i>
+							</button>
+							<button class="btn btn-info states-btn update-role" @click="clicked?saveDownloadSetting(index):sth()">
+								<i class="fa fa-check">{{i18n.update}}</i>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+    		</table>
+    	</div>
+    </div>
+
+	<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+	<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+	<script type="text/javascript" src='../../static/vendor/vue/vue.js'></script>
+	<script type="text/javascript" src='../../static/js/common/header.js'></script>
+	<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+	<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+	<script type="text/javascript" src='../../static/js/src/app/download.js'></script>
+    </body>
+</html>

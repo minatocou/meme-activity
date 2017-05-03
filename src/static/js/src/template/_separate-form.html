@@ -1,0 +1,68 @@
+<div class="separate-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#separate" href="#separate">分割线组件</a>
+            </div>
+            <div id="separate" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                        <div class="form-group">
+                            <div><em class="red"></em>新人展示</div>
+                            <input class="form-control input-sm isNew" type="checkbox" value="1" v-model="setting.isNew" name="isNew" />
+                        </div>
+                    </form>
+                    <div v-if="setting.data && setting.data.length>0" class="separateGroup singleConf">
+                        <form  v-for="(i,separate) in setting.data" class="separateItem singleItem">
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <label><input type="radio" value="block" v-model="picked" name="space_type"> 色块分割</label>
+                                    <label><input type="radio" value="img" v-model='picked' name="space_type"> 图片分割</label>
+                                </div>
+                                <template v-if="picked=='block'">
+                                    <div class="form-group" >
+                                        <div>高度/px(建议20px)</div>
+                                        <input class="form-control input-sm space_height" value="${separate.space_height}" name="space_height" />
+                                    </div>
+                                    <div class="form-group" >
+                                        <div>背景色(建议#f5f5f5)</div>
+                                        <input class="form-control input-sm space_color" value="${separate.space_color}" name="space_color" />
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <div class="form-group">
+                                        <div><em class="red">*</em>分割图片URL(建议750*20)</div>
+                                        <img class="thumbnail" v-if="separate.space_bg" :src="separate.space_bg">
+                                        <input class="form-control input-sm space_bg removeSpace" v-model="separate.space_bg" value="${separate.space_bg}" name="space_bg" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>跳转URL/APP原生页面</div>
+                                        <select class="form-control linkKind appLink" name="url_type" @change="changeUrlType($event)" value="${separate.url_type}">
+                                            <template v-for="(k,v) in urlType">
+                                                <option v-if="separate.url_type==v.value"
+                                                        data-link_Type ="${k}"
+                                                        data-placeholder="${v.palceholderVal}"
+                                                        selected>
+                                                    ${v.value}
+                                                </option>
+                                                <option v-else
+                                                        data-link_Type ="${k}"
+                                                        data-placeholder="${v.palceholderVal}">
+                                                    ${v.value}
+                                                </option>
+                                            </template>
+                                        </select>
+                                        <input class="form-control input-sm inputWord" name="url_text" @change="changeUrlInput($event)" value="${separate.url_text}" placeholder="URL" type="text">
+                                        <input class="form-control input-sm" name="item_action_url" type="hidden" value="${separate.item_action_url}">
+                                        <input class="form-control input-sm" name="item_action_url_type" type="hidden" value="${separate.item_action_url_type}">
+                                    </div>
+                                </template>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<form class="l1-attr attr-form" style="display: none" role="form">
+    <div class="form-group">
+        <input class="form-control input-sm" form-img name="groupImg" placeholder="{{i18n.list_address}}"
+               type="text">
+    </div>
+    <div class="form-group">
+        <input class="form-control input-sm" name="groupImgUrl" placeholder="{{i18n.list_link}}" type="text">
+    </div>
+    <div class="form-group">
+        <div>开始时间</div>
+        <input class="form-control input-sm" name="groupImgFromTime" placeholder="{{i18n.start_time}}"
+               type="text">
+    </div>
+    <div class="form-group">
+        <div>结束时间</div>
+        <input class="form-control input-sm" name="groupImgToTime" placeholder="{{i18n.end_time}}" type="text">
+    </div>
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#category" data-toggle="tab">
+                category
+            </a>
+        </li>
+        <li><a href="#sku" data-toggle="tab">sku</a></li>
+        <li><a href="#format" data-toggle="tab">{{i18n.format_setting}}</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="category">
+            <div class="form-group">
+                <input class="form-control input-sm" name="categoryid" placeholder="categoryid" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="proNum" placeholder="{{i18n.show_num}}"
+                       type="number">
+            </div>
+            <hr>
+            <div class="tip">{{i18n.black_tip}}</div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="isFriday" placeholder="{{i18n.black_is}}"
+                       type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="catFrom" placeholder="{{i18n.start_time}}"
+                       type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="catTo" placeholder="{{i18n.end_time}}" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="catLabel" placeholder="{{i18n.label}}" type="text">
+            </div>
+        </div>
+        <div class="tab-pane fade" id="sku">
+            <div class="form-group">
+                <input class="form-control input-sm" name="skus" placeholder="{{i18n.skuid}}" type="text">
+            </div>
+        </div>
+        <div class="tab-pane fade" id="format">
+            <div class="form-group">
+                <label>{{i18n.onelineN}}</label>
+                <select name="column" class="form-control" placeholder="{{i18n.oneline1}}">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class='tip'><em>*</em> {{i18n.cat_tip}}</div>
+</form>

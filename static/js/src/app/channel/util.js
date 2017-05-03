@@ -1,0 +1,1 @@
+function uuid(){function n(){return Math.floor(65536*(1+Math.random())).toString(16).substring(1)}return n()+n()+"-"+n()+"-"+n()+"-"+n()+"-"+n()+n()+n()}function isRepeat(n){for(var r={},t=0;t<n.length;t++){if(r[n[t]])return!0;r[n[t]]=!0}return!1}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>memebox管理面板</title>
+    {{> meta}}
+    <link rel='stylesheet' href="/css/build/src/views/tab/admin/panel.css?t=1493261397671" />
+</head>
+<body>
+
+{{>header}}
+
+<div class="main-container">
+
+    {{>sidebar}}
+    <div class="panel-container">
+        <div class="panel-main">
+            <div class="newUser"><button>{{i18n.new_user}}</button></div>
+            <div class="search">
+                <table>
+                    <tr>
+                        <th>{{i18n.fullname}}</th>
+                        <td><input type="text" id="search-name"></td>
+                    </tr>
+                </table>
+                <div class="search-btn">
+                    <button id="search-btn">{{i18n.search}}</button>
+                </div>
+            </div>
+            <div class="user-list">
+                <div class="user-wrap">
+                    <table>
+                        <colgroup>
+                            <col width="20%">
+                            <col width="25%">
+                            <col width="25%">
+                            <col width="30%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>{{i18n.loginname}}</th>
+                            <th>{{i18n.fullname}}</th>
+                            <th>{{i18n.role}}</th>
+                            <th>{{i18n.operation}}</th>
+                        </tr>
+                        </thead>
+                        <tbody id="user-content"></tbody>
+                    </table>
+                    <div id="pagination-container"></div>
+                </div>
+                <p class="loading">loading...</p>
+            </div>
+            <div class="user-pagination">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">{{i18n.new_user}}</h4>
+            </div>
+            <div class="modal-body">
+                <form id="add-user-form">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>{{i18n.username}}：</th>
+                            <td>
+                                <input type="text" name="realname">
+                                <span class="valid-msg"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{i18n.loginname}}：</th>
+                            <td>
+                                <input type="text" name="username" class="new-username">
+                                <span class="valid-msg"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{i18n.password}}：</th>
+                            <td>
+                                <input type="password" name="password">
+                                <span class="valid-msg"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="jurisdiction">{{i18n.role}}：</th>
+                            <td>
+                                <div class="chk-group">
+
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary add">{{i18n.add}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{i18n.cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">{{i18n.edit_privilege}}</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary edit updateEdit">{{i18n.update}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{i18n.cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="edit-content" type="text/x-handlebars-template">
+    <form id="edit-user-form">
+        <input type="hidden" name="userid" value="\{{userInfo.id}}">
+        <table>
+            <tbody>
+            <tr>
+                <th>{{i18n.fullname}}：</th>
+                <td>
+                    <input type="text" name="realname" value="\{{userInfo.realname}}">
+                    <span class="valid-msg"></span>
+                </td>
+            </tr>
+            <tr>
+                <th>{{i18n.loginname}}：</th>
+                <td>
+                    <input type="text" name="username" value="\{{userInfo.username}}" class="update-username" readonly>
+                    <span class="valid-msg"></span>
+                </td>
+            </tr>
+
+            <tr>
+                <th class="jurisdiction">{{i18n.role}}：</th>
+                <td>
+                    \{{#each roles}}
+                    <div class="f-l" style="margin-right:10px"><label><input  type="radio" value="\{{id}}" name="roleRadio"> </label> \{{rolename}}</div>
+                    \{{/each}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</script>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">{{i18n.sure_title}}</h4>
+            </div>
+            <div class="modal-body">
+                {{i18n.sure_delete}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary delete">{{i18n.delete}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{i18n.cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="user-tpl" type="text/x-handlebars-template">
+    \{{#each .}}
+    <tr data-userid="\{{id}}" data-roleid="\{{Roles.0.id}}">
+        <td>\{{username}}</td>
+        <td>\{{realname}}</td>
+        <td>\{{Roles.0.rolename}}</td>
+        <td>
+            <button class="edit">{{i18n.edit_privilege}}</button>
+            <button class="delete">{{i18n.delete}}</button>
+        </td>
+    </tr>
+    \{{/each}}
+</script>
+<script id="role-tpl" type="text/x-handlebars-template">
+    \{{#each data}}
+    <div class="f-l" ><label><input  type="radio" value="\{{id}}" name="roleRadio" \{{#compare @index '==' 0}} checked \{{/compare}}> </label> \{{rolename}}</div>
+    \{{/each}}
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/tab/admin/panel.js?t=1493261397671"></script>
+</body>
+</html>

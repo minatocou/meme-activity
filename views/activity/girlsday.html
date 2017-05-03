@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>memebox{{i18n.girls_day_page}}</title>
+	    {{> meta}}
+	
+    <link rel='stylesheet' href="/css/build/src/views/activity/girlsday.css?t=1493261397671" />
+</head>
+    <body>
+    {{>header}}
+    <div class="main-container">
+    	{{>sidebar}}
+    	<button type="button" class="btn btn-primary add" @click='addProduct()'>{{i18n.add}}</button>
+    	<div class="app-download">
+    		<table class="table table-bordered table-hover">
+	    		<thead>
+	    			<th>id</th>
+	    			<th>{{i18n.product_id}}</th>
+	    			<th>{{i18n.link}}</th>
+	    			<th>{{i18n.waresName}}</th>
+	    			<th>{{i18n.remark}}</th>
+	    			<th>{{i18n.operation}}</th>
+	    		</thead>
+				<tbody>
+					<tr v-for="(index,item) in list">
+						<td>${item.id}</td>
+						<td><input type="text" value="${item.productId}" @input="item.productId = $event.target.value"></td>
+						<td><input type="text" value="${item.link}" @input="item.link = $event.target.value"></td>
+						<td><input type="text" value="${item.name}" @input="item.name = $event.target.value"></td>
+						<td><input type="text" value="${item.desc}" @input="item.desc = $event.target.value"></td>
+						<td>
+							<button class="btn btn-danger delete-btn" @click='delProductSetting(index)'>
+								<i class=" fa fa-trash">{{i18n.delete}}</i>
+							</button>
+							<button class="btn btn-info states-btn update-role" @click="clicked?saveProductSetting(index):sth()">
+								<i class="fa fa-check">{{i18n.update}}</i>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+    		</table>
+    	</div>
+    </div>    
+<script type="text/javascript" src="/js/build/src/views/activity/girlsday.js?t=1493261397671"></script>
+</body>
+</html>

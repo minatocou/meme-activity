@@ -1,0 +1,75 @@
+<div class="discount-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#discount" href="#discount">今日特价组件</a>
+            </div>
+            <div id="discount" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="discountGroup singleConf">
+                        <form  v-for="(i,discount) in setting.data" class="discountItem singleItem">
+                            <input type="hidden" class="uid" name="id" value="${discount.id}">
+                            <a class="itemTitle" @click="slideItem($event)">配置(${discount.discount_time},${status(discount)}) <i class="fa fa-caret-down"></i></a>
+                            <div class="itemBody">
+                                <!--<div class="form-group ">
+                                    <div>*背景图片URL(建议750*1111)</div>
+                                    <input class="form-control input-sm bgImg removeSpace" value="${discount.banner_img}" name="banner_img" placeholder="${i18n.bg_url}"
+                                           type="text">
+                                </div>-->
+                                <div class="form-group">
+                                    <div>跳转URL/APP原生页面</div>
+                                    <select class="form-control linkKind appLink" name="url_type" @change="changeUrlType($event)" value="${discount.url_type}">
+                                        <template v-for="(k,v) in urlType">
+                                            <option v-if="discount.url_type==v.value"
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}"
+                                                    selected>
+                                                ${v.value}
+                                            </option>
+                                            <option v-else
+                                                    data-link_Type ="${k}"
+                                                    data-placeholder="${v.palceholderVal}">
+                                                ${v.value}
+                                            </option>
+                                        </template>
+                                    </select>
+                                    <input class="form-control input-sm inputWord" name="url_text" @change="changeUrlInput($event)" value="${discount.url_text}" placeholder="URL" type="text">
+                                    <input class="form-control input-sm" name="item_action_url" type="hidden" value="${discount.item_action_url}">
+                                    <input class="form-control input-sm" name="item_action_url_type" type="hidden" value="${discount.item_action_url_type}">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>活动时间</div>
+                                    <input @mousedown="initDate($event)" class="form-control input-sm " v-model="discount.discount_time" value="${discount.discount_time}"  name="discount_time" placeholder="${i18n.tip_time}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>Category ID</div>
+                                    <input class="form-control input-sm position" value="${discount.category_id}"  name="category_id" placeholder="${i18n.please_input_number}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div class="ops">
+                                        <a class="btn btn-warning btn-sm shutDiscount" @click="shutDiscount($event)" :class="{'active':discount.status==1}" type="button">${i18n.shut}
+                                        </a>
+                                        <a class="btn btn-success btn-sm openDiscount" @click="openDiscount($event)" :class="{'active':discount.status==0}" type="button">${i18n.open}
+                                        </a>
+                                    </div>
+                                    <input class="status" type="hidden" name="status" value="${discount.status}">
+                                </div>
+                            </div>
+                            <div class="form-group delIcon">
+                                <div class="ops">
+                                    <a class="btn btn-sm delBanner" @click="deleteDiscount($event)" type="button">×</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <a @click="addDiscount($event)" class="addDiscount btn btn-primary">${i18n.add_config} + </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

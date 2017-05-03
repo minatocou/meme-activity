@@ -1,0 +1,1 @@
+$("#search").click(function(){console.log(searchContent())}),$("#pagination-container").pagination({dataSource:[1,2,3,4],pageSize:5,callback:function(n,o){console.log(n,o)}});

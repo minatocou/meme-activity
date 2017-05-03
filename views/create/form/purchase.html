@@ -1,0 +1,28 @@
+<form class="purchase-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#purchase" href="#purchase">{{i18n.purchase_setting}}</a>
+            </div>
+            <div id="purchase" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div>
+                        <span>{{i18n.time}} </span>
+                        <input class="form-control input-xs" name="fromDate" id="fromdatetimepicker"
+                               placeholder="{{i18n.start_time}}" type="text" style="margin-bottom: 15px">
+                        <input class="form-control input-xs" name="toDate" id="todatetimepicker"
+                               placeholder="{{i18n.end_time}}" type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.purchase_pl}} </span>
+                        <input class="form-control input-xs" name="peopleFrom" id="people_from"
+                               placeholder="{{i18n.start_pl}}" type="number" style="margin-bottom: 15px">
+                        <input class="form-control input-xs" name="peopleTo" id="people_to"
+                               placeholder="{{i18n.end_pl}}" type="number">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

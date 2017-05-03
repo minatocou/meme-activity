@@ -1,0 +1,54 @@
+<form class="comm-attr" role="form">
+    <input type="hidden" name="cid" value="{{cid}}">
+    <input type="hidden" name="d" value="{{d}}">
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#page" href="#page">{{i18n.page_setting}}</a>
+            </div>
+            <div id="page" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input name="urlkey" class="form-control input-sm" placeholder="url key"
+                               value="{{urlKey}}" type="text">
+                        <div class="tip"><em>*</em>{{i18n.ukey}}</div>
+                    </div>
+                    <div class="form-group">
+                        <input name="title" class="form-control input-sm" placeholder="{{i18n.title}}"
+                               value="{{root.title}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input name="bgColor" class="form-control input-sm" placeholder="{{i18n.background}}"
+                               value="{{root.bgColor}}" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#share" href="#share">{{i18n.app_share}}</a>
+            </div>
+            <div id="share" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input name="shareTitle" class="form-control input-sm" value="{{root.shareTitle}}"
+                               placeholder="{{i18n.share_title}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input name="shareDesc" class="form-control input-sm" value="{{root.shareDesc}}"
+                               placeholder="{{i18n.share_desc}}" type="text">
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<input name="shareUrl" class="form-control input-sm" value="{{root.shareUrl}}" placeholder="分享连接" type="text">-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <input name="shareImg" class="form-control input-sm" value="{{root.shareImg}}"
+                               placeholder="{{i18n.share_img}}" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

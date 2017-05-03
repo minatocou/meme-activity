@@ -1,0 +1,13 @@
+/.idea
+/node_modules
+.idea/
+*.iml
+classes/
+*.class
+target/
+uploader/
+*.log
+/dist/node_modules
+/conf/config.js
+*.DS_Store
+/.vscode

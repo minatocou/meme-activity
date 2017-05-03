@@ -1,0 +1,1 @@
+var validators={required:{check:function(e){return e.trim()}},phone:{message:"请输入11位正确的手机号码",check:function(e){return/^(13[0-9]|17[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/i.test(e)}}};

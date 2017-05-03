@@ -1,0 +1,133 @@
+hr { margin: 8px 0; background-color: #ddd; }
+.right-content-frame { height: 100%; overflow: auto; position: relative; }
+.table > thead > tr > th,.th { background: #efefef; text-align: center; line-height: 2; }
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td { padding: 6px; }
+.b-0 { border: 0 !important; }
+.b-1 { border: 1px solid #ddd; }
+.bt-1 { border-top: 1px solid #ddd; }
+.by-1 { border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+.br-1 { border-right: 1px solid #ddd; }
+.bb-0 { border-bottom: 0 !important; }
+.bb-1 { border-bottom: 1px solid #ddd !important; }
+.p-0 { padding: 0 !important; }
+.p-7 { padding: 7px; }
+.pt-7 { padding-top: 7px; }
+.pt-20 { padding-top: 20px; }
+.p-12 { padding: 12px; }
+.px-0 { padding-left: 0 !important; padding-right: 0 !important; }
+.px-5 { padding-left: 5px !important; padding-right: 5px !important; }
+.px-30 { padding-left: 30px !important; padding-right: 30px !important; }
+.pb-0 { padding-bottom: 0 !important; }
+.pl-10 { padding-left: 10px !important; }
+.pt-0 { padding-top: 0 !important; }
+.pr-0 { padding-right: 0 !important; }
+.py-40 { padding-top: 40px; padding-bottom: 40px; }
+.mt-20 { margin-top: 20px !important; }
+.mx-20 { margin-left: 20px !important; margin-right: 20px !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-5 { margin-bottom: 5px !important; }
+.mb-20 { margin-bottom: 20px !important; }
+.mt-7 { margin-top: 7px !important; }
+.mt-10 { margin-top: 10px !important; }
+.ml-10 { margin-left: 10px !important; }
+.mr-10 { margin-right: 10px !important; }
+.mr-15 { margin-right: 15px !important; }
+.m-0 { margin: 0 !important; }
+.block {
+    display: block;
+}
+.font-20 { font-size: 20px !important; }
+.table-cell { display: table-cell; }
+.nowrap {  white-space: nowrap; }
+.relative { position: relative; }
+.v-middle { vertical-align: middle !important; }
+.v-middle> tbody > tr > td,.v-middle> thead > tr > th { vertical-align: middle; }
+.ov-h { overflow: hidden !important; }
+.ov-auto { overflow: auto !important; }
+.h-100p { height: 100%; }
+.color-warning,label.error[for] { color: #e33; margin-bottom: 0; white-space: nowrap; }
+.td-max-width { max-width: 240px; overflow: hidden; text-overflow: ellipsis; margin: auto; white-space: nowrap; }
+.input-60 { width: 60px }
+.input-80 { width: 80px; display: inline-block; }
+.form-control[readonly] { background: #fff; }
+.question-option-list { list-style-type: upper-alpha; padding-left: 40px; line-height: 34px; }
+.question-option-list li { margin-bottom: 8px; }
+.question-preview-list { list-style-type: decimal; padding-left: 30px; }
+.question-preview-list li { margin-bottom: 15px; position: relative; padding: 15px; }
+.question-preview-list li .question-edit-trigger {
+ 	position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    vertical-align: middle;
+    background: rgba(111,111,111,.5);
+    display: none;
+    font-size: 24px;
+}
+.question-preview-list li:hover .question-edit-trigger {
+ 	display: block;
+}
+.question-preview-list li:hover .question-edit-trigger .fa {
+ 	background: #fff;
+ 	border-radius: 6px;
+ 	padding: 8px 12px;
+}
+.question-preview-list li:hover{ background: #ddd; }
+.question-preview-list li div.close.hide{ position: absolute; top: 0; right: 5px; z-index: 100; }
+.question-preview-list li:hover div.close.hide{ display: block !important; }
+.option-container { display: inline-block; vertical-align: top; width: 100%; }
+
+tbody.data-container > tr:first-child [data-direction] { display: none; }
+tbody.data-container > tr:last-child [data-direction="down"] { display: none; }
+
+.justify-container { text-align: justify; font-size: 0; }
+.justify-container:after { content: ''; display: inline-block; width: 100%; }
+.justify-item { display: inline-block; vertical-align: top; font-size: 14px; line-height: 34px }
+
+.block-nav-top { padding: 13px 30px; box-shadow: 0 2px 2px 0 #ddd; border-bottom: 1px solid #ddd; }
+.data-container-wrap { height: calc(100% - 61px); overflow: auto; }
+
+.tag-container { margin-left: 16.66667%; padding-left: 15px; margin-top: 20px; float: left; }
+.tag-cell { border-radius: 10px; display: inline-block; padding: 5px 12px; margin: 0 5px 5px 0; border: 1px solid #ddd; box-shadow: 0 0 10px 0 #ddd; }
+
+.editable .form-control { width: 45%; float: left; }
+.save-edit .form-control { pointer-events: none; border: 0; box-shadow: none; background: transparent; }
+.save-edit .color-warning { display: none; }
+.save-edit input[type="checkbox"],.save-edit input[type="radio"] { display: none; }
+.save-edit input:not(:checked) + .label-text { display: none; }
+.save-edit label { width: auto; padding: 0; pointer-events: none; }
+.save-edit input[type="checkbox"]:checked + .label-text:after { content: " / "; font-weight: 600; }
+.save-edit.radio { padding-left: 20px; }
+
+.modify-questions-block { 
+	height: 100%;
+	width: 100%;
+	transition: all .3s ease 0s;
+    overflow: auto;
+    position: absolute;
+    transform: translateY(-100%);
+    left: 0;
+    top: 0;
+    background: #fff;
+}
+.modify-questions-block.active { 
+	transform: translateY(0);
+}
+.tipsShow { position: absolute; top: 40%; left: 50%; transform: translateX(-50%); border-radius: 15px; color: #fff; background: rgba(55,55,55,.9); padding: 12px 30px; text-align: right; }
+.close-panel { position: absolute; top: 5px; right: 5px; font-size: 25px; }
+.close-panel:focus { outline: none; }
+
+.tag-list-container { height: calc(100% - 49px); }
+.list-container { padding-bottom: 60px; overflow: auto; height: 100%; }
+.tag-right-content .list-container { padding: 20px 30px 70px; height: calc(100% - 62px); }
+.tag-left-list { height: 100%; width: 390px; float: left; position: relative; box-shadow: 1px 0px 1px 1px #ddd; }
+.tag-left-list table.table tr.active td{ background: #74a5cc; color: #fff; }
+.tag-left-list table.table tr.active .btn{ background: transparent; color: #fff; }
+.tag-right-content { overflow-x: hidden; overflow-y: auto; height: 100%; position: relative; }
+label.disabled { pointer-events: none; color: #999; cursor: not-allowed; }
+.footer-pagenation { position: absolute; width: 100%; max-width: 390px; height: 50px; bottom: 0; right: 0; padding: 10px; background: #fff; }
+.tag-right-content .footer-pagenation:before { position: absolute; width: 100%; color: #e33; transform: translateY(-125%); content: "翻页之后，未保存的数据将会丢失！"; }
+.modified { background: #efefef; }
+input.color-warning { border-color: #e33; }

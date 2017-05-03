@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memebox权限关系管理面板</title>
+    {{> meta}}
+    <link rel='stylesheet' href="/css/build/src/views/tab/admin/action.css?t=1493261397671" />
+</head>
+<body>
+{{>header}}
+
+<div class="main-container">
+    {{>sidebar}}
+
+    <div class="action-container">
+        <div class="newAction f-r"><button class="btn btn-primary">{{i18n.new_privilege}}</button></div>
+        <div>
+            <table>
+                <colgroup>
+                    <col width="30%">
+                    <col width="35%">
+                    <col width="35%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>{{i18n.privilege_desc}}</th>
+                    <th>{{i18n.privilege_name}}</th>
+                    <th>{{i18n.operation}}</th>
+                </tr>
+                </thead>
+                <tbody id="action-body">
+
+                </tbody>
+            </table>
+            <div id="pagination-container"></div>
+        </div>
+    </div>
+</div>
+<script id="action-template" type="text/x-handlebars-template">
+    \{{#each .}}
+    <tr data-actionid="\{{id}}" data-roles="\{{Roles}}">
+        <td>\{{name}}</td>
+        <td>\{{action}}</td>
+        <td>
+            <button class="btn btn-danger delete-btn" data-actionid="\{{id}}" data-roles="\{{Roles}}">
+                <i class=" fa fa-trash"></i>{{i18n.delete}}
+            </button>
+        </td>
+    </tr>
+    \{{/each}}
+</script>
+<script id="empty-template" type="text/x-handlebars-template">
+    <tr >
+        <td><input type="text" class="form-control name-view" /></td>
+        <td><input type="text" class="form-control action-name" /></td>
+        <td>
+            <button class="btn btn-success states-btn" >
+                <i class="fa fa-check"></i>{{i18n.save}}
+            </button>
+        </td>
+    </tr>
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/tab/admin/action.js?t=1493261397671"></script>
+</body>
+</html>

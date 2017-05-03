@@ -1,0 +1,154 @@
+html,
+body {
+    font-size: 14px;
+    height: 100%;
+    margin: 0;
+
+    font-family: "Microsoft YaHei",tahoma,arial,"Hiragino Sans GB","\5b8b\4f53",sans-serif;
+    *font-family: "Microsoft Yahei", "微软雅黑", Tahoma, Arial, Helvetica, STHeiti, "宋体";
+}
+
+a {
+    text-decoration: none;
+    color: #333333;
+}
+a:hover{
+    color:#ff4490;
+    text-decoration: none;
+}
+.inline-block {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+body .u-flyer{
+    width: 40px;
+    border-radius: 20px;
+}
+
+/** 标签-start **/
+.label-wrap{
+    width:600px;
+}
+.label-wrap .label-list{
+    width:100%;
+    height:auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom:15px;
+}
+.label-list ul{
+    min-height:34px;
+    padding:5px 0;
+    margin-bottom:0;
+}
+.label-list ul li{
+    display: inline-block;
+    float: left;
+    height:24px;
+    line-height:24px;
+    padding:0 8px;
+    text-align: center;
+    color: #666;
+    margin-left:10px;
+}
+.label-wrap .label-group{
+    width:100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.label-wrap .label-group .label-head{
+    border-bottom:1px solid #ccc;
+    padding-right:80px;
+}
+.label-head .label-tags{
+    height:40px;
+    overflow: hidden;
+    margin-bottom:0;
+}
+.label-tags li{
+    display: inline-block;
+    float: left;
+    height:24px;
+    line-height:24px;
+    padding:0 10px;
+    text-align: center;
+    color: #666;
+    cursor: pointer;
+    margin:5px 0 5px 15px;
+}
+.label-tags li:hover{
+    text-decoration: none;
+    background-color: #f0f0f0;
+}
+.label-tags li.current,
+.label-tags li.current:hover{
+    color: #fff;
+    background-color: #696c7f;
+}
+.label-head .label-more{
+    display: inline-block;
+    float: right;
+    color: #337ab7;
+    height:40px;
+    padding:8px 0;
+    margin-right:-60px;
+    cursor: pointer;
+}
+.label-head .label-more .fa{
+    margin-left:5px;
+    font-size:1.2em;
+}
+.label-more.open + .label-tags{
+    height:auto;
+}
+.label-wrap .label-group .label-content{
+    padding:10px;
+    min-height:150px;
+}
+.label-content .label-table{
+    width:100%;
+    margin-bottom:0;
+}
+.label-content .label-table:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.label-table li{
+    display: inline-block;
+    float: left;
+    margin-left:15px;
+    height:24px;
+    line-height:24px;
+    padding:0 10px;
+    margin-bottom:15px;
+    text-align: center;
+    color: #da786b;
+    cursor: pointer;
+    background-color: #fdf3f2;
+}
+.label-table li:hover,
+.label-table li.current{
+    background-color: #f2f2f4;
+    color: #a9a9b5;
+}
+.label-table li .fa{
+    margin-left:6px;
+    margin-right:0;
+}
+/** 标签-end **/
+

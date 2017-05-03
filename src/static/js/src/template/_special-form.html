@@ -1,0 +1,59 @@
+<div class="special-attr attr-form" v-show="show" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#special"
+                                          href="#special">特色栏目组件</a>
+            </div>
+            <div id="special" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="commonConf">
+                        <input type="hidden" class="has_change" name="has_change" value="${setting.has_change}">
+                    </form>
+
+                    <div v-if="setting.data && setting.data.length>0" class="specialGroup singleConf">
+                        <form v-for="(i,special) in setting.data | orderBy 'position'" class="specialItem singleItem">
+                            <a class="itemTitle" @click="slideItem($event)">区域<span>${special.position}</span>配置 <i class="fa fa-caret-down"></i></a>
+                            <input class="form-control input-sm" name="position" type="hidden" value="${special.position}">
+                            <div class="itemBody">
+                                <div class="form-group">
+                                    <div><em class="red">*</em>图片URL(建议${areaSize[i].size})</div>
+                                    <img class="thumbnail" v-if="special.special_img" :src="special.special_img">
+                                    <input class="form-control input-sm imgSrc removeSpace" v-model="special.special_img" value="${special.special_img}" name="special_img"
+                                           placeholder="${i18n.imgSrc}"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <div><em class="red">*</em>跳转URL/APP原生页面</div>
+                                    <select class="form-control linkKind appLink" name="url_type"
+                                            @change="changeUrlType($event)"
+                                            value="${special.url_type}">
+                                        <template v-for="(k,v) in urlType">
+                                            <option v-if="special.url_type==v.value"
+                                                    data-link_Type="${k}"
+                                                    data-placeholder="${v.palceholderVal}"
+                                                    selected>
+                                                ${v.value}
+                                            </option>
+                                            <option v-else
+                                                    data-link_Type="${k}"
+                                                    data-placeholder="${v.palceholderVal}">
+                                                ${v.value}
+                                            </option>
+                                        </template>
+                                    </select>
+                                    <input class="form-control input-sm inputWord" name="url_text"
+                                           @change="changeUrlInput($event)"
+                                           value="${special.url_text}" placeholder="URL" type="text">
+                                    <input class="form-control input-sm" name="item_action_url" type="hidden"
+                                           value="${special.item_action_url}">
+                                    <input class="form-control input-sm" name="item_action_url_type" type="hidden" value="${special.item_action_url_type}">
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

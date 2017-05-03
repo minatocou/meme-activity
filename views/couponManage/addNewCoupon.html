@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.add }}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/couponManage/addNewCoupon.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <div class="top-block py-10">
+            <h4 class="pull-left py-10">{{i18n.add}}</h4>
+            <div class="pull-right">
+                <a href="/coupon/cn/manage" class="btn btn-default px-30" type="button">{{i18n.go_back}}</a>
+                <button class="btn btn-primary px-30" type="button" data-form-btn=".addNewCouponForm">
+                    {{i18n.confirmAndSend}}
+                </button>
+            </div>
+        </div>
+        <div class="main-content clearfix">
+            <form class="form-horizontal need-validate-form mt-20 clearfix addNewCouponForm" role="form"
+                  action="/coupon/bind">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.activity_name}}
+                    </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" placeholder="请输入活动名称" required
+                                  name="activity_name" id="activity_name"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.coupon}}ID </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="coupon_id"
+                               placeholder="{{i18n.couponIDPlaceholder}}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{i18n.activity_explanation}}</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" placeholder="活动说明"
+                                  name="desc"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label margin-b-10"><span class="color-warning">*</span>发券用户</label>
+                    <div class="about-user">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户ID</label>
+                            <div class="col-sm-9">
+                                <textarea id="userIdBox" class="form-control"
+                                          placeholder="{{i18n.couponUserIDPlaceholder}}"
+                                          required
+                                          name="customers"></textarea>
+                            </div>
+                            <div class="import-excel">
+                                <div class="excel-box">
+                                    <label>
+                                        <span id="showFileName">点击上传文件</span>
+                                        <input id="uploadExcelFile" type="file">
+                                    </label>
+                                    <button type="button" class="btn btn-default" id="importUserIdBtn">
+                                        确认批量导入用户ID
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label"><input type="checkbox"> 会员等级</label>-->
+                        <!--<div class="col-sm-9">-->
+                        <!--<textarea class="form-control" placeholder="{{i18n.couponUserIDPlaceholder}}" name="customers"></textarea>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label"><input type="checkbox"> 特殊场景用户</label>-->
+                        <!--<div class="col-sm-9">-->
+                        <!--<textarea class="form-control" placeholder="{{i18n.couponUserIDPlaceholder}}" name="customers"></textarea>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+
+                </div>
+            </form>
+            <div class="show-total">
+                <span>
+                    发券统计
+                </span>
+                <table border="1">
+                    <thead>
+                    <tr>
+                        <th>发券用户数</th>
+                        <th>绑定总数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>——</td>
+                        <td>——</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/build/src/views/couponManage/addNewCoupon.js?t=1493261397671"></script>
+</body>
+</html>

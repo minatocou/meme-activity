@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.couponManage }}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/couponManage/couponManage.css?t=1493261397671" />
+</head>
+<body data-preview="{{config.preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+
+    <div class="right-content-frame">
+        <ul class="top-block">
+            <li class="tab-pane-btn tab-content">
+                <div>
+                    <label>
+                        活动ID
+                        <input class="form-control" type="text" id="searchActivityId">
+                    </label>
+                    <label>
+                        活动名称
+                        <input class="form-control" type="text" id="searchActivityName">
+                    </label>
+                    <label>
+                        优惠券Id
+                        <input class="form-control" type="text" id="couponId">
+                    </label>
+                    <button class="btn btn-default" id="searchBtn">搜索</button>
+                    <a href="/coupon/cn/addNewCoupon" class="btn btn-danger px-30">{{i18n.add}}</a>
+                </div>
+            </li>
+        </ul>
+        <div class="tab-content main-content">
+            <div id="couponTab">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th key="id" class="cursor">活动ID</th>
+                        <th class="cursor" key="activity_name">活动名称</th>
+                        <th>优惠券ID</th>
+                        <th key="origin_total" class="cursor">发送人数</th>
+                        <th key="last_operator" class="cursor">最后操作人</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody class="data-container text-center" id="couponList-container">
+                    </tbody>
+                </table>
+                <div id="pagination-container"></div>
+            </div>
+        </div>
+
+        {{>ajaxLoading}}
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">优惠券详情</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h5>活动名称</h5>
+                        <p id="activity_name"></p>
+                        <h5>优惠券ID</h5>
+                        <p id="coupon_id_list"></p>
+                        <h5>活动说明</h5>
+                        <p id="desc"></p>
+                        <h5>用户ID</h5>
+                        <p id="customer_id_list" style="word-break:break-all"></p>
+                        <h5>发券用户数</h5>
+                        <p id="origin_total"></p>
+                        <h5>绑定总数</h5>
+                        <p id="success_total"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="couponListTpl">
+    ${each list }
+    <tr>
+        <td>${$value.id}</td>
+        <td>${$value.activity_name}</td>
+        <td>${$value.coupon_id_list}</td>
+        <td>${$value.origin_total}</td>
+        <td>${$value.last_operator}</td>
+        <td>
+            <button type="button" class="btn btn-default goDetails" data-index=${$index} data-toggle="modal"
+                    data-target="#myModal">详情
+            </button>
+        </td>
+    </tr>
+    ${/each}
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/couponManage/couponManage.js?t=1493261397671"></script>
+</body>
+</html>

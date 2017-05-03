@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.appConf }}</title>
+    {{> meta}}
+    <link rel='stylesheet' href="/css/build/src/views/subscription/list.css?t=1493261397671" />
+</head>
+<body data-preview="{{config.preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+
+    <div class="appList">
+        <div class="subscriptionHeader">
+            <h2>订阅相关</h2>
+        </div>
+        <div class="subscriptionBody">
+            <div class="searchContainer">
+                <form class="search">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>sku</th>
+                            <th>开始时间</th>
+                            <th></th>
+                            <th>结束时间</th>
+                            <th>排序方式</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input type="text" name="sku"></td>
+                            <td><input type="text" name="starttime"></td>
+                            <td>——</td>
+                            <td><input type="text" name="endtime"></td>
+                            <td>
+                                <select name="sort">
+                                    <option value="1">订阅量</option>
+                                    <option value="2">时间</option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href="javascript:void(0);" class="btn btn-primary searchBtn">搜索</a>
+                </form>
+            </div>
+            <div class="subscription">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/html" id="subscription-list-tmpl">
+    <div class="listContainer table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <th>sku</th>
+            <th>商品名称</th>
+            <th>订阅到货提醒人数</th>
+            <th>订阅起始时间</th>
+            <th>类型</th>
+            </thead>
+            <tbody>
+            ${if subscriptionData}
+            ${each subscriptionData as item i}
+            <tr>
+                <td>${item.sku}</td>
+                <td>${item.name}</td>
+                <td>${item.count}</td>
+                <td>${item.time}</td>
+                <td>${item.type}</td>
+            </tr>
+            ${/each}
+            ${else}
+            <tr>
+                <td colspan="5" style="text-align:center;">暂无数据</td>
+            </tr>
+            ${/if}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="pagination-container"></div>
+
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/subscription/list.js?t=1493261397671"></script>
+</body>
+</html>

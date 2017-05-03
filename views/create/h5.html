@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>memebox配置h5</title>
+    {{> meta}}
+    <link rel='stylesheet' href="/css/build/src/views/create/h5.css?t=1493261397671" />
+</head>
+<body id="hfiveContainer" data-preview="{{preview}}" data-state="{{state}}" data-localize="{{i18n.localize}}">
+
+<div class="header">
+    <ul class="f-l back">
+        <li>
+            <a href="{{#backh5 d}}{{/backh5}}"><i class="fa fa-arrow-circle-left"></i>{{i18n.go_back}}</a>
+        </li>
+    </ul>
+    <ul class="header-item">
+        <div id="upload-img">{{i18n.upload}} <i class="fa  fa-spin"></i></div>
+    </ul>
+    <ul class="header-group">
+        <li>
+            <a href="javascript:void(0)" id="preview-btn">
+                <i class="fa fa-inverse fa-check-circle-o"></i>
+                <span>{{i18n.preview}}</span>
+            </a>
+        </li>
+        <li>
+            <a id="save-btn" href="javascript:void(0)">
+                <i class="fa fa-inverse fa-save"></i>
+                <span>{{i18n.save}}</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="main-container">
+    <div class="block-wrapper">
+        <ul id="template">
+    <li class="l1 t1 template" data-field="l1">
+        <div class="list">
+            <div class="img"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tTopnav template" data-field="topnav">
+        {{i18n.top_nav}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tSeckill template" data-field="seckill">
+        {{i18n.seckill}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tVideo template" data-field="video">
+        <img src="/img/static/img/video.png" alt="">
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tPurchase template" data-field="purchase">
+        <div class="psetting">
+                    <span>
+                        {{i18n.placeorder}}
+                    </span>
+
+        </div>
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tCountdown template" data-field="countdown">
+        {{i18n.countdown}}
+        <i class="close-btn">×</i>
+    </li>
+
+    <li class="tAnchor template" data-field="anchor">
+        {{i18n.anchor}}
+        <i class="close-btn">×</i>
+    </li>
+
+    <li class="tFlashsale template" data-field="flashsale">
+        {{i18n.flashsale}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tBenefits template" data-field="benefits">
+        {{i18n.benefits}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tWin template" data-field="win">
+        {{i18n.roster}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tPresale template" data-field="presale">
+        {{i18n.presale}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tGroupon template" data-field="groupon">
+        {{i18n.groupon}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tComment template" data-field="comment">
+        {{i18n.comment}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tLive template" data-field="live">
+        {{i18n.live}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tSupport template" data-field="support">
+        {{i18n.support}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tNewcomer simple template" data-field="newcomer">
+        {{i18n.newcomer}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tNewcomer simple template" data-field="newcomercomment">
+        {{i18n.newcomercomment}}
+        <i class="close-btn">×</i>
+    </li>
+    <li class="tNewcomercoupon simple template" data-field="newcomercoupon">
+        {{i18n.newcomercoupon}}
+        <i class="close-btn">×</i>
+    </li>
+
+</ul>
+    </div>
+    <div class="img-wrapper">
+        <ul class="img-list">
+        </ul>
+    </div>
+    <div class="canvas-wrapper">
+        <ul class="canvas" id="canvas">
+    {{#each field}}
+    {{#compare type '==' 'l1'}}
+    <li class="t1 l1 template" data-field="l1" data-setting='{{#json this}}{{/json}}'>
+        <div class="list">
+            <div class="img"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+
+    {{#compare type '==' 'img'}}
+    <li class="tImg template" data-field="img" data-setting='{{#json this}}{{/json}}'>
+        <a href="{{imgUrl}}" style="pointer-events: none;">
+            <img src="{{imgSrc}}" alt="">
+        </a>
+        <i class="close-btn">×</i>
+        {{#each linksPopup}}
+        <div style='{{#css css}}{{/css}}' class="link link-popup">
+            <p>
+                图片：<span class="pop-img-url">{{img}}</span>
+            </p>
+            <p>
+                <span class="link-type">{{type}}</span>：<span class="link-url">{{url}}</span>
+            </p>
+            <i class="close-link-btn">×</i>
+        </div>
+        {{/each}}
+        {{#each links}}
+        <div style='{{#css css}}{{/css}}' class="link">
+            <span class="link-url">{{url}}</span>
+            <i class="close-link-btn">×</i>
+        </div>
+        {{/each}}
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'topnav'}}
+    <li class="tTopnav template" data-field="topnav" data-setting='{{#json this}}{{/json}}'>
+        <div class="psetting">
+                    <span>
+                        {{../../i18n.top_nav}}
+                    </span>
+
+        </div>
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type "==" "seckill"}}
+    <li class="tSeckill template" data-field="seckill" data-setting='{{#json this}}{{/json}}'>
+        <div class="psetting">
+                    <span>
+                        {{../../i18n.seckill}}
+                    </span>
+
+        </div>
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'purchase'}}
+    <li class="tPurchase template" data-field="purchase" data-setting='{{#json this}}{{/json}}'>
+        <div class="psetting">
+                    <span>
+                        {{../../i18n.placeorder}}
+                    </span>
+
+        </div>
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'countdown'}}
+    <li class="tCountdown template" data-field="countdown" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.countdown}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+
+    {{#compare type '==' 'video'}}
+    <li class="tVideo template" data-field="video" data-setting='{{#json this}}{{/json}}'>
+        <img src="{{videoBackground}}" alt="">
+        {{#if videoUrl}}
+        <div style='{{#css videocss}}{{/css}}' class="addVideo-cont">
+            <span class="video-url">{{videoUrl}}</span>
+
+            <i class="close-video-btn">×</i>
+        </div>
+
+        {{/if}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+
+    {{#compare type '==' 'anchor'}}
+    <li class="tAnchor template" data-field="anchor" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.anchor}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+
+    {{#compare type '==' 'flashsale'}}
+    <li class="tFlashsale template" data-field="flashsale" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.flashsale}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'benefits'}}
+    <li class="tBenefits template" data-field="benefits" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.benefits}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'win'}}
+    <li class="tWin template" data-field="win" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.roster}}
+        <i class="close-btn">×</i>
+
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'comment'}}
+    <li class="tComment template" data-field="comment" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.comment}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'presale'}}
+    <li class="tPresale template" data-field="presale" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.presale}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'groupon'}}
+    <li class="tGroupon template" data-field="groupon" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.groupon}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'live'}}
+    <li class="tLive template" data-field="live" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.live}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'support'}}
+    <li class="tSupport template" data-field="support" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.support}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'newcomer'}}
+    <li class="tNewcomer simple template" data-field="newcomer" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.newcomer}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'newcomercomment'}}
+    <li class="tNewcomer simple template" data-field="newcomercomment" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.newcomercomment}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{#compare type '==' 'newcomercoupon'}}
+    <li class="tNewcomercoupon simple template" data-field="newcomercoupon" data-setting='{{#json this}}{{/json}}'>
+        {{../../i18n.newcomercoupon}}
+        <i class="close-btn">×</i>
+    </li>
+    {{/compare}}
+    {{/each}}
+</ul>
+    </div>
+    <div class="attr-wrapper">
+        <form class="comm-attr" role="form">
+    <input type="hidden" name="cid" value="{{cid}}">
+    <input type="hidden" name="d" value="{{d}}">
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#page" href="#page">{{i18n.page_setting}}</a>
+            </div>
+            <div id="page" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input name="urlkey" class="form-control input-sm" placeholder="url key"
+                               value="{{urlKey}}" type="text">
+                        <div class="tip"><em>*</em>{{i18n.ukey}}</div>
+                    </div>
+                    <div class="form-group">
+                        <input name="title" class="form-control input-sm" placeholder="{{i18n.title}}"
+                               value="{{root.title}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input name="bgColor" class="form-control input-sm" placeholder="{{i18n.background}}"
+                               value="{{root.bgColor}}" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#share" href="#share">{{i18n.app_share}}</a>
+            </div>
+            <div id="share" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input name="shareTitle" class="form-control input-sm" value="{{root.shareTitle}}"
+                               placeholder="{{i18n.share_title}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input name="shareDesc" class="form-control input-sm" value="{{root.shareDesc}}"
+                               placeholder="{{i18n.share_desc}}" type="text">
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<input name="shareUrl" class="form-control input-sm" value="{{root.shareUrl}}" placeholder="分享连接" type="text">-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <input name="shareImg" class="form-control input-sm" value="{{root.shareImg}}"
+                               placeholder="{{i18n.share_img}}" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="l1-attr attr-form" style="display: none" role="form">
+    <div class="form-group">
+        <input class="form-control input-sm" form-img name="groupImg" placeholder="{{i18n.list_address}}"
+               type="text">
+    </div>
+    <div class="form-group">
+        <input class="form-control input-sm" name="groupImgUrl" placeholder="{{i18n.list_link}}" type="text">
+    </div>
+    <div class="form-group">
+        <div>开始时间</div>
+        <input class="form-control input-sm" name="groupImgFromTime" placeholder="{{i18n.start_time}}"
+               type="text">
+    </div>
+    <div class="form-group">
+        <div>结束时间</div>
+        <input class="form-control input-sm" name="groupImgToTime" placeholder="{{i18n.end_time}}" type="text">
+    </div>
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#category" data-toggle="tab">
+                category
+            </a>
+        </li>
+        <li><a href="#sku" data-toggle="tab">sku</a></li>
+        <li><a href="#format" data-toggle="tab">{{i18n.format_setting}}</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="category">
+            <div class="form-group">
+                <input class="form-control input-sm" name="categoryid" placeholder="categoryid" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="proNum" placeholder="{{i18n.show_num}}"
+                       type="number">
+            </div>
+            <hr>
+            <div class="tip">{{i18n.black_tip}}</div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="isFriday" placeholder="{{i18n.black_is}}"
+                       type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="catFrom" placeholder="{{i18n.start_time}}"
+                       type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="catTo" placeholder="{{i18n.end_time}}" type="text">
+            </div>
+            <div class="form-group">
+                <input class="form-control input-sm" name="catLabel" placeholder="{{i18n.label}}" type="text">
+            </div>
+        </div>
+        <div class="tab-pane fade" id="sku">
+            <div class="form-group">
+                <input class="form-control input-sm" name="skus" placeholder="{{i18n.skuid}}" type="text">
+            </div>
+        </div>
+        <div class="tab-pane fade" id="format">
+            <div class="form-group">
+                <label>{{i18n.onelineN}}</label>
+                <select name="column" class="form-control" placeholder="{{i18n.oneline1}}">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class='tip'><em>*</em> {{i18n.cat_tip}}</div>
+</form>
+        <form class="img-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#img" href="#img">{{i18n.img_setting}}</a>
+            </div>
+            <div id="img" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="imgRadios" id="imgRadios" data-value="" checked/>
+                                {{i18n.NA}}
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="imgRadios" id="imgRadios1" data-value='1'/>
+                                {{i18n.top_affix}}
+                                <div class="tip">{{i18n.top_affix_tip}}</div>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="imgRadios" id="imgRadios2" data-value='2'/>
+                                {{i18n.bottom_affix}}
+                                <div class="tip">{{i18n.bottom_affix_tip}}</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control input-sm" form-img name="imgSrc"
+                               placeholder="{{i18n.img_address}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <div>开始时间</div>
+                        <input class="form-control input-sm" form-img name="imgFromTime"
+                               placeholder="{{i18n.start_time}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <div>结束时间</div>
+                        <input class="form-control input-sm" form-img name="imgToTime"
+                               placeholder="{{i18n.end_time}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="imgUrl" placeholder="url" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="isLogin">{{i18n.is_login}}</label>
+                        <input id="isLogin" class="form-control input-sm" name="isLogin" placeholder="{{i18n.is_login}}"
+                               value="1" type="checkbox">
+                    </div>
+                    <div style="display: none" class="form-group loginMsg">
+                        <label>{{i18n.newcomer_loginMsg}}</label>
+                        <input class="form-control input-sm" name="loginMsg"
+                               placeholder="{{i18n.newcomer_loginMsg}}" maxlength="20" type="text">
+                        <label>{{i18n.newcomer_regMsg}}</label>
+                        <input class="form-control input-sm" name="regMsg"
+                               placeholder="{{i18n.newcomer_regMsg}}" maxlength="20" type="text">
+                    </div>
+                    <div class="link-group">
+                        <div style="padding: 0" class="col-xs-12 col-md-8">
+                            <input class="form-control input-sm" id="linkUrl" placeholder="{{i18n.hot_address}}"
+                                   type="text">
+                        </div>
+                        <div class="col-xs-6 col-md-4">
+                            <button class="btn btn-success btn-sm" id="addLink" type="button">{{i18n.add_hot}}
+                            </button>
+                        </div>
+                        <div class="tip">
+                            {{i18n.top_affix_tip2}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                         <div>
+                             {{i18n.hot_popup_setting}}
+                             <button type="button" class="btn btn-success btn-sm" id="addPop">{{i18n.add_hot}}</button>
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <div>{{i18n.hot_popup_img_url}}</div>
+                        <input class="form-control input-sm" type="text" id="popupImgUrl">
+                        size:640*870
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            url <input type="radio" name="popType" data-value="0" checked>
+                        </label>
+                        <label>
+                            {{i18n.anchor}} <input type="radio" name="popType" data-value="1">
+                        </label>
+                        <div>{{i18n.url_anchor}}</div>
+                        <input class="form-control input-sm" type="text" id="popupAnchor">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+        <form class="purchase-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#purchase" href="#purchase">{{i18n.purchase_setting}}</a>
+            </div>
+            <div id="purchase" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div>
+                        <span>{{i18n.time}} </span>
+                        <input class="form-control input-xs" name="fromDate" id="fromdatetimepicker"
+                               placeholder="{{i18n.start_time}}" type="text" style="margin-bottom: 15px">
+                        <input class="form-control input-xs" name="toDate" id="todatetimepicker"
+                               placeholder="{{i18n.end_time}}" type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.purchase_pl}} </span>
+                        <input class="form-control input-xs" name="peopleFrom" id="people_from"
+                               placeholder="{{i18n.start_pl}}" type="number" style="margin-bottom: 15px">
+                        <input class="form-control input-xs" name="peopleTo" id="people_to"
+                               placeholder="{{i18n.end_pl}}" type="number">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="countdown-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#countdown" href="#countdown">{{i18n.count_setting}}</a>
+            </div>
+            <div id="countdown" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div>
+                        <span>{{i18n.start_time}} </span>
+                        <input class="form-control input-sm" name="countdownFrom" id="countdownFrom"
+                               placeholder="{{i18n.start_time}}" type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.end_time}} </span>
+                        <input class="form-control input-sm" name="countdownTo" id="countdownTo"
+                               placeholder="{{i18n.end_time}}" type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.back_img}} </span>
+                        <input class="form-control input-sm" name="countdownBg" id="countdownBg"
+                               placeholder="{{i18n.back_img}}" type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.back_height}} </span>
+                        <input class="form-control input-sm" name="countdownHeight" id="countdownHeight"
+                               placeholder="{{i18n.back_height}}" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="video-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#video" href="#video">{{i18n.video_setting}}</a>
+            </div>
+            <div id="video" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="videoUrl" id="videoUrl"
+                               placeholder="{{i18n.video_link}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="videoBackground" id="videoBackground"
+                               placeholder="{{i18n.video_bg}}" type="text">
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-success btn-sm" id="addVideo" type="button">{{i18n.add_video}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="anchor-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#anchor" href="#anchor">{{i18n.anchor_setting}}</a>
+            </div>
+            <div id="anchor" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div>
+                        <input class="form-control input-sm" name="anchorHash" id="anchorHash"
+                               placeholder="{{i18n.anchor_link}}" type="text">
+                    </div>
+                    <div class="tip">{{i18n.anchor_tip}}</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="flashsale-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#flashsale" href="#flashsale">{{i18n.flash_setting}}</a>
+            </div>
+            <div id="flashsale" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div>顶部颜色</div>
+                        <input class="form-control input-sm" name="topColor" id="topColor"
+                               placeholder="{{i18n.topColor}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <div>底色</div>
+                        <input class="form-control input-sm" name="flashColor" id="flashColor"
+                               placeholder="{{i18n.flashColor}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <div>tab 颜色</div>
+                        <input class="form-control input-sm" name="tabColor" id="tabColor"
+                               placeholder="{{i18n.tabColor}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <div>tab 高亮的颜色</div>
+                        <input class="form-control input-sm" name="tabActiveColor" id="tabActiveColor"
+                               placeholder="{{i18n.tabActiveColor}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <div>是否显示左右箭头</div>
+                        <input class="form-control input-sm" name="isShowTr" id="isShowTr"
+                               type="text">
+                        <div class="tip">不填不显示,填1显示</div>
+                    </div>
+                    <div class="flashsale-table-content">
+
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-info addflash">{{i18n.add_hot}}</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="benefits-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#benefits" href="#benefits">{{i18n.be_setting}}</a>
+            </div>
+            <div id="benefits" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="tip">{{i18n.be_tip}}</div>
+                    <div class="form-group">
+                        <span>{{i18n.share_bf}} </span>
+                        <input class="form-control input-sm" name="benefitsBeforeImg" id="benefitsBeforeImg"
+                               placeholder="{{i18n.share_bf_url}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <span>{{i18n.share_af}} </span>
+                        <input class="form-control input-sm" name="benefitsAfterImg" id="benefitsAfterImg"
+                               placeholder="{{i18n.share_af_url}}" type="text">
+                    </div>
+
+                    <hr>
+                    <div>
+                        <span>{{i18n.start_time}} </span>
+                        <input class="form-control input-sm" name="benefitsFromDate" id="benefitsFromDate"
+                               placeholder="{{i18n.start_time}}" type="text">
+
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.end_time}} </span>
+                        <input class="form-control input-sm" name="benefitsToDate" id="benefitsToDate"
+                               placeholder="{{i18n.end_time}}" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="win-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#win" href="#win">{{i18n.roster_setting}}</a>
+            </div>
+            <div id="win" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="redirectUrl" id="win-redirectUrl"
+                               placeholder="{{i18n.redirect_url}}" type="text">
+                    </div>
+
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab1</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab2</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab3</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab4</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab5</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab6</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab7</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab8</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab9</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered win-table">
+                        <thead>
+                        <tr class="text-center">
+                            <td colspan="2">Tab10</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><input class="form-control input-sm winfrom"
+                                                   placeholder="{{i18n.start_time}}" type="text"></td>
+                        </tr>
+                        <tr class="">
+                            <td colspan="2"><input class="form-control input-sm winto"
+                                                   placeholder="{{i18n.end_time}}" type="text"></td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="csv-name">{{i18n.NA}}</td>
+                            <td colspan="2">
+                                <a href="javascript:void(0)" class="addWin" data-csv>{{i18n.add_hot}}</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="presale-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#presale" href="#presale">{{i18n.presale_setting}}</a>
+            </div>
+            <div id="presale" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>{{i18n.presale_num}} {{i18n.default_all}}</label>
+                        <input class="form-control input-sm" name="presaleNum"
+                               placeholder="{{i18n.presale_num}}" min="1" type="number">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="groupon-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#groupon" href="#groupon">{{i18n.groupon_setting}}</a>
+            </div>
+            <div id="groupon" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>{{i18n.grouponId}}</label>
+                        <input class="form-control input-sm" name="grouponId" placeholder="{{i18n.grouponId}}"
+                               type="number">
+                        <label>{{i18n.groupon_num}} {{i18n.default_all}}</label>
+                        <input class="form-control input-sm" name="grouponNum"
+                               placeholder="{{i18n.groupon_num}}" min="1" type="number">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="newcomer-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#newcomer" href="#newcomer">{{i18n.newcomer_setting}}</a>
+            </div>
+            <div id="newcomer" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <!--<label>{{i18n.grouponId}}</label>-->
+                        <!--<input class="form-control input-sm" name="grouponId" placeholder="{{i18n.grouponId}}"-->
+                        <!--type="number">-->
+                        <label>{{i18n.newcomer_num}} {{i18n.default_all}}</label>
+                        <input class="form-control input-sm" name="newcomerNum"
+                               placeholder="{{i18n.newcomer_num}}" min="1" type="number">
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label>{{i18n.newcomer_isEssence}}</label>-->
+                        <!--<input class="form-control input-sm" name="isEssence"-->
+                                <!--data-value="1" value="1" checked type="checkbox">-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="newcomercomment-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#newcomercomment" href="#newcomercomment">{{i18n.newcomer_setting}}</a>
+            </div>
+            <div id="newcomercomment" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <!--<label>{{i18n.grouponId}}</label>-->
+                        <!--<input class="form-control input-sm" name="grouponId" placeholder="{{i18n.grouponId}}"-->
+                        <!--type="number">-->
+                        <label>{{i18n.newcomer_num}} {{i18n.default_all}}</label>
+                        <input class="form-control input-sm" name="newcomerNum"
+                               placeholder="{{i18n.newcomer_num}}" min="1" type="number">
+                    </div>
+                    <div  class="form-group">
+                        <label>{{i18n.newcomer_isEssence}}</label>
+                        <input class="form-control input-sm" name="isEssence"
+                                data-value="1" value="1" disabled checked type="checkbox">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="comment-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#comment" href="#comment">{{i18n.comment}}</a>
+            </div>
+            <div id="comment" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div>
+                        <span>{{i18n.rollingInterval}}</span>
+                        <input class="form-control input-sm" name="timeInterval" id="timeInterval"
+                               placeholder="{{i18n.rollingInterval}}" type="number">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.commentBgColor}}</span>
+                        <input class="form-control input-sm" name="commentBgColor" id="commentBgColor"
+                               placeholder="{{i18n.commentBgColor}}" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="support-attr attr-form" style="display: none;" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#support" href="#support">{{i18n.support}}</a>
+            </div>
+            <div id="support" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div>
+                        <span>{{i18n.start_time}} </span>
+                        <input class="form-control input-sm" name="supportFrom" id="supportFrom"
+                               placeholder="{{i18n.start_time}}" type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.end_time}} </span>
+                        <input class="form-control input-sm" name="supportTo" id="supportTo"
+                               placeholder="{{i18n.end_time}}" type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.start_pl}} </span>
+                        <input class="form-control input-sm" name="startPv" id="supportStartPv"
+                               placeholder="{{i18n.start_time}}" type="number">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.end_pl}} </span>
+                        <input class="form-control input-sm" name="endPv" id="supportEndPv"
+                               placeholder="{{i18n.end_time}}" type="number">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.gift_pic}}1</span>
+                        <input class="form-control input-sm" name="pic1" id="supportPic1"
+                               type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.gift_pic}}2</span>
+                        <input class="form-control input-sm" name="pic2" id="supportPic2"
+                               type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.gift_pic}}3</span>
+                        <input class="form-control input-sm" name="pic3" id="supportPic3"
+                               type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.gift_pic}}4</span>
+                        <input class="form-control input-sm" name="pic4" id="supportPic4"
+                               type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.gift_pic}}5</span>
+                        <input class="form-control input-sm" name="pic5" id="supportPic5"
+                               type="text">
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.fly_height}}</span>
+                        <div class="input-group">
+                            <input class="form-control input-sm" name="height" id="flyHeight"
+                                   type="text" placeholder="默认100">
+                            <div class="input-group-addon">PX</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <span>{{i18n.background}} </span>
+                        <input class="form-control input-sm" name="supportBg" id="supportBg"
+                               placeholder="{{i18n.background}}" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="live-attr attr-form" style="display: none" role="form">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#live"
+                                          href="#live">{{i18n.live}}</a></div>
+            <div id="live" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="liveLink" id="liveLink"
+                               placeholder="{{i18n.liveLink}}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control input-sm" name="liveBg" id="liveBg"
+                               placeholder="{{i18n.liveBg}}" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+        <script id="topNavTabAdd" type="text/html">
+    <div class="form-group">
+        <i class="fa fa-close remove-table"></i>
+        <label>
+            <span>tab</span>
+            <input class="form-control input-sm" type="text"  maxlength="6"  placeholder="tab名称">
+        </label>
+        <label>
+            <span>{{i18n.anchor}}</span>
+            <input class="form-control input-sm" type="text" placeholder="锚点">
+        </label>
+    </div>
+</script>
+<form class="topnav-attr attr-form" style="display: none" role="form" action="">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#topnav" href="#topnav">{{i18n.top_nav}}</a>
+            </div>
+            <div id="topnav" class="panel-body panel-collapse collapse">
+                <div class="topnav-body">
+                    <!--<div class="form-group" data-index="1">-->
+                    <!--<label>-->
+                    <!--<span>tab1</span>-->
+                    <!--<input class="form-control input-sm" type="text">-->
+                    <!--</label>-->
+                    <!--<label>-->
+                    <!--<span>{{i18n.anchor}}</span>-->
+                    <!--<input class="form-control input-sm" type="text">-->
+                    <!--</label>-->
+                    <!--</div>-->
+                </div>
+                <button id="addBtn" type="button" class="btn btn-default">{{i18n.add_hot}}</button>
+            </div>
+        </div>
+    </div>
+</form>
+        <form class="newcomercoupon-attr attr-form" style="display: none" role="form" action="">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#newcomercoupon" href="#newcomercoupon">{{i18n.newcomercoupon}}</a>
+            </div>
+            <div id="newcomercoupon" class="panel-body panel-collapse collapse">
+                <label>
+                    <span>背景色</span>
+                    <input class="form-control input-sm" type="text" name="bgcolor"  placeholder="背景色">
+                </label>
+                <div class="newcomercoupon-body">
+                </div>
+                <button id="newcomercouponAdd" type="button" class="btn btn-default">{{i18n.add_hot}}</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script id="newcomercouponTemplate" type="text/html">
+    ${each couponInfo as coupon i}
+    <hr>
+    <div class="form-group">
+        <i class="fa fa-close remove-table"></i>
+        <label>
+            <span>券id</span>
+            <span class="index">-No${i}</span>
+            <input class="form-control input-sm" value="${coupon.ruleId}" type="text" name="ruleId" placeholder="券id">
+        </label>
+        <label>
+            <span>券封面图</span>
+            <input class="form-control input-sm" type="text" value="${coupon.ruleImg}" name="ruleImg" placeholder="券封面图">
+        </label>
+    </div>
+    ${/each}
+</script>
+    </div>
+    <div class="preview-wrapper">
+        <div class="preview-container">
+            <div class="preview-header">
+                <h4>{{i18n.preview}}:</h4>
+            </div>
+            <div class="preview-con">
+                <div class="preview">
+                </div>
+                <div class="qr">
+                    <span class="tip">{{i18n.scan}}:</span>
+                    <div id="qrCode"></div>
+                    <div class="p-link">
+                        {{i18n.scan_link}}:
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="close"><i class="fa fa-times"></i></div>
+        </div>
+    </div>
+    <div class="modal fade" id="winModal">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{i18n.data}}</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary save-win">{{i18n.save}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="flashsaleTrTemplate" type="text/html">
+    <tr class="cattime">
+        <td><input class="form-control input-sm flash-sale-tab" placeholder="{{i18n.time}}" type="text"
+                   data-flashtimepicker></td>
+        <td><input class="form-control input-sm flash-sale-tab flash-category" placeholder="category" type="text"></td>
+        <td><i class="fa fa-close"></i></td>
+    </tr>
+</script>
+<script id="flashsaleTable" type="text/html">
+    ${each tabInfo as table i}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th colspan="2" class="flash-tab">tab${i}</th>
+            <th><i class="fa fa-close remove-table"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td colspan="3"><input value="${table.date}" class="form-control input-sm flash-sale-tab"
+                                   placeholder="{{i18n.date}}" type="text" data-flashdatepicker></td>
+        </tr>
+        ${each table.catTime as ct}
+        <tr class="cattime">
+            <td><input class="form-control input-sm flash-sale-tab" value="${ct.time}" placeholder="{{i18n.time}}"
+                       type="text" data-flashtimepicker></td>
+            <td><input class="form-control input-sm flash-sale-tab flash-category" value="${ct.category}"
+                       placeholder="category" type="text"></td>
+            <td><i class="fa fa-close"></i></td>
+        </tr>
+        ${/each}
+        <tr>
+            <td colspan="3" style="text-align: right"><i class="fa fa-plus"></i></td>
+        </tr>
+        </tbody>
+    </table>
+    ${/each}
+</script>
+<script id="flashsaleTemplate" type="text/html">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th colspan="2" class="flash-tab">tab${i}</th>
+            <th><i class="fa fa-close remove-table"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td colspan="3"><input class="form-control input-sm flash-sale-tab" placeholder="{{i18n.date}}" type="text"
+                                   data-flashdatepicker></td>
+        </tr>
+        <tr class="cattime">
+            <td><input class="form-control input-sm flash-sale-tab" placeholder="{{i18n.time}}" type="text"
+                       data-flashtimepicker></td>
+            <td><input class="form-control input-sm flash-sale-tab flash-category" placeholder="category" type="text">
+            </td>
+            <td><i class="fa fa-close"></i></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: right"><i class="fa fa-plus"></i></td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+<script id="t1Template" type="text/html">
+    <div class="list">
+        ${if groupImg}
+        <div>
+            <a ${if groupImgUrl}href="${groupImgUrl}" ${/if} class="img">
+            <img src="${groupImg}">
+            </a>
+        </div>
+        ${/if}
+        ${each list as item i}
+        ${if !proNum || i
+        <proNum }
+        <div>
+            <a href="http://cn.memebox.com/catalog/product/view/id/${item.productId}">
+                <img src="${item.imgUrl}">
+                <div class="pro-info">
+                    <div class="title">${item.name}</div>
+                    <div class="price">${item.price}</div>
+                </div>
+            </a>
+        </div>
+        ${/if}
+        ${/each}
+    </div>
+</script>
+<script id="imgTemplate" type="text/html">
+    <a href="${imgUrl}">
+        <img src="${imgSrc}">
+    </a>
+    <i class="close-btn">×</i>
+</script>
+<script id="winTemplate" type="text/html">
+    <table class="table table-bordered win-model-table">
+        <thead>
+        <tr>
+            <th>{{i18n.fullname}}</th>
+            <th>{{i18n.phone}}</th>
+            <th>{{i18n.gift}}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        ${each items as value i}
+        <tr class="targetTr">
+            <td><input type="text" class="win-name" value="${value.name}"></td>
+            <td><input type="text" class="win-mobile" value="${value.mobile}"></td>
+            <td><input type="text" class="win-gift" value="${value.gift}"></td>
+            <td><i class="fa fa-close"></i></td>
+        </tr>
+        ${/each}
+        <tr class="add-modal">
+            <td colspan="4" style="text-align: right"><i class="fa fa-plus"></i></td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+<script id="topNavTab" type="text/html">
+    ${each tabInfo as tab i}
+    <div class="form-group">
+        <i class="fa fa-close remove-table"></i>
+        <label>
+            <span>tab${i+1}</span>
+            <input class="form-control input-sm" maxlength="6" type="text" name="tab_name" value="${tab.name}" placeholder="tab名称">
+        </label>
+        <label>
+            <span>{{i18n.anchor}}</span>
+            <input class="form-control input-sm" type="text" name="tab_anchor" value="${tab.anchor}" placeholder="锚点">
+        </label>
+    </div>
+    ${/each}
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/create/h5.js?t=1493261397671"></script>
+</body>
+</html>

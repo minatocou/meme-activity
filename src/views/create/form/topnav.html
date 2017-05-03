@@ -1,0 +1,36 @@
+<script id="topNavTabAdd" type="text/html">
+    <div class="form-group">
+        <i class="fa fa-close remove-table"></i>
+        <label>
+            <span>tab</span>
+            <input class="form-control input-sm" type="text"  maxlength="6"  placeholder="tab名称">
+        </label>
+        <label>
+            <span>{{i18n.anchor}}</span>
+            <input class="form-control input-sm" type="text" placeholder="锚点">
+        </label>
+    </div>
+</script>
+<form class="topnav-attr attr-form" style="display: none" role="form" action="">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><a data-toggle="collapse" data-parent="#topnav" href="#topnav">{{i18n.top_nav}}</a>
+            </div>
+            <div id="topnav" class="panel-body panel-collapse collapse">
+                <div class="topnav-body">
+                    <!--<div class="form-group" data-index="1">-->
+                    <!--<label>-->
+                    <!--<span>tab1</span>-->
+                    <!--<input class="form-control input-sm" type="text">-->
+                    <!--</label>-->
+                    <!--<label>-->
+                    <!--<span>{{i18n.anchor}}</span>-->
+                    <!--<input class="form-control input-sm" type="text">-->
+                    <!--</label>-->
+                    <!--</div>-->
+                </div>
+                <button id="addBtn" type="button" class="btn btn-default">{{i18n.add_hot}}</button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox 秒杀列表</title>
+    {{> meta}}
+    <link rel="stylesheet" href="../../../static/css/common/reset.css">
+    <link rel="stylesheet" href="../../../static/css/common/global.css">
+    <link rel="stylesheet" href="../../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../../static/css/common/sidebar.css">
+    <link rel="stylesheet" href="../../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../../static/vendor/pagination/pagination.css">
+    <link rel="stylesheet" href="../../../static/css/src/market/flashsale/list.css">
+    <link rel="stylesheet" href="../../../static/css/src/ajaxLoading.css">
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <div class="box">
+            <div class="panel" id="panel">
+                <form action="" class="form-inline">
+                    <div class="form-group">
+                        <label for="name" class="control-label">
+                            生效秒杀组
+                        </label>
+                        <input type="number" id="activeFlash" class="form-control input-sm">
+                        <button type="button"  class="btn btn-primary save">保存</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="id" class="control-label">
+                            ID
+                        </label>
+                        <input type="number"  id="id" class="form-control input-sm">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label">
+                            {{i18n.market_name}}
+                        </label>
+                        <input type="text" id="name" class="form-control input-sm">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="search">{{i18n.search}}</button>
+                        <a class="btn btn-danger" href="/market/flash">新增秒杀</a>
+                    </div>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            秒杀ID
+                        </th>
+                        <th>
+                            活动名称
+                        </th>
+                        <th>
+                            活动状态
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="list">
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div id="pagination-container"></div>
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+<script id="listTpl" type="text/x-handlebars-template">
+    \{{#each .}}
+    <tr data-id="\{{id}}">
+        <td>
+            \{{id}}
+        </td>
+        <td>
+            \{{name}}
+        </td>
+        <td>
+            \{{#compare active '==' '1'}}
+            {{i18n.open}}
+            \{{/compare}}
+            \{{#compare active '==' '0'}}
+            {{i18n.pause}}
+            \{{/compare}}
+        </td>
+        <td>
+            <a class="btn btn-default" href="/market/flash?id=\{{id}}">
+                查看
+            </a>
+        </td>
+    </tr>
+    \{{/each}}
+</script>
+
+<script type="text/javascript" src='../../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../../static/vendor/handlebars/handlebars.js'></script>
+<script type="text/javascript" src='../../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../../static/js/common/common.js'></script>
+<script type="text/javascript" src='../../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../../static/js/src/market/flashsale/list.js'></script>
+</body>
+</html>

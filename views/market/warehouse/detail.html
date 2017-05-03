@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>memebox {{i18n.warehouse}}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/market/warehouse/detail.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="market-container">
+        <div class="breadcrumbs">
+            {{i18n.market_tools}} ><span> {{i18n.warehouse}} ></span><span
+                class="high-light">{{i18n.detail_page}}</span>
+            <div class="f-r"><a class="btn btn-danger" id="marketSaveBtn">{{i18n.save}}</a></div>
+        </div>
+        <hr>
+        <div class="box">
+            <div class="set_attr" id="detail">
+
+            </div>
+            <div class="explain">
+                <h4>配置说明</h4>
+                <div id="explainText">
+                    <ol>
+                        <li>名称：无需填写数值，标注活动即可，如：春节大促</li>
+                        <li>时间：同一仓仓减时间不可重合；（不区分状态，即无论暂停或开启，同一仓减时间不可重合）</li>
+                        <li>设置优惠：设置时，条件金额≥减扣金额</li>
+                        <li>
+                            共用：
+                            <p>1）与直减叠加：直减优惠后金额参与到仓减计算</p>
+                            <p>2）与优惠券共用：共用表示优惠券金额不会影响立减金额；</p>
+                        </li>
+                        <li>不共用则使用任一优惠券后，本仓减金额被扣减；</li>
+                    </ol>
+                </div>
+                <div id="spreadSwitch">
+                    <span class="fr">{{i18n.spread}}</span>
+                    <span class="fr">{{i18n.retract}}</span>
+                </div>
+            </div>
+            <div class="log">
+                <h4>操作日志</h4>
+                <div id="logTable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="logTbody">
+                        </tbody>
+                    </table>
+                    <div id="pagination-container"></div>
+                </div>
+                <div id="logBtn">
+                    <span class="fr">{{i18n.spread}}</span>
+                    <span class="fr">{{i18n.retract}}</span>
+                </div>
+            </div>
+            <hr>
+            <a class="btn btn-default btn-sm active" data-toggle="modal" data-target="#myModal">< {{i18n.go_back}}</a>
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    确定要返回吗
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    取消
+                </button>
+                <button type="button" class="btn btn-primary" id="goBack">
+                    {{i18n.sure}}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<script id="detailTpl" type="text/x-handlebars-template">
+    <form>
+        <h4>
+            {{i18n.base_attribute}}
+        </h4>
+        <div class="non-empty group prompt-box">
+            <label for="name">{{i18n.market_name}}</label>
+            <input type="text" class="form-control input-l" id="name" value="\{{name}}">
+            <span class="prompt">无需填写数值，标注活动即可，如：春节大促</span>
+        </div>
+        <div class="group non-empty">
+            <label for="description" class="">{{i18n.use_explain}}</label>
+            <input type="text" class="form-control input-l" id="description" value="\{{description}}">
+        </div>
+        <div class="group non-empty prompt-box">
+            <label>{{i18n.use_time}}</label>
+            <input class="form-control input-l" id="from_date" type="text" value="\{{from_date}}">
+            -
+            <input class="form-control input-l" id="to_date" type="text" value="\{{to_date}}">
+            <span class="prompt">同一仓仓减时间不可重合；（不区分状态，即无论暂停或开启，同一仓减时间不可重合）</span>
+        </div>
+        <div class="non-empty group">
+            <label for="status">{{i18n.state}}</label>
+            <select class="form-control input-l" id="status">
+                \{{#select status }}
+                <option value="1">{{i18n.open}}</option>
+                <option value="2">{{i18n.pause}}</option>
+                \{{/select}}
+            </select>
+        </div>
+        <div class="non-empty group">
+            <label for="customer_group">{{i18n.user_group}}</label>
+            <select class="form-control input-l" id="customer_group">
+                <option value="0">ALL</option>
+            </select>
+        </div>
+        <h4>
+            {{i18n.set_rule}}
+        </h4>
+        <div class="non-empty group">
+            <label for="warehouse">{{i18n.select_product}}</label>
+            <select class="form-control input-l" id="warehouse">
+                \{{#select warehouse}}
+                <option value="2">{{i18n.china_pro}}</option>
+                <option value="1">{{i18n.korea_pro}}</option>
+                <option value="4">{{i18n.ftz_pro}}</option>
+                <option value="8">Epass</option>
+                \{{/select}}
+            </select>
+        </div>
+        <div id="discount">
+            <div class="non-empty group prompt-box">
+                <label>{{i18n.set_discount}}</label>
+                <span>{{i18n.fill}}</span>
+                <input type="number" class="form-control input-s" value="\{{discount.[0].[0]}}" min="0" >
+                <span>{{i18n.yuan}} - {{i18n.minus}}</span>
+                <input type="number" class="form-control input-s" value="\{{discount.[0].[1]}}" min="0" >
+                <span>{{i18n.yuan}}</span>
+                <span class="prompt">设置时，条件金额≥减扣金额</span>
+            </div>
+            <div class="content-r group">
+                <span>{{i18n.fill}}</span>
+                <input type="number" class="form-control input-s" value="\{{discount.[1].[0]}}" min="0" >
+                <span>{{i18n.yuan}} - {{i18n.minus}}</span>
+                <input type="number" class="form-control input-s" value="\{{discount.[1].[1]}}" min="0" >
+                <span>{{i18n.yuan}}</span>
+            </div>
+            <div class="content-r group">
+                <span>{{i18n.fill}}</span>
+                <input type="number" class="form-control input-s" value="\{{discount.[2].[0]}}" min="0" >
+                <span>{{i18n.yuan}} - {{i18n.minus}}</span>
+                <input type="number" class="form-control input-s" value="\{{discount.[2].[1]}}" min="0" >
+                <span>{{i18n.yuan}}</span>
+            </div>
+        </div>
+        <h4>
+            {{i18n.restrict_discount}}
+        </h4>
+        <div class="group prompt-box">
+            <label style="width: auto;margin-right: 50px">
+                <input type="checkbox" value="0" id="compatible_preference" \{{#compare compatible_preference '==' 1}}checked\{{/compare}}>
+                与其他直减叠加
+            </label>
+            <label style="width: auto">
+                <input type="checkbox" value="0" id="compatible_coupon" \{{#compare compatible_coupon '==' 1}}checked\{{/compare}}>
+                与优惠券共用 (不勾选则不共用)
+            </label>
+            <p class="prompt">共用：1）与直减叠加：直减优惠后金额参与到仓减计算 2）与优惠券共用：共用表示优惠券金额不会影响立减金额；不共用则使用任一优惠券后，本仓减金额被扣减；</p>
+        </div>
+    </form>
+</script>
+<script id="logTpl" type="text/x-handlebars-template">
+    \{{#each list}}
+    <tr>
+        <td>\{{user_name}}</td>
+        <td>\{{time}}</td>
+        <td>\{{#compare action '==' 'new'}}新建\{{/compare}}\{{#compare action '==' 'edit'}}编辑\{{/compare}}</td>
+    </tr>
+    \{{/each}}
+</script>
+
+<script type="text/javascript" src="/js/build/src/views/market/warehouse/detail.js?t=1493261397671"></script>
+</body>
+</html>

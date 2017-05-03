@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.doneInWarehouse }}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../static/css/common/reset.css">
+    <link rel="stylesheet" href="../../static/vendor/pagination/pagination.css">
+    <link rel="stylesheet" href="../../static/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../../static/css/common/global.css">
+    <link rel="stylesheet" href="../../static/css/common/header.css">
+    <link rel="stylesheet" href="../../static/css/common/sidebar.css">
+    <link rel="stylesheet" href="../../static/css/src/list/list.css">
+    <link rel="stylesheet" href="../../static/css/src/create/preview.css">
+    <link rel="stylesheet" href="../../static/css/src/gift/gift-tab.css">
+    <link rel="stylesheet" href="../../static/css/src/ajaxLoading.css">
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <ul class="gift-tab">
+            <li class="tab-list-item active" data-target="#mainList,.task-plan-add" data-toggle="tab">
+                {{i18n.TaskPlan}}
+            </li>
+            <li class="tab-list-item" data-target=".gift-out,.empty-pane" data-role="boxOut" data-toggle="tab">
+                {{i18n.boxOut}}
+            </li>
+            <li class="tab-list-item" data-target=".gift-in,.empty-pane" data-role="boxIn" data-toggle="tab">
+                {{i18n.boxIn}}
+            </li>
+            <li class="tab-pane-btn tab-content pull-right">
+                <div class="tab-pane task-plan-add">
+                    <button class="btn btn-danger px-30" data-toggle="modal" data-modal="add-assemble-task">{{i18n.add}}</button>
+                </div>
+                <div class="tab-pane empty-pane"></div>
+            </li>
+        </ul>
+        <div id="list" class="tab-content">
+            {{>gift/work/mainList}}
+
+
+
+
+            <div class="tab-pane gift-out">
+                <form data-api="/task/outstock" action="" class="b-1 py-40 form-horizontal scan-submit-form">
+                    <div class="table mb-0 dis-table">
+                        <div class="form-group table-cell nowrap">
+                            <label class="col-sm-2 control-label"> {{i18n.boxCode}} </label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" min="0" name="barCode" value="">
+                            </div>
+                        </div>
+                        <div class="form-group table-cell nowrap">
+                            <label class="col-sm-2 control-label"> {{i18n.outCount}} </label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" name="qty" min="1" value="1">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="hide"></button>
+                </form>
+                <div class="table-responsive mt-20">
+                    <table class="table table-bordered table-hover v-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>{{i18n.scanDate}}</th>
+                                <th>{{i18n.scanUser}} </th>
+                                <th>{{i18n.boxCode}}</th>
+                                <th>{{i18n.outCount}}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="data-container text-center">
+                            
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+            <script type="text/html" id="storage-list-tmpl">
+                ${each list}
+                    <tr>
+                        <td>${$value.scanDate}</td>
+                        <td>${$value.scanUser}</td>
+                        <td>${$value.boxCode}</td>
+                        <td>${$value.count}</td>
+                    </tr>
+                ${/each}  
+            </script>
+            <div class="tab-pane gift-in">
+                <form data-api="/task/instock" action="" class="b-1 py-40 form-horizontal scan-submit-form">
+                    <div class="table mb-0 dis-table">
+                        <div class="form-group table-cell nowrap">
+                            <label class="col-sm-2 control-label"> {{i18n.boxCode}} </label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" name="barCode" min="0" value="">
+                            </div>
+                        </div>
+                        <div class="form-group table-cell nowrap">
+                            <label class="col-sm-2 control-label"> {{i18n.inCount}} </label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" name="qty" min="1" value="1">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="hide"></button>
+                </form>
+                <div class="table-responsive mt-20">
+                    <table class="table table-bordered table-hover v-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>{{i18n.scanDate}}</th>
+                                <th>{{i18n.scanUser}} </th>
+                                <th>{{i18n.boxCode}}</th>
+                                <th>{{i18n.inCount}}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="data-container text-center">
+                            
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+
+
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/jquery.validate.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/pagination/pagination.js'></script>
+<script type="text/javascript" src='../../static/js/common/header.js'></script>
+<script type="text/javascript" src='../../static/js/common/sidebar.js'></script>
+<script type="text/javascript" src='../../static/js/common/footer.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/js/src/gift/common.js'></script>
+<script type="text/javascript" src='../../static/js/src/gift/workHouse.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-select/dist/js/bootstrap-select.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-validation/dist/localization/messages_zh.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap-select/dist/js/i18n/defaults-zh_CN.min.js'></script>
+
+<script type="text/html" id="modal-template">
+    <div class="modal fade" id="modal-frame" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            <h4 class="modal-title">${modalTitle}</h4>
+          </div>
+          <div class="modal-body px-30">
+            ${#subModal}
+          </div>
+          <div class="modal-footer">
+            ${if addContinuity}
+                <div class="pull-left checkbox">&nbsp;&nbsp;
+                    <label>
+                        <input class="add-continuity" type="checkbox" name="" id="" checked>{{i18n.addContinuity}}
+                    </label>
+                </div>
+            ${/if}
+            ${if downloadTmpl}
+                <div class="pull-left">&nbsp;&nbsp;
+                    <a class="download-tmpl" href="javascript:;">{{i18n.downloadTmpl}}</a>
+                </div>
+            ${/if}
+            <button type="button" class="btn btn-default px-30" data-dismiss="modal">{{i18n.cancel}}</button>
+            <button type="submit" class="btn btn-primary px-30 modal-submit-btn">${btnName}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+@import "../variables";
+html {
+	font: 14px @font-family;
+}
+
+@media screen and (min-width: 360px) {
+	html {
+		font: 16px @font-family;
+
+	}
+}
+.close-btn,.close-link-btn,.close-video-btn{
+	position: absolute;
+	right: -5px;
+	top: -5px;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	background: @mainColor;
+	color: #ffffff;
+	text-align: center;
+	line-height: 15px;
+	border-radius: 50%;
+	display: none;
+	cursor: pointer;
+
+}
+.canvas-wrapper .close-btn,.canvas-wrapper .close-link-btn,.img-wrapper .close-btn ,.canvas-wrapper .close-video-btn {
+	display: block;
+}
+//中间
+#canvas{
+	li.cur{
+		box-shadow: 0 0  10px @mainColor;
+		z-index: 100;
+	}
+	.tPurchase > div.psetting{
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+		span{
+			display: inline-block;
+		}
+	}
+	.tImg{
+		input{
+			display: none;
+		}
+	}
+	.tCountdown {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tComment {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tVideo {
+		border: 1px solid #dddddd;
+		text-align: center;
+	}
+
+	.tAnchor {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tFlashsale {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tBenefits {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tWin {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tPresale {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tGroupon {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tSupport{
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tLive {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.simple{
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tTopnav{
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+	.tSeckill{
+		border: 1px solid #dddddd;
+		padding: 5px;
+		text-align: center;
+	}
+}
+//左侧
+#template {
+	.t1{
+		margin: 15*@xem;
+	}
+	.tImg{
+		margin: 15*@xem;
+	}
+	.tTopnav{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tSeckill{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tPurchase{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		>div.psetting {
+			margin: 0;
+			text-align: center;
+			span{
+				display: inline-block;
+			}
+		}
+	}
+	.tCountdown{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tComment{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tVideo{
+		margin: 0*@xem;
+		padding: 0*@xem;
+		text-align: center;
+	}
+	.tAnchor{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tFlashsale{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tBenefits{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tWin{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tPresale{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tGroupon{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tSupport{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.tLive{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+	.simple{
+		margin: 15*@xem;
+		background: #ffffff;
+		padding: 10*@xem;
+		text-align: center;
+	}
+}
+img{
+	max-width: 100%;
+}
+[data-field]{
+	margin: 5*@xem 0;
+}
+.t1{
+	position: relative;
+	.list{
+		width: 100%;
+		font-size: 0;
+		a{
+			color: #333;
+		}
+		> div{
+			min-height: 80*@xem;
+			width: 49%;
+			margin-left: 1%;
+			box-shadow: 0 0 2*@xem #ccc;
+			display: inline-block;
+			vertical-align: top;
+			position: relative;
+			left: -0.5%;
+			margin-bottom: 5*@xem;
+			color: #333;
+		}
+		.pro-info{
+			padding: 8*@xem;
+			font-size: 14*@xem;
+			.title{
+				height: 40*@xem;
+				.ov2
+			}
+			.price{
+				color: @mainColor;
+				font-size: 18*@xem;
+			}
+		}
+	}
+}
+.tImg{
+	img{
+		width: 100%;
+	}
+}
+.ov2{
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+#topnav {
+	padding:5px;
+	label{
+		width: 100%;
+	}
+	span{
+		display: inline-block;
+		width: 25%;
+	}
+	input{
+		display: inline-block;
+		width: 70%;
+	}
+	.fa-close{
+		float: right;
+	}
+}
+#newcomercoupon{
+	.fa-close{
+		float: right;
+	}
+}

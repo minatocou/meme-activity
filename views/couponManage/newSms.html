@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{i18n.add }}</title>
+    {{> meta}}
+    <link rel="stylesheet" href="/css/build/src/views/couponManage/newSms.css?t=1493261397671" />
+</head>
+<body data-preview="{{preview}}">
+{{>header}}
+<div class="main-container">
+    {{>sidebar}}
+    <div class="right-content-frame">
+        <div class="top-block py-10">
+            <h4 class="pull-left py-10">{{i18n.add}}</h4>
+            <div class="pull-right">
+                <button class="btn btn-primary px-30" type="button" data-form-btn=".addNewCouponForm">
+                    确认并发送短信
+                </button>
+            </div>
+        </div>
+        <div class="main-content clearfix">
+            <form class="form-horizontal need-validate-form mt-20 clearfix addNewCouponForm" role="form"
+                  action="/coupon/bind">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.activity_name}}
+                    </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" placeholder="请输入活动名称" required
+                                  name="name" id="name"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>{{i18n.activity_explanation}}</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="description"
+                               placeholder="活动说明" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="color-warning">*</span>短信内容 </label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" placeholder="短信内容，请输入140字以内的短信内容"
+                                  name="content" required></textarea>
+                        <p>65个字符计费为1条短信，文末必须加上"回TD退订"</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label margin-b-10"><span class="color-warning">*</span>发送短信用户</label>
+                    <div class="about-user">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户ID</label>
+                            <div class="col-sm-9">
+                                <textarea id="userIdBox" class="form-control"
+                                          placeholder="{{i18n.couponUserIDPlaceholder}}"
+                                          required
+                                          name="customerIds"></textarea>
+                            </div>
+                            <div class="import-excel">
+                                <div class="excel-box">
+                                    <label>
+                                        <span id="showFileName">点击上传文件</span>
+                                        <input id="uploadExcelFile" type="file">
+                                    </label>
+                                    <button type="button" class="btn btn-default" id="importUserIdBtn">
+                                        确认批量导入用户ID
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <!--<div class="show-total">-->
+                <!--<span>-->
+                    <!--发券统计-->
+                <!--</span>-->
+                <!--<table border="1">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th>发券用户数</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td>——</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        </div>
+        {{>ajaxLoading}}
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/build/src/views/couponManage/newSms.js?t=1493261397671"></script>
+</body>
+</html>

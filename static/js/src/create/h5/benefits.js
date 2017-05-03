@@ -1,0 +1,1 @@
+$("#benefitsFromDate").datetimepicker({onShow:function(){this.setOptions({maxDate:$("#benefitsToDate").val()?$("#benefitsToDate").val():!1})}}),$("#benefitsToDate").datetimepicker({onShow:function(){this.setOptions({minDate:$("#benefitsFromDate").val()?$("#benefitsFromDate").val():!1})}});

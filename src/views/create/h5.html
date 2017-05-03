@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>memebox配置h5</title>
+    {{> meta}}
+
+    <link rel='stylesheet' href="../../static/css/common/reset.css">
+    <link rel='stylesheet' href="../../static/css/common/global.css">
+    <link rel='stylesheet' href="../../static/vendor/font-awesome/css/font-awesome.css">
+    <link rel='stylesheet' href="../../static/vendor/bootstrap/css/bootstrap.css">
+    <link rel='stylesheet' href="../../static/vendor/datePicker/jquery.datetimepicker.css">
+    <link rel='stylesheet' href="../../static/vendor/jquery-ui/jquery-ui.min.css">
+    <link rel='stylesheet' href="../../static/css/src/create/h5.css">
+    <link rel='stylesheet' href="../../static/css/src/create/preview.css">
+</head>
+<body id="hfiveContainer" data-preview="{{preview}}" data-state="{{state}}" data-localize="{{i18n.localize}}">
+
+<div class="header">
+    <ul class="f-l back">
+        <li>
+            <a href="{{#backh5 d}}{{/backh5}}"><i class="fa fa-arrow-circle-left"></i>{{i18n.go_back}}</a>
+        </li>
+    </ul>
+    <ul class="header-item">
+        <div id="upload-img">{{i18n.upload}} <i class="fa  fa-spin"></i></div>
+    </ul>
+    <ul class="header-group">
+        <li>
+            <a href="javascript:void(0)" id="preview-btn">
+                <i class="fa fa-inverse fa-check-circle-o"></i>
+                <span>{{i18n.preview}}</span>
+            </a>
+        </li>
+        <li>
+            <a id="save-btn" href="javascript:void(0)">
+                <i class="fa fa-inverse fa-save"></i>
+                <span>{{i18n.save}}</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="main-container">
+    <div class="block-wrapper">
+        <link rel='import' href="_h5_left.html?__inline">
+    </div>
+    <div class="img-wrapper">
+        <ul class="img-list">
+        </ul>
+    </div>
+    <div class="canvas-wrapper">
+        <link rel='import' href="_h5_main.html?__inline">
+    </div>
+    <div class="attr-wrapper">
+        <link rel='import' href="form/common.html?__inline">
+        <link rel='import' href="form/l1.html?__inline">
+        <link rel='import' href="form/img.html?__inline">
+        <link rel='import' href="form/purchase.html?__inline">
+        <link rel='import' href="form/countdown.html?__inline">
+        <link rel='import' href="form/video.html?__inline">
+        <link rel='import' href="form/anchor.html?__inline">
+        <link rel='import' href="form/flashsale.html?__inline">
+        <link rel='import' href="form/benefits.html?__inline">
+        <link rel='import' href="form/win.html?__inline">
+        <link rel='import' href="form/presale.html?__inline">
+        <link rel='import' href="form/groupon.html?__inline">
+        <link rel='import' href="form/newcomer.html?__inline">
+        <link rel='import' href="form/newcomercomment.html?__inline">
+        <link rel='import' href="form/comment.html?__inline">
+        <link rel='import' href="form/support.html?__inline">
+        <link rel='import' href="form/live.html?__inline">
+        <link rel='import' href="form/topnav.html?__inline">
+        <link rel='import' href="form/newcomercoupon.html?__inline">
+    </div>
+    <div class="preview-wrapper">
+        <div class="preview-container">
+            <div class="preview-header">
+                <h4>{{i18n.preview}}:</h4>
+            </div>
+            <div class="preview-con">
+                <div class="preview">
+                </div>
+                <div class="qr">
+                    <span class="tip">{{i18n.scan}}:</span>
+                    <div id="qrCode"></div>
+                    <div class="p-link">
+                        {{i18n.scan_link}}:
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="close"><i class="fa fa-times"></i></div>
+        </div>
+    </div>
+    <div class="modal fade" id="winModal">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{i18n.data}}</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary save-win">{{i18n.save}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="flashsaleTrTemplate" type="text/html">
+    <tr class="cattime">
+        <td><input class="form-control input-sm flash-sale-tab" placeholder="{{i18n.time}}" type="text"
+                   data-flashtimepicker></td>
+        <td><input class="form-control input-sm flash-sale-tab flash-category" placeholder="category" type="text"></td>
+        <td><i class="fa fa-close"></i></td>
+    </tr>
+</script>
+<script id="flashsaleTable" type="text/html">
+    ${each tabInfo as table i}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th colspan="2" class="flash-tab">tab${i}</th>
+            <th><i class="fa fa-close remove-table"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td colspan="3"><input value="${table.date}" class="form-control input-sm flash-sale-tab"
+                                   placeholder="{{i18n.date}}" type="text" data-flashdatepicker></td>
+        </tr>
+        ${each table.catTime as ct}
+        <tr class="cattime">
+            <td><input class="form-control input-sm flash-sale-tab" value="${ct.time}" placeholder="{{i18n.time}}"
+                       type="text" data-flashtimepicker></td>
+            <td><input class="form-control input-sm flash-sale-tab flash-category" value="${ct.category}"
+                       placeholder="category" type="text"></td>
+            <td><i class="fa fa-close"></i></td>
+        </tr>
+        ${/each}
+        <tr>
+            <td colspan="3" style="text-align: right"><i class="fa fa-plus"></i></td>
+        </tr>
+        </tbody>
+    </table>
+    ${/each}
+</script>
+<script id="flashsaleTemplate" type="text/html">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th colspan="2" class="flash-tab">tab${i}</th>
+            <th><i class="fa fa-close remove-table"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td colspan="3"><input class="form-control input-sm flash-sale-tab" placeholder="{{i18n.date}}" type="text"
+                                   data-flashdatepicker></td>
+        </tr>
+        <tr class="cattime">
+            <td><input class="form-control input-sm flash-sale-tab" placeholder="{{i18n.time}}" type="text"
+                       data-flashtimepicker></td>
+            <td><input class="form-control input-sm flash-sale-tab flash-category" placeholder="category" type="text">
+            </td>
+            <td><i class="fa fa-close"></i></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: right"><i class="fa fa-plus"></i></td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+<script id="t1Template" type="text/html">
+    <div class="list">
+        ${if groupImg}
+        <div>
+            <a ${if groupImgUrl}href="${groupImgUrl}" ${/if} class="img">
+            <img src="${groupImg}">
+            </a>
+        </div>
+        ${/if}
+        ${each list as item i}
+        ${if !proNum || i
+        <proNum }
+        <div>
+            <a href="http://cn.memebox.com/catalog/product/view/id/${item.productId}">
+                <img src="${item.imgUrl}">
+                <div class="pro-info">
+                    <div class="title">${item.name}</div>
+                    <div class="price">${item.price}</div>
+                </div>
+            </a>
+        </div>
+        ${/if}
+        ${/each}
+    </div>
+</script>
+<script id="imgTemplate" type="text/html">
+    <a href="${imgUrl}">
+        <img src="${imgSrc}">
+    </a>
+    <i class="close-btn">×</i>
+</script>
+<script id="winTemplate" type="text/html">
+    <table class="table table-bordered win-model-table">
+        <thead>
+        <tr>
+            <th>{{i18n.fullname}}</th>
+            <th>{{i18n.phone}}</th>
+            <th>{{i18n.gift}}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        ${each items as value i}
+        <tr class="targetTr">
+            <td><input type="text" class="win-name" value="${value.name}"></td>
+            <td><input type="text" class="win-mobile" value="${value.mobile}"></td>
+            <td><input type="text" class="win-gift" value="${value.gift}"></td>
+            <td><i class="fa fa-close"></i></td>
+        </tr>
+        ${/each}
+        <tr class="add-modal">
+            <td colspan="4" style="text-align: right"><i class="fa fa-plus"></i></td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+<script id="topNavTab" type="text/html">
+    ${each tabInfo as tab i}
+    <div class="form-group">
+        <i class="fa fa-close remove-table"></i>
+        <label>
+            <span>tab${i+1}</span>
+            <input class="form-control input-sm" maxlength="6" type="text" name="tab_name" value="${tab.name}" placeholder="tab名称">
+        </label>
+        <label>
+            <span>{{i18n.anchor}}</span>
+            <input class="form-control input-sm" type="text" name="tab_anchor" value="${tab.anchor}" placeholder="锚点">
+        </label>
+    </div>
+    ${/each}
+</script>
+
+<script type="text/javascript" src='../../static/vendor/jquery/jquery.js'></script>
+
+<script type="text/javascript" src='../../static/vendor/webuploader/webuploader.js'></script>
+<script type="text/javascript" src='../../static/vendor/sortable/Sortable.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-ui/jquery-ui.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/underscore/underscore.js'></script>
+<script type="text/javascript" src='../../static/vendor/artTemplate/template.js'></script>
+<script type="text/javascript" src='../../static/vendor/sortable/jquery.binding.js'></script>
+<script type="text/javascript" src='../../static/vendor/bootstrap/js/bootstrap.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/jquery-qrcode/jquery-qrcode-0.14.0.min.js'></script>
+<script type="text/javascript" src='../../static/vendor/datePicker/jquery.datetimepicker.full.min.js'></script>
+<script type="text/javascript" src='../../static/js/common/i18n.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/util.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/va.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/validator.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/event.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/sortable.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/upload.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/h5.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/category.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/flashsale.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/image.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/countdown.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/win.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/video.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/presale.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/comment.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/support.js'></script>
+<script type="text/javascript" src='../../static/js/src/create/h5/benefits.js'></script>
+<script type="text/javascript" src="../../static/js/src/create/h5/topnav.js"></script>
+<script type="text/javascript" src="../../static/js/src/create/h5/newcomercoupon.js"></script>
+</body>
+</html>
